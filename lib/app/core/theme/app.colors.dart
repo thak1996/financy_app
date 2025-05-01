@@ -18,6 +18,8 @@ abstract class AppColors {
   static Color get grey200 => const Color(0xFFEEEEEE);
   static Color get grey300 => const Color(0xFFE0E0E0);
 
+  static Color get white => const Color(0xFFFFFFFF);
+
   // Surface Colors
   static Color get background => const Color(0xFFFFFFFF);
   static Color get surface => const Color(0xFFFFFFFF);
@@ -29,4 +31,6 @@ abstract class AppColors {
 
   // Link Colors
   static Color get link => const Color(0xFF2196F3);
+
+  static List<Color> get gradient => [Color(0xFF63B5AF), Color(0xFF438883)];
 }

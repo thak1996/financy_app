@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app.colors.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -20,16 +21,23 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "Template_Bloc",
-              style: Theme.of(context).textTheme.titleLarge,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: AppColors.gradient,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            "Financy",
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              fontSize: 50,
+              fontWeight: FontWeight.w700,
+              color: AppColors.white,
             ),
-          ],
+          ),
         ),
       ),
     );

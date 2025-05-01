@@ -19,25 +19,21 @@ class AppTheme {
       ).copyWith(
         displayLarge: GoogleFonts.inter(
           fontSize: AppMetrics.fontDisplay1,
-          fontWeight: FontWeight.bold,
           letterSpacing: AppMetrics.letterSpacingS,
           color: AppColors.textPrimary,
         ),
         displayMedium: GoogleFonts.inter(
           fontSize: AppMetrics.fontDisplay2,
-          fontWeight: FontWeight.bold,
           letterSpacing: AppMetrics.letterSpacingS,
           color: AppColors.textPrimary,
         ),
         displaySmall: GoogleFonts.inter(
           fontSize: AppMetrics.fontDisplay3,
-          fontWeight: FontWeight.bold,
           letterSpacing: AppMetrics.letterSpacingS,
           color: AppColors.textPrimary,
         ),
         headlineMedium: GoogleFonts.inter(
           fontSize: AppMetrics.fontHeadline,
-          fontWeight: FontWeight.w600,
           letterSpacing: AppMetrics.letterSpacingS,
           color: AppColors.textPrimary,
         ),
@@ -49,7 +45,6 @@ class AppTheme {
         ),
         titleLarge: GoogleFonts.inter(
           fontSize: AppMetrics.fontTitle,
-          fontWeight: FontWeight.w600,
           letterSpacing: AppMetrics.letterSpacingS,
           color: AppColors.textPrimary,
         ),
@@ -65,7 +60,6 @@ class AppTheme {
         ),
         labelLarge: GoogleFonts.inter(
           fontSize: AppMetrics.fontLabel,
-          fontWeight: FontWeight.w500,
           letterSpacing: AppMetrics.letterSpacingM,
           color: AppColors.textSecondary,
         ),

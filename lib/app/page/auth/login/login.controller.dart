@@ -8,17 +8,13 @@ class LoginController extends Cubit<LoginState> {
 
   final SecureStorageService _secureStorageService;
 
-  void validateFields(String email, String password) {
-    final isValid = email.isNotEmpty && password.isNotEmpty;
-    emit(LoginInitial(isValid: isValid));
-  }
-
   Future<void> login(String email, String password) async {
     emit(const LoginLoading());
     try {
       await Future.delayed(const Duration(seconds: 2));
       log('email: $email');
       log('password: $password');
+      emit(const LoginSuccess());
     } catch (e) {
       emit(LoginError(e.toString()));
     }

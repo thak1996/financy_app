@@ -118,23 +118,70 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.grey300),
+          borderSide: BorderSide(color: AppColors.primary, width: 1.4),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.grey300),
+          borderSide: BorderSide(color: AppColors.primary, width: 1.4),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.grey300),
+          borderSide: BorderSide(color: AppColors.primary, width: 1.4),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        alignLabelWithHint: false,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         hoverColor: Colors.transparent,
-        focusColor: AppColors.grey200,
+        focusColor: Colors.transparent,
         filled: true,
-        fillColor: AppColors.grey100,
-        labelStyle: TextStyle(color: AppColors.textPrimary),
-        hintStyle: TextStyle(color: AppColors.textSecondary),
+        fillColor: Colors.transparent,
+        prefixStyle: GoogleFonts.inter(
+          color: AppColors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: -0.5,
+        ),
+        suffixStyle: GoogleFonts.inter(
+          color: AppColors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: -0.5,
+        ),
+        labelStyle: GoogleFonts.inter(
+          color: AppColors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: -0.5,
+        ),
+        hintStyle: GoogleFonts.inter(
+          color: AppColors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: -0.5,
+        ),
+        counterStyle: GoogleFonts.inter(
+          color: AppColors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: -0.5,
+        ),
+        floatingLabelStyle: GoogleFonts.inter(
+          color: AppColors.textSecondary,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          letterSpacing: -0.5,
+        ),
+        helperStyle: GoogleFonts.inter(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.5,
+        ),
+        errorStyle: GoogleFonts.inter(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.5,
+        ),
+        floatingLabelAlignment: FloatingLabelAlignment.start,
       ),
     );
   }

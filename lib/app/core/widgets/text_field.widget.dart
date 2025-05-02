@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../theme/app.colors.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
@@ -32,11 +33,7 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   bool _obscureText = true;
 
-  void _toggleObscureText() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+  void _toggleObscureText() => setState(() => _obscureText = !_obscureText);
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +51,20 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       inputFormatters:
           widget.inputFormatter != null ? [widget.inputFormatter!] : null,
       onChanged: widget.onChanged,
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w500,
+      ),
       decoration: InputDecoration(
         labelText: widget.label,
+        
         suffixIcon:
             widget.isPassword
                 ? IconButton(
                   icon: Icon(
+                    size: 22,
                     _obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: Colors.grey[700],
+                    color: AppColors.textPrimary,
                   ),
                   onPressed: _toggleObscureText,
                 )

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app.colors.dart';
+
 class TextButtonWidget extends StatelessWidget {
   const TextButtonWidget({
     super.key,
@@ -20,7 +22,6 @@ class TextButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: alignment,
       child: InkWell(
@@ -35,14 +36,15 @@ class TextButtonWidget extends StatelessWidget {
                 text: primaryText,
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(color: primaryTextColor),
+                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
               ),
               if (secondaryText != null)
                 TextSpan(
                   text: ' $secondaryText',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: secondaryTextColor),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
             ],
           ),

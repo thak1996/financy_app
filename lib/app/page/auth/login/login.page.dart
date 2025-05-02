@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               if (state is LoginSuccess) context.go('/home');
             },
             child: Scaffold(
+              backgroundColor: AppColors.iceWhite,
               body: SafeArea(
                 child: CustomScrollView(
                   slivers: [
@@ -61,18 +62,15 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Column(
                           children: [
-                            const Spacer(flex: 1),
-                            Icon(
-                              Icons.security,
-                              size: 64,
-                              color: AppColors.primary,
-                            ),
-                            const SizedBox(height: 16),
+                            const Spacer(),
                             Text(
                               'Welcome Back',
-                              style: Theme.of(context).textTheme.headlineMedium,
+                              style: Theme.of(context).textTheme.displayLarge
+                                  ?.copyWith(fontWeight: FontWeight.w700),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 12),
+                            Image.asset('assets/images/login.png'),
+                            const SizedBox(height: 32),
                             Form(
                               key: _formKey,
                               child: Column(
@@ -80,44 +78,31 @@ class _LoginPageState extends State<LoginPage> {
                                 children: [
                                   TextFieldWidget(
                                     controller: _emailController,
-                                    label: 'Email',
+                                    label: 'YOUR EMAIL',
                                     validator: Validators.validateEmail,
                                     textInputAction: TextInputAction.next,
-                                    onChanged: (value) {
-                                      controller.validateFields(
-                                        value,
-                                        _passwordController.text,
-                                      );
-                                    },
                                   ),
-                                  const SizedBox(height: 8),
+                                  const SizedBox(height: 37),
                                   TextFieldWidget(
                                     controller: _passwordController,
-                                    label: 'Password',
+                                    label: 'YOUR PASSWORD',
                                     validator: Validators.validatePassword,
                                     isPassword: true,
-                                    onChanged: (value) {
-                                      controller.validateFields(
-                                        _emailController.text,
-                                        value,
-                                      );
-                                    },
                                   ),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: 8),
                                   TextButtonWidget(
                                     alignment: Alignment.topRight,
                                     primaryText: 'Forgot Password?',
                                     primaryTextColor: AppColors.link,
                                     onPressed: () {},
                                   ),
-                                  const SizedBox(height: 16),
+                                  const SizedBox(height: 24),
                                 ],
                               ),
                             ),
-                            const Spacer(),
                             FilledButton(
                               onPressed:
-                                  state is LoginLoading || !state.isValid
+                                  state is LoginLoading
                                       ? null
                                       : () {
                                         if (_formKey.currentState?.validate() ??
@@ -137,16 +122,15 @@ class _LoginPageState extends State<LoginPage> {
                                           strokeWidth: 2,
                                         ),
                                       )
-                                      : const Text('Login'),
+                                      : const Text('Sign In'),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 24),
                             TextButtonWidget(
-                              primaryText: 'Don\'t have an account?',
+                              primaryText: 'Don\'t Have Account?',
                               secondaryText: 'Sign up',
-                              primaryTextColor: AppColors.textPrimary,
-                              secondaryTextColor: AppColors.link,
                               onPressed: () => context.push('/register'),
                             ),
+                            Spacer(),
                           ],
                         ),
                       ),

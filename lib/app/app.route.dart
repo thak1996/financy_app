@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'page/auth/onBoarding/onboarding.page.dart';
 import 'page/auth/register/register.page.dart';
 import 'page/home/home.page.dart';
 import 'page/auth/login/login.page.dart';
@@ -11,5 +12,6 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: '/login', builder: (context, state) => LoginPage()),
     GoRoute(path: '/home', builder: (context, state) => HomePage()),
     GoRoute(path: '/register', builder: (context, state) => RegisterPage()),
+    GoRoute(path: '/onboarding', builder: (context, state) => OnBoarding()),
   ],
 );

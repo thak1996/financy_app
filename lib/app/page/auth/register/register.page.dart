@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app.metrics.dart';
 import '../../../core/widgets/alert_dialog.widget.dart';
 import '../../../core/widgets/header_register.widget.dart';
 import '../../../core/widgets/step_indicator.widget.dart';
@@ -154,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   validator: Validators.validateName,
                   onChanged: (_) => setState(() {}),
                 ),
-                SizedBox(height: AppMetrics.sizedBoxXS),
+                const SizedBox(height: 8),
                 TextFieldWidget(
                   controller: emailController,
                   label: 'Email',

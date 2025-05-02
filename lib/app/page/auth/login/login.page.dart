@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app.colors.dart';
-import '../../../core/theme/app.metrics.dart';
 import '../../../core/utils/secure_storage.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/widgets/text_button.widget.dart';
@@ -68,12 +67,12 @@ class _LoginPageState extends State<LoginPage> {
                               size: 64,
                               color: AppColors.primary,
                             ),
-                            SizedBox(height: AppMetrics.sizedBoxM),
+                            const SizedBox(height: 16),
                             Text(
                               'Welcome Back',
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
-                            SizedBox(height: AppMetrics.sizedBoxM),
+                            const SizedBox(height: 16),
                             Form(
                               key: _formKey,
                               child: Column(
@@ -91,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                                       );
                                     },
                                   ),
-                                  SizedBox(height: AppMetrics.sizedBoxXS),
+                                  const SizedBox(height: 8),
                                   TextFieldWidget(
                                     controller: _passwordController,
                                     label: 'Password',
@@ -104,14 +103,14 @@ class _LoginPageState extends State<LoginPage> {
                                       );
                                     },
                                   ),
-                                  SizedBox(height: AppMetrics.sizedBoxXXS),
+                                  const SizedBox(height: 4),
                                   TextButtonWidget(
                                     alignment: Alignment.topRight,
                                     primaryText: 'Forgot Password?',
                                     primaryTextColor: AppColors.link,
                                     onPressed: () {},
                                   ),
-                                  SizedBox(height: AppMetrics.sizedBoxM),
+                                  const SizedBox(height: 16),
                                 ],
                               ),
                             ),
@@ -140,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                                       )
                                       : const Text('Login'),
                             ),
-                            SizedBox(height: AppMetrics.sizedBoxXS),
+                            const SizedBox(height: 8),
                             TextButtonWidget(
                               primaryText: 'Don\'t have an account?',
                               secondaryText: 'Sign up',

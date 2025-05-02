@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 1500), () {
-      if (mounted) context.go('/login');
+      if (mounted) context.go('/onboarding');
     });
   }
 
@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: AppColors.gradient,
+            colors: AppColors.gradientBackground,
           ),
         ),
         child: Center(

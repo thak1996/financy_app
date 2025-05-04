@@ -3,15 +3,16 @@ import 'package:flutter/services.dart';
 import '../theme/app.colors.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  final TextEditingController controller;
-  final String label;
-  final bool isPassword;
   final String? Function(String?)? validator;
-  final TextInputType? keyboardType;
-  final bool enableSuggestions;
-  final TextInputAction? textInputAction;
-  final TextInputFormatter? inputFormatter;
   final void Function(String)? onChanged;
+  final TextEditingController controller;
+  final bool enableSuggestions;
+  final String? helperText;
+  final TextInputFormatter? inputFormatter;
+  final bool isPassword;
+  final TextInputType? keyboardType;
+  final String label;
+  final TextInputAction? textInputAction;
 
   const TextFieldWidget({
     super.key,
@@ -24,6 +25,7 @@ class TextFieldWidget extends StatefulWidget {
     this.textInputAction,
     this.inputFormatter,
     this.onChanged,
+    this.helperText,
   });
 
   @override
@@ -31,48 +33,76 @@ class TextFieldWidget extends StatefulWidget {
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
-  bool _obscureText = true;
-
-  void _toggleObscureText() => setState(() => _obscureText = !_obscureText);
-
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      obscureText: widget.isPassword && _obscureText,
-      keyboardType: widget.keyboardType,
-      keyboardAppearance:
-          Theme.of(context).brightness == Brightness.dark
-              ? Brightness.dark
-              : Brightness.light,
-      enableSuggestions: widget.enableSuggestions,
-      autocorrect: widget.enableSuggestions,
-      textInputAction: widget.textInputAction,
-      inputFormatters:
-          widget.inputFormatter != null ? [widget.inputFormatter!] : null,
-      onChanged: widget.onChanged,
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-        color: AppColors.textPrimary,
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        labelText: widget.label,
-        
-        suffixIcon:
-            widget.isPassword
-                ? IconButton(
-                  icon: Icon(
-                    size: 22,
-                    _obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: AppColors.textPrimary,
-                  ),
-                  onPressed: _toggleObscureText,
-                )
-                : null,
-      ),
-      validator:
-          widget.validator ??
-          (value) => value?.isEmpty ?? true ? 'Campo obrigatório' : null,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFormField(
+          controller: widget.controller,
+          obscureText: widget.isPassword && _obscureText,
+          keyboardType: widget.keyboardType,
+          keyboardAppearance:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Brightness.dark
+                  : Brightness.light,
+          enableSuggestions: widget.enableSuggestions,
+          autocorrect: widget.enableSuggestions,
+          textInputAction: widget.textInputAction,
+          inputFormatters:
+              widget.inputFormatter != null ? [widget.inputFormatter!] : null,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w500,
+          ),
+          onChanged: (value) {
+            if (value.length == 1) {
+              setState(() => _helperText = null);
+            } else if (value.isEmpty) {
+              setState(() => _helperText = widget.helperText);
+            }
+          },
+          decoration: InputDecoration(
+            labelText: widget.label.toUpperCase(),
+            labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w500,
+            ),
+            helperText: _helperText,
+
+            helperMaxLines: 3,
+            helperStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w500,
+            ),
+            suffixIcon:
+                widget.isPassword
+                    ? IconButton(
+                      icon: Icon(
+                        size: 22,
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: AppColors.textPrimary,
+                      ),
+                      onPressed: _toggleObscureText,
+                    )
+                    : null,
+          ),
+          validator:
+              widget.validator ??
+              (value) => value?.isEmpty ?? true ? 'Campo obrigatório' : null,
+        ),
+      ],
     );
   }
+
+  String? _helperText;
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _helperText = widget.helperText;
+  }
+
+  void _toggleObscureText() => setState(() => _obscureText = !_obscureText);
 }

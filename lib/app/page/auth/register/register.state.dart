@@ -1,23 +1,15 @@
 abstract class RegisterState {
-  final int currentStep;
-
-  const RegisterState({this.currentStep = 0});
+  const RegisterState();
 }
 
-class RegisterInitial extends RegisterState {
-  const RegisterInitial({super.currentStep});
-}
+class RegisterInitial extends RegisterState {}
 
-class RegisterLoading extends RegisterState {
-  const RegisterLoading({super.currentStep});
-}
+class RegisterLoading extends RegisterState {}
 
-class RegisterSuccess extends RegisterState {
-  const RegisterSuccess({super.currentStep});
-}
+class RegisterSuccess extends RegisterState {}
 
 class RegisterError extends RegisterState {
   final String message;
 
-  const RegisterError(this.message, {super.currentStep});
+  const RegisterError(this.message);
 }

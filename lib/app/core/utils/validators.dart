@@ -52,7 +52,7 @@ class Validators {
       return 'Confirmação de senha é obrigatória';
     }
     if (value != password) {
-      return 'As senhas não conferem';
+      return 'Passwords do not match. Please retype.';
     }
     return null;
   }

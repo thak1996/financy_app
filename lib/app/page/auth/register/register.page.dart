@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app.colors.dart';
 import '../../../core/widgets/alert_dialog.widget.dart';
-import '../../../core/widgets/header_register.widget.dart';
-import '../../../core/widgets/step_indicator.widget.dart';
+import '../../../core/widgets/text_button.widget.dart';
 import '../../../core/widgets/text_field.widget.dart';
 import 'register.controller.dart';
 import 'register.state.dart';
@@ -21,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -47,55 +48,93 @@ class _RegisterPageState extends State<RegisterPage> {
         builder: (context, state) {
           final controller = context.read<RegisterController>();
           return Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    HeaderRegisterWidget(
-                      title: 'Register',
-                      onPressed: () {
-                        controller.reset();
-                        context.pop();
-                      },
+            backgroundColor: AppColors.iceWhite,
+            body: Padding(
+              padding: const EdgeInsets.all(22),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 400),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                            'Start saving\nYour Money!',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.displayLarge
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Image.asset('assets/images/register.png'),
+                        const SizedBox(height: 32),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              TextFieldWidget(
+                                controller: nameController,
+                                label: 'YOUR NAME',
+                                keyboardType: TextInputType.name,
+                                textInputAction: TextInputAction.next,
+                                validator: Validators.validateName,
+                              ),
+                              const SizedBox(height: 24),
+                              TextFieldWidget(
+                                controller: emailController,
+                                label: 'YOUR EMAIL',
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                validator: Validators.validateEmail,
+                              ),
+                              const SizedBox(height: 24),
+                              TextFieldWidget(
+                                controller: passwordController,
+                                label: 'CHOOSE YOUR PASSWORD',
+                                isPassword: true,
+                                textInputAction: TextInputAction.next,
+                                validator: Validators.validatePassword,
+                                helperText:
+                                    'Must have at least 8 characters, 1 capital letter and 1 number.',
+                              ),
+                              const SizedBox(height: 24),
+                              TextFieldWidget(
+                                controller: confirmPasswordController,
+                                label: 'CONFIRM YOUR PASSWORD',
+                                isPassword: true,
+                                validator:
+                                    (value) => Validators.confirmPassword(
+                                      value,
+                                      passwordController.text,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        FilledButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              controller.register(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                            }
+                          },
+                          child: Text('Sign Up'),
+                        ),
+                        const SizedBox(height: 16),
+                        TextButtonWidget(
+                          primaryText: 'Already have account?',
+                          secondaryText: 'Sign in',
+                          onPressed: () => context.push('/login'),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
                     ),
-                    StepIndicatorWidget(
-                      currentStep: state.currentStep,
-                      totalSteps: 2,
-                      onStepTapped: (step) => controller.goToStep(step),
-                      icons: [Icons.person_outline, Icons.lock_outline],
-                    ),
-                    Text(
-                      _getStepTitle(state.currentStep),
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Expanded(
-                      child: _buildStep(
-                        state.currentStep,
-                        controller,
-                        emailController,
-                        passwordController,
-                        confirmPasswordController,
-                        nameController,
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed:
-                          !_canAdvance(state.currentStep)
-                              ? null
-                              : () {
-                                if (state.currentStep == 0) {
-                                  controller.nextStep();
-                                } else {
-                                  controller.register(
-                                    emailController.text,
-                                    passwordController.text,
-                                  );
-                                }
-                              },
-                      child: Text(state.currentStep == 1 ? 'Finish' : 'Next'),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -103,101 +142,5 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       ),
     );
-  }
-
-  bool _canAdvance(int currentStep) {
-    if (currentStep == 0) {
-      return Validators.validateEmail(emailController.text) == null &&
-          Validators.validateName(nameController.text) == null;
-    } else {
-      return Validators.validatePassword(passwordController.text) == null &&
-          Validators.confirmPassword(
-                confirmPasswordController.text,
-                passwordController.text,
-              ) ==
-              null;
-    }
-  }
-
-  String _getStepTitle(int step) {
-    switch (step) {
-      case 0:
-        return 'Personal Data';
-      case 1:
-        return 'Password';
-      default:
-        return '';
-    }
-  }
-
-  Widget _buildStep(
-    int step,
-    RegisterController controller,
-    TextEditingController emailController,
-    TextEditingController passwordController,
-    TextEditingController confirmPasswordController,
-    TextEditingController nameController,
-  ) {
-    switch (step) {
-      case 0:
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          child: Form(
-            child: Column(
-              children: [
-                TextFieldWidget(
-                  controller: nameController,
-                  label: 'Name',
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  validator: Validators.validateName,
-                  onChanged: (_) => setState(() {}),
-                ),
-                const SizedBox(height: 8),
-                TextFieldWidget(
-                  controller: emailController,
-                  label: 'Email',
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  validator: Validators.validateEmail,
-                  onChanged: (_) => setState(() {}),
-                ),
-              ],
-            ),
-          ),
-        );
-      case 1:
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          child: Form(
-            child: Column(
-              children: [
-                TextFieldWidget(
-                  controller: passwordController,
-                  label: 'Password',
-                  isPassword: true,
-                  textInputAction: TextInputAction.next,
-                  validator: Validators.validatePassword,
-                  onChanged: (_) => setState(() {}),
-                ),
-                const SizedBox(height: 16),
-                TextFieldWidget(
-                  controller: confirmPasswordController,
-                  label: 'Confirm Password',
-                  isPassword: true,
-                  validator:
-                      (value) => Validators.confirmPassword(
-                        value,
-                        passwordController.text,
-                      ),
-                  onChanged: (_) => setState(() {}),
-                ),
-              ],
-            ),
-          ),
-        );
-      default:
-        return const SizedBox();
-    }
   }
 }

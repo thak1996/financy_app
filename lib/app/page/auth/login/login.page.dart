@@ -100,18 +100,14 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             FilledButton(
-                              onPressed:
-                                  state is LoginLoading
-                                      ? null
-                                      : () {
-                                        if (_formKey.currentState?.validate() ??
-                                            false) {
-                                          controller.login(
-                                            _emailController.text,
-                                            _passwordController.text,
-                                          );
-                                        }
-                                      },
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  controller.login(
+                                    _emailController.text,
+                                    _passwordController.text,
+                                  );
+                                }
+                              },
                               child:
                                   state is LoginLoading
                                       ? const SizedBox(

@@ -33,7 +33,7 @@ class OnBoarding extends StatelessWidget {
                   const SizedBox(height: 20),
                   PrimaryButton(
                     text: 'Get Started',
-                    onPressed: () => context.push('/login'),
+                    onPressed: () => context.push('/register'),
                   ),
                   const SizedBox(height: 16),
                   TextRichWidget(

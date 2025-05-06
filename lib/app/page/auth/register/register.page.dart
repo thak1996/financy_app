@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import '../../../core/theme/app.colors.dart';
 import '../../../core/widgets/alert_dialog.widget.dart';
 import '../../../core/widgets/text_button.widget.dart';
 import '../../../core/widgets/text_field.widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/theme/app.colors.dart';
+import '../../../core/utils/validators.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 import 'register.controller.dart';
 import 'register.state.dart';
-import '../../../core/utils/validators.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -50,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
           return Scaffold(
             backgroundColor: AppColors.iceWhite,
             body: Padding(
-              padding: const EdgeInsets.all(22),
+              padding: const EdgeInsets.symmetric(horizontal: 22),
               child: Center(
                 child: SingleChildScrollView(
                   child: ConstrainedBox(
@@ -61,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: [
                         Center(
                           child: Text(
-                            'Start saving\nYour Money!',
+                            'Start Saving\nYour Money!',
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(fontWeight: FontWeight.w700),

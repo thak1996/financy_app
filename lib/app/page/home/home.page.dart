@@ -16,17 +16,11 @@ class HomePage extends StatelessWidget {
           actions: const [ThemeSwitchIcon(), SizedBox(width: 16)],
         ),
         body: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Display Large',
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-              ],
+            Text(
+              'Display Large',
+              style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(height: 16),
             Text(

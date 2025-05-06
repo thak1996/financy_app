@@ -110,11 +110,12 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child:
                                   state is LoginLoading
-                                      ? const SizedBox(
+                                      ? SizedBox(
                                         width: 20,
                                         height: 20,
                                         child: CircularProgressIndicator(
                                           strokeWidth: 2,
+                                          color: AppColors.iceWhite,
                                         ),
                                       )
                                       : const Text('Sign In'),

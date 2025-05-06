@@ -12,9 +12,13 @@ class LoginController extends Cubit<LoginState> {
     emit(const LoginLoading());
     try {
       await Future.delayed(const Duration(seconds: 2));
-      log('email: $email');
-      log('password: $password');
-      emit(const LoginSuccess());
+      if (email == 'teste@teste.com' && password == '12345678') {
+        log('email: $email');
+        log('password: $password');
+        emit(const LoginSuccess());
+      } else {
+        emit(const LoginError('Email ou senha inválidos'));
+      }
     } catch (e) {
       emit(LoginError(e.toString()));
     }

@@ -43,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
             message: state.message,
           );
         }
+        if (state is RegisterSuccess) context.go('/home');
       },
       child: BlocBuilder<RegisterController, RegisterState>(
         builder: (context, state) {
@@ -120,10 +121,21 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller.register(
                                 _emailController.text,
                                 _passwordController.text,
+                                _nameController.text,
                               );
                             }
                           },
-                          child: Text('Sign Up'),
+                          child:
+                              state is RegisterLoading
+                                  ? SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: AppColors.iceWhite,
+                                    ),
+                                  )
+                                  : Text('Sign Up'),
                         ),
                         const SizedBox(height: 16),
                         TextRichWidget(

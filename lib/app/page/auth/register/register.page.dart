@@ -17,18 +17,18 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  final nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Column(
                             children: [
                               TextFieldWidget(
-                                controller: nameController,
+                                controller: _nameController,
                                 label: 'YOUR NAME',
                                 keyboardType: TextInputType.name,
                                 textInputAction: TextInputAction.next,
@@ -83,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               const SizedBox(height: 24),
                               TextFieldWidget(
-                                controller: emailController,
+                                controller: _emailController,
                                 label: 'YOUR EMAIL',
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
@@ -91,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               const SizedBox(height: 24),
                               TextFieldWidget(
-                                controller: passwordController,
+                                controller: _passwordController,
                                 label: 'CHOOSE YOUR PASSWORD',
                                 isPassword: true,
                                 textInputAction: TextInputAction.next,
@@ -101,13 +101,13 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               const SizedBox(height: 24),
                               TextFieldWidget(
-                                controller: confirmPasswordController,
+                                controller: _confirmPasswordController,
                                 label: 'CONFIRM YOUR PASSWORD',
                                 isPassword: true,
                                 validator:
                                     (value) => Validators.confirmPassword(
                                       value,
-                                      passwordController.text,
+                                      _passwordController.text,
                                     ),
                               ),
                             ],
@@ -118,8 +118,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               controller.register(
-                                emailController.text,
-                                passwordController.text,
+                                _emailController.text,
+                                _passwordController.text,
                               );
                             }
                           },

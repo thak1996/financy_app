@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app.colors.dart';
 import '../../../core/utils/secure_storage.dart';
 import '../../../core/utils/validators.dart';
-import '../../../core/widgets/text_button.widget.dart';
 import '../../../core/widgets/text_field.widget.dart';
+import '../../../core/widgets/text_rich_widget.dart';
 import 'login.controller.dart';
 import 'login.state.dart';
 import '../../../core/widgets/alert_dialog.widget.dart';
@@ -90,11 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                                     isPassword: true,
                                   ),
                                   const SizedBox(height: 8),
-                                  TextButtonWidget(
+                                  TextRichWidget(
+                                    textOne: 'Forgot Password?',
                                     alignment: Alignment.topRight,
-                                    primaryText: 'Forgot Password?',
-                                    primaryTextColor: AppColors.link,
-                                    onPressed: () {},
+                                    onTap: () {},
                                   ),
                                   const SizedBox(height: 24),
                                 ],
@@ -125,10 +124,10 @@ class _LoginPageState extends State<LoginPage> {
                                       : const Text('Sign In'),
                             ),
                             const SizedBox(height: 24),
-                            TextButtonWidget(
-                              primaryText: 'Don\'t Have Account?',
-                              secondaryText: 'Sign up',
-                              onPressed: () => context.push('/register'),
+                            TextRichWidget(
+                              textOne: 'Don\'t Have Account?',
+                              textTwo: 'Sign up',
+                              onTap: () => context.push('/register'),
                             ),
                             Spacer(),
                           ],

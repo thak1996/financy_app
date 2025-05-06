@@ -1,11 +1,11 @@
 import '../../../core/widgets/alert_dialog.widget.dart';
-import '../../../core/widgets/text_button.widget.dart';
 import '../../../core/widgets/text_field.widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/theme/app.colors.dart';
 import '../../../core/utils/validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import '../../../core/widgets/text_rich_widget.dart';
 import 'register.controller.dart';
 import 'register.state.dart';
 
@@ -126,10 +126,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text('Sign Up'),
                         ),
                         const SizedBox(height: 16),
-                        TextButtonWidget(
-                          primaryText: 'Already have account?',
-                          secondaryText: 'Sign in',
-                          onPressed: () => context.push('/login'),
+                        TextRichWidget(
+                          textOne: 'Already have account?',
+                          textTwo: 'Sign in',
+                          onTap: () => context.push('/login'),
                         ),
                         const SizedBox(height: 16),
                       ],

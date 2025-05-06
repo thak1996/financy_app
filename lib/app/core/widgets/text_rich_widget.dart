@@ -5,37 +5,42 @@ class TextRichWidget extends StatelessWidget {
   const TextRichWidget({
     super.key,
     required this.textOne,
-    required this.textTwo,
+    this.textTwo,
     required this.onTap,
+    this.alignment = Alignment.center,
   });
 
   final String textOne;
-  final String textTwo;
+  final String? textTwo;
   final VoidCallback onTap;
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      onTap: onTap,
-      child: RichText(
-        text: TextSpan(
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary,
-            fontWeight: FontWeight.w400,
-          ),
-          children: [
-            TextSpan(text: textOne),
-            TextSpan(
-              text: textTwo,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w500,
-              ),
+    return Align(
+      alignment: alignment,
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        onTap: onTap,
+        child: RichText(
+          text: TextSpan(
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.textSecondary,
+              fontWeight: FontWeight.w400,
             ),
-          ],
+            children: [
+              TextSpan(text: "$textOne "),
+              TextSpan(
+                text: textTwo ?? ' ',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

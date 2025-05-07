@@ -19,8 +19,10 @@ class AlertDialogWidget extends StatelessWidget {
     required String message,
     String buttonText = 'OK',
   }) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder:
           (context) => AlertDialogWidget(
             title: title,
@@ -32,15 +34,30 @@ class AlertDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(title, style: Theme.of(context).textTheme.headlineSmall),
-      content: Text(message, style: Theme.of(context).textTheme.bodyMedium),
-      actions: [
-        PrimaryButton(
-          text: buttonText,
-          onPressed: () => Navigator.pop(context),
-        ),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            message,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          PrimaryButton(
+            text: buttonText,
+            maxWidth: 100,
+            onPressed: () => Navigator.pop(context),
+            height: 40,
+          ),
+        ],
+      ),
     );
   }
 }

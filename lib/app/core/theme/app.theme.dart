@@ -227,12 +227,12 @@ class AppTheme {
             bodyMedium: GoogleFonts.inter(
               fontSize: 14,
               letterSpacing: -0.5,
-              color: Colors.white70,
+              color: Colors.white,
             ),
             labelLarge: GoogleFonts.inter(
               fontSize: 14,
               letterSpacing: -0.5,
-              color: Colors.white70,
+              color: Colors.white,
             ),
           ),
       appBarTheme: const AppBarTheme(

@@ -7,17 +7,20 @@ class PrimaryButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.padding = const EdgeInsets.symmetric(horizontal: 28),
+    this.isLoading = false,
   });
 
   final String text;
   final VoidCallback onPressed;
   final EdgeInsets padding;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
       child: Container(
+        height: 50,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: AppColors.gradientButton,
@@ -26,14 +29,31 @@ class PrimaryButton extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(40),
         ),
-        child: FilledButton(
-          style: FilledButton.styleFrom(foregroundColor: AppColors.white),
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: AppColors.white,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(40),
+            onTap: isLoading ? null : onPressed,
+            child: Center(
+              child:
+                  isLoading
+                      ? SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.white,
+                          ),
+                        ),
+                      )
+                      : Text(
+                        text,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.white,
+                        ),
+                      ),
             ),
           ),
         ),

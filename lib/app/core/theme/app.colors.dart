@@ -36,7 +36,6 @@ abstract class AppColors {
   ];
   static List<Color> get gradientButton => [
     Color(0xFF69AEA9),
-    Color(0xFF69AEA9),
     Color(0xFF3F8782),
   ];
 }

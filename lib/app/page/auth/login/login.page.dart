@@ -9,6 +9,7 @@ import '../../../core/widgets/text_rich_widget.dart';
 import 'login.controller.dart';
 import 'login.state.dart';
 import '../../../core/widgets/alert_dialog.widget.dart';
+import '../../../core/widgets/primary_button.widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -99,7 +100,10 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                             ),
-                            FilledButton(
+                            PrimaryButton(
+                              padding: const EdgeInsets.all(0),
+                              text: 'Sign In',
+                              isLoading: state is LoginLoading,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   controller.login(
@@ -108,17 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                               },
-                              child:
-                                  state is LoginLoading
-                                      ? SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                          color: AppColors.iceWhite,
-                                        ),
-                                      )
-                                      : const Text('Sign In'),
                             ),
                             const SizedBox(height: 24),
                             TextRichWidget(

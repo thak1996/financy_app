@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'primary_button.widget.dart';
 
 class AlertDialogWidget extends StatelessWidget {
   const AlertDialogWidget({
@@ -35,9 +36,9 @@ class AlertDialogWidget extends StatelessWidget {
       title: Text(title, style: Theme.of(context).textTheme.headlineSmall),
       content: Text(message, style: Theme.of(context).textTheme.bodyMedium),
       actions: [
-        FilledButton(
+        PrimaryButton(
+          text: buttonText,
           onPressed: () => Navigator.pop(context),
-          child: Text(buttonText),
         ),
       ],
     );

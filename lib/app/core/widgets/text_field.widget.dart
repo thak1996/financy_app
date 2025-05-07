@@ -69,7 +69,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               fontWeight: FontWeight.w500,
             ),
             helperText: _helperText,
-
             helperMaxLines: 3,
             helperStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: AppColors.textPrimary,

@@ -1,4 +1,5 @@
 import '../../../core/widgets/alert_dialog.widget.dart';
+import '../../../core/widgets/primary_button.widget.dart';
 import '../../../core/widgets/text_field.widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/theme/app.colors.dart';
@@ -64,8 +65,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text(
                             'Start Saving\nYour Money!',
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(fontWeight: FontWeight.w700),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.displayLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.textPrimary,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -115,8 +120,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        FilledButton(
-                          onPressed: () {
+                        PrimaryButton(
+                          padding: const EdgeInsets.all(0),
+                          text: 'Sign Up',
+                          isLoading: state is RegisterLoading,
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               controller.register(
                                 _emailController.text,
@@ -125,17 +133,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               );
                             }
                           },
-                          child:
-                              state is RegisterLoading
-                                  ? SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      color: AppColors.iceWhite,
-                                    ),
-                                  )
-                                  : Text('Sign Up'),
                         ),
                         const SizedBox(height: 16),
                         TextRichWidget(

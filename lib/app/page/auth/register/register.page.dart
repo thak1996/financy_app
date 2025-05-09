@@ -45,6 +45,18 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         }
         if (state is RegisterSuccess) context.go('/home');
+        if (state is RegisterLoading) {
+          showDialog(
+            context: context,
+            builder:
+                (context) => Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
+                  ),
+                ),
+          );
+        }
       },
       child: BlocBuilder<RegisterController, RegisterState>(
         builder: (context, state) {
@@ -123,7 +135,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         PrimaryButton(
                           padding: const EdgeInsets.all(0),
                           text: 'Sign Up',
-                          isLoading: state is RegisterLoading,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               controller.register(

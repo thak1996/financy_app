@@ -9,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 28),
     this.isLoading = false,
     this.height,
-    this.maxWidth = 200,
+    this.maxWidth = double.infinity,
   });
 
   final String text;

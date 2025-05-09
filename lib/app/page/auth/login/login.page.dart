@@ -47,6 +47,20 @@ class _LoginPageState extends State<LoginPage> {
                 );
               }
               if (state is LoginSuccess) context.go('/home');
+              if (state is LoginLoading) {
+                showDialog(
+                  context: context,
+                  builder:
+                      (context) => Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.white,
+                          ),
+                        ),
+                      ),
+                );
+              }
             },
             child: Scaffold(
               backgroundColor: AppColors.iceWhite,
@@ -103,7 +117,6 @@ class _LoginPageState extends State<LoginPage> {
                             PrimaryButton(
                               padding: const EdgeInsets.all(0),
                               text: 'Sign In',
-                              isLoading: state is LoginLoading,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   controller.login(

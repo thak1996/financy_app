@@ -1,3 +1,4 @@
+import '../../../core/models/user_credentials.model.dart';
 import '../../../core/widgets/alert_dialog.widget.dart';
 import '../../../core/widgets/primary_button.widget.dart';
 import '../../../core/widgets/text_field.widget.dart';
@@ -138,9 +139,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               controller.register(
-                                _emailController.text,
-                                _passwordController.text,
-                                _nameController.text,
+                                UserCredentials(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                  name: _nameController.text,
+                                ),
                               );
                             }
                           },

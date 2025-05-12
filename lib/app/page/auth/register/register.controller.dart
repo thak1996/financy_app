@@ -1,24 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/models/user_credentials.model.dart';
+import '../../../core/services/auth.service.dart';
 import 'register.state.dart';
-import 'dart:developer';
 
 class RegisterController extends Cubit<RegisterState> {
-  RegisterController() : super(RegisterInitial());
+  RegisterController(this._authService) : super(RegisterInitial());
 
-  Future<void> register(String email, String password, String name) async {
+  final AuthService _authService;
+
+  Future<void> register(UserCredentials userCredentials) async {
     emit(RegisterLoading());
     try {
-      await Future.delayed(const Duration(seconds: 2));
-      if (email == 'teste@teste.com' &&
-          password == '12345678' &&
-          name == 'teste') {
-        log('email: $email');
-        log('password: $password');
-        log('name: $name');
-        emit(RegisterSuccess());
-      } else {
-        emit(RegisterError('Informações Incorretas'));
-      }
+      await _authService.register(
+        userCredentials.name,
+        email: userCredentials.email!,
+        password: userCredentials.password!,
+      );
+      emit(RegisterSuccess());
     } catch (e) {
       emit(RegisterError(e.toString()));
     }

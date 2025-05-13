@@ -9,14 +9,17 @@ class RegisterController extends Cubit<RegisterState> {
   final AuthService _authService;
 
   Future<void> register(UserCredentials userCredentials) async {
-    emit(RegisterLoading());
     try {
-      await _authService.register(
+      emit(RegisterLoading());
+      final result = await _authService.register(
         userCredentials.name,
         email: userCredentials.email!,
         password: userCredentials.password!,
       );
-      emit(RegisterSuccess());
+      result.fold(
+        (success) => emit(RegisterSuccess()),
+        (failure) => emit(RegisterError(failure.toString())),
+      );
     } catch (e) {
       emit(RegisterError(e.toString()));
     }

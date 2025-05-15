@@ -13,7 +13,10 @@ class AppProvider {
     BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
     BlocProvider<HomeController>(create: (_) => HomeController()),
     BlocProvider<LoginController>(
-      create: (_) => LoginController(SecureStorageService()),
+      create: (_) => LoginController(
+        SecureStorageService(),
+        AuthService(),
+      ),
     ),
     BlocProvider<RegisterController>(
       create: (_) => RegisterController(AuthService()),

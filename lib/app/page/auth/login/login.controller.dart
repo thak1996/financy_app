@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/services/auth.service.dart';
 import '../../../core/utils/secure_storage.dart';
@@ -9,7 +8,7 @@ class LoginController extends Cubit<LoginState> {
   LoginController(this._secureStorageService, this._authService)
     : super(const LoginInitial());
 
-  final SecureStorageService _secureStorageService;
+  final SecureStorage _secureStorageService;
   final AuthService _authService;
 
   Future<void> login(String email, String password) async {

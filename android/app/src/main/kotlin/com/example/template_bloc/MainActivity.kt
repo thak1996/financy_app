@@ -1,4 +1,4 @@
-package com.example.template_bloc
+package com.example.financy_app
 
 import io.flutter.embedding.android.FlutterActivity
 

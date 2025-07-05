@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) {
             return MaterialApp.router(
-              title: 'template_bloc',
+              title: 'financy_app',
               darkTheme: AppTheme.darkTheme,
               theme: AppTheme.lightTheme,
               themeMode:

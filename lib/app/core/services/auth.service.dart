@@ -1,6 +1,6 @@
 import 'package:result_dart/result_dart.dart';
-import 'package:template_bloc/app/core/models/user_credentials.model.dart';
 import '../interfaces/auth.interface.dart';
+import '../models/user_credentials.model.dart';
 
 class AuthService implements IAuthService {
   @override
@@ -12,11 +12,9 @@ class AuthService implements IAuthService {
     try {
       await Future.delayed(const Duration(seconds: 2));
       if (email == 'teste@teste.com' && password == '12345678') {
-        return Success(UserCredentials(
-          email: email,
-          password: password,
-          token: token,
-        ));
+        return Success(
+          UserCredentials(email: email, password: password, token: token),
+        );
       }
       return Failure(Exception('Invalid email or password'));
     } catch (e) {

@@ -1,4 +1,4 @@
-# template_bloc
+# financy_app
 
 A new Flutter project.
 

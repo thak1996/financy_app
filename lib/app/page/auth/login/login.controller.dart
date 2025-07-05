@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/services/auth.service.dart';
+import '../../../core/services/auth_firebase.service.dart';
 import '../../../core/utils/secure_storage.dart';
 import 'login.state.dart';
 
@@ -9,7 +9,7 @@ class LoginController extends Cubit<LoginState> {
     : super(const LoginInitial());
 
   final SecureStorage _secureStorageService;
-  final AuthService _authService;
+  final AuthFirebaseService _authService;
 
   Future<void> login(String email, String password) async {
     emit(const LoginLoading());

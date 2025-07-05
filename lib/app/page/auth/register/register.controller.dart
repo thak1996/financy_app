@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/models/user_credentials.model.dart';
-import '../../../core/services/auth.service.dart';
+import '../../../core/services/auth_firebase.service.dart';
 import 'register.state.dart';
 
 class RegisterController extends Cubit<RegisterState> {
   RegisterController(this._authService) : super(RegisterInitial());
 
-  final AuthService _authService;
+  final AuthFirebaseService _authService;
 
   Future<void> register(UserCredentials userCredentials) async {
     try {

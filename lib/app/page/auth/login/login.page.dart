@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/services/auth.service.dart';
+import '../../../core/services/auth_firebase.service.dart';
 import '../../../core/theme/app.colors.dart';
 import '../../../core/utils/secure_storage.dart';
 import '../../../core/utils/validators.dart';
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create:
-          (context) => LoginController(SecureStorage(), AuthService()),
+          (context) => LoginController(SecureStorage(), AuthFirebaseService()),
       child: BlocBuilder<LoginController, LoginState>(
         builder: (context, state) {
           final controller = context.read<LoginController>();

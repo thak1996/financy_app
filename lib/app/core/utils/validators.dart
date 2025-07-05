@@ -1,55 +1,55 @@
 class Validators {
   static String? validateName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Nome é obrigatório';
+      return 'Name is required';
     }
     if (value.length > 255) {
-      return 'Nome deve ter no máximo 255 caracteres';
+      return 'Name must be at most 255 characters';
     }
     return null;
   }
 
   static String? validatePhone(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Telefone é obrigatório';
+      return 'Phone number is required';
     }
 
     final phoneRegex = RegExp(
       r'^\([1-9]{2}\) [9]{0,1}[6-9]{1}[0-9]{3}\-[0-9]{4}$',
     );
     if (!phoneRegex.hasMatch(value)) {
-      return 'Telefone inválido';
+      return 'Invalid phone number';
     }
     return null;
   }
 
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Senha é obrigatória';
+      return 'Password is required';
     }
     if (value.length < 8) {
-      return 'Senha deve ter no mínimo 8 caracteres';
+      return 'Password must be at least 8 characters';
     }
     return null;
   }
 
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email é obrigatório';
+      return 'Email is required';
     }
     if (value.length > 255) {
-      return 'Email deve ter no máximo 255 caracteres';
+      return 'Email must be at most 255 characters';
     }
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value)) {
-      return 'Email inválido';
+      return 'Invalid email';
     }
     return null;
   }
 
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
-      return 'Confirmação de senha é obrigatória';
+      return 'Password confirmation is required';
     }
     if (value != password) {
       return 'Passwords do not match. Please retype.';

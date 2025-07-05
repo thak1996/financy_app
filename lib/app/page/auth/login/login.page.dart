@@ -82,8 +82,12 @@ class _LoginPageState extends State<LoginPage> {
                             const Spacer(),
                             Text(
                               'Welcome Back',
-                              style: Theme.of(context).textTheme.displayLarge
-                                  ?.copyWith(fontWeight: FontWeight.w700),
+                              style: Theme.of(
+                                context,
+                              ).textTheme.displayLarge?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.primary,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             Image.asset('assets/images/login.png'),

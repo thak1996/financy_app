@@ -21,7 +21,7 @@ class AuthFirebaseService implements IAuthService {
         UserCredentials(email: userCredential.user?.email, token: token),
       );
     } catch (e) {
-      return Failure(Exception('Login failed: ${e.toString()}'));
+      return Failure(Exception(e));
     }
   }
 
@@ -46,7 +46,7 @@ class AuthFirebaseService implements IAuthService {
         ),
       );
     } catch (e) {
-      return Failure(Exception('Registration failed: ${e.toString()}'));
+      return Failure(Exception(e));
     }
   }
 }

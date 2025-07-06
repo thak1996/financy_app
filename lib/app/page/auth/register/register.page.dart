@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
           return Scaffold(
             backgroundColor: AppColors.iceWhite,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
               child: Center(
                 child: SingleChildScrollView(
                   child: ConstrainedBox(
@@ -80,14 +80,17 @@ class _RegisterPageState extends State<RegisterPage> {
                             textAlign: TextAlign.center,
                             style: Theme.of(
                               context,
-                            ).textTheme.displayLarge?.copyWith(
+                            ).textTheme.displayMedium?.copyWith(
                               fontWeight: FontWeight.w700,
                               color: AppColors.textPrimary,
                             ),
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Image.asset('assets/images/register.png'),
+                        Image.asset(
+                          'assets/images/register.png',
+                          fit: BoxFit.contain,
+                        ),
                         const SizedBox(height: 32),
                         Form(
                           key: _formKey,

@@ -2,6 +2,12 @@
 cmake_minimum_required(VERSION 3.14)
 project(financy_app LANGUAGES CXX)
 
+# Suppress Firebase PDB warnings
+if(WIN32)
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ignore:4099")
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /ignore:4099")
+endif()
+
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
 set(BINARY_NAME "financy_app")

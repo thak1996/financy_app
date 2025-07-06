@@ -16,7 +16,12 @@ class OnBoarding extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Image.asset('assets/images/onboarding.png'),
+              child: Image.asset(
+                'assets/images/onboarding.png',
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.3,
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(height: 20),
             Expanded(

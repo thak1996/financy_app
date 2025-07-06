@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:financy_app/app/core/interfaces/auth.interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:result_dart/result_dart.dart';
@@ -19,12 +17,10 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
-      log(response.user?.email ?? '');
       return Success(
         UserCredentials(email: response.user?.email, token: response.user?.uid),
       );
     } on FirebaseAuthException catch (e) {
-      log("message: ${e.message}, code: ${e.code}");
       return Failure(AppException.fromFirebaseAuthException(e));
     } catch (e) {
       return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));

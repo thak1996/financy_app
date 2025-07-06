@@ -16,7 +16,7 @@ class AppProvider {
       create: (_) => LoginController(SecureStorage(), AuthFirebaseService()),
     ),
     BlocProvider<RegisterController>(
-      create: (_) => RegisterController(AuthFirebaseService()),
+      create: (_) => RegisterController(AuthFirebaseService(), SecureStorage()),
     ),
     Provider<SecureStorage>(create: (_) => SecureStorage()),
   ];

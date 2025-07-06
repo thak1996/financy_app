@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/services/auth_firebase.service.dart';
 import '../../../core/utils/secure_storage.dart';
@@ -17,7 +16,6 @@ class LoginController extends Cubit<LoginState> {
       final result = await _authService.login(email: email, password: password);
       result.fold((success) {
         _secureStorageService.write(key: 'user', value: success.token ?? '');
-        log(success.token ?? '');
         emit(const LoginSuccess());
       }, (failure) => emit(LoginError(failure.toString())));
     } catch (e) {

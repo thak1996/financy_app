@@ -42,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
           return BlocListener<LoginController, LoginState>(
             listener: (context, state) {
               if (state is LoginError) {
+                context.pop();
                 AlertDialogWidget.show(
                   context,
                   title: 'Erro',

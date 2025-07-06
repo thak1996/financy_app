@@ -39,6 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return BlocListener<RegisterController, RegisterState>(
       listener: (context, state) {
         if (state is RegisterError) {
+          context.pop();
           AlertDialogWidget.show(
             context,
             title: 'Erro',

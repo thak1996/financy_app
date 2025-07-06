@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/models/user_credentials.model.dart';
 import '../../../core/services/auth_firebase.service.dart';
@@ -11,15 +12,15 @@ class RegisterController extends Cubit<RegisterState> {
   Future<void> register(UserCredentials userCredentials) async {
     try {
       emit(RegisterLoading());
-      final result = await _authService.register(
+      final response = await _authService.register(
         userCredentials.name,
         email: userCredentials.email!,
         password: userCredentials.password!,
       );
-      result.fold(
-        (success) => emit(RegisterSuccess()),
-        (failure) => emit(RegisterError(failure.toString())),
-      );
+      response.fold((success) {
+        log('User registered successfully: ${success.email}');
+        emit(RegisterSuccess());
+      }, (failure) => emit(RegisterError(failure.toString())));
     } catch (e) {
       emit(RegisterError(e.toString()));
     }

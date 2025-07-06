@@ -42,6 +42,11 @@ android {
     }
 }
 
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+    implementation("com.google.firebase:firebase-auth:22.3.1")
+}
+
 flutter {
     source = "../.."
 }

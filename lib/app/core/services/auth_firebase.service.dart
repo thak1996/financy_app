@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:financy_app/app/core/interfaces/auth.interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:result_dart/result_dart.dart';
 import '../models/user_credentials.model.dart';
+import '../utils/api_exception.dart';
 
 class AuthFirebaseService implements IAuthService {
   final _auth = FirebaseAuth.instance;
@@ -10,18 +13,21 @@ class AuthFirebaseService implements IAuthService {
   AsyncResult<UserCredentials> login({
     required String email,
     required String password,
-    String? token,
   }) async {
     try {
-      final userCredential = await _auth.signInWithEmailAndPassword(
+      final response = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      log(response.user?.email ?? '');
       return Success(
-        UserCredentials(email: userCredential.user?.email, token: token),
+        UserCredentials(email: response.user?.email, token: response.user?.uid),
       );
+    } on FirebaseAuthException catch (e) {
+      log("message: ${e.message}, code: ${e.code}");
+      return Failure(AppException.fromFirebaseAuthException(e));
     } catch (e) {
-      return Failure(Exception(e));
+      return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));
     }
   }
 
@@ -32,21 +38,20 @@ class AuthFirebaseService implements IAuthService {
     required String password,
   }) async {
     try {
-      final userCredential = await _auth.createUserWithEmailAndPassword(
+      final response = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (userCredential.user != null) {
-        await userCredential.user?.updateDisplayName(name);
+      if (response.user != null) {
+        await response.user?.updateDisplayName(name);
       }
       return Success(
-        UserCredentials(
-          email: userCredential.user?.email,
-          token: userCredential.user?.uid,
-        ),
+        UserCredentials(email: response.user?.email, token: response.user?.uid),
       );
+    } on FirebaseAuthException catch (e) {
+      return Failure(AppException.fromFirebaseAuthException(e));
     } catch (e) {
-      return Failure(Exception(e));
+      return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));
     }
   }
 }

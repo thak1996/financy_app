@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
             message: state.message,
           );
         }
-        if (state is RegisterSuccess) context.go('/home');
+        if (state is RegisterSuccess) context.goNamed('home');
         if (state is RegisterLoading) {
           showDialog(
             context: context,
@@ -156,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         TextRichWidget(
                           textOne: 'Already have account?',
                           textTwo: 'Sign in',
-                          onTap: () => context.push('/login'),
+                          onTap: () => context.pushNamed('login'),
                         ),
                         const SizedBox(height: 16),
                       ],

@@ -38,13 +38,13 @@ class OnBoarding extends StatelessWidget {
                   const SizedBox(height: 20),
                   PrimaryButton(
                     text: 'Get Started',
-                    onPressed: () => context.push('/register'),
+                    onPressed: () => context.pushNamed('register'),
                   ),
                   const SizedBox(height: 16),
                   TextRichWidget(
                     textOne: 'Already have an account? ',
                     textTwo: 'Sign in',
-                    onTap: () => context.push('/login'),
+                    onTap: () => context.pushNamed('login'),
                   ),
                 ],
               ),

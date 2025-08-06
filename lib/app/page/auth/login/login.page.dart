@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                   message: state.message,
                 );
               }
-              if (state is LoginSuccess) context.go('/home');
+              if (state is LoginSuccess) context.goNamed('home');
               if (state is LoginLoading) {
                 showDialog(
                   context: context,
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                             TextRichWidget(
                               textOne: 'Don\'t Have Account?',
                               textTwo: 'Sign up',
-                              onTap: () => context.push('/register'),
+                              onTap: () => context.pushNamed('register'),
                             ),
                             Spacer(),
                           ],

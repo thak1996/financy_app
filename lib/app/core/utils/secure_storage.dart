@@ -1,5 +1,4 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../interfaces/secure_storage.interface.dart';
 
 class SecureStorage extends ISecureStorage {

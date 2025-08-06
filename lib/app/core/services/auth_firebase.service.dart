@@ -22,10 +22,12 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
-      await _secureStorageService.write(
-        key: 'user',
-        value: response.user?.uid ?? '',
-      );
+      if (response.user != null) {
+        await _secureStorageService.write(
+          key: 'user',
+          value: response.user?.uid ?? '',
+        );
+      }
       return Success(
         UserModel(email: response.user?.email, token: response.user?.uid),
       );
@@ -49,11 +51,11 @@ class AuthFirebaseService implements IAuthService {
       );
       if (response.user != null) {
         await response.user?.updateDisplayName(name);
+        await _secureStorageService.write(
+          key: 'user',
+          value: response.user?.uid ?? '',
+        );
       }
-      await _secureStorageService.write(
-        key: 'user',
-        value: response.user?.uid ?? '',
-      );
       return Success(
         UserModel(email: response.user?.email, token: response.user?.uid),
       );

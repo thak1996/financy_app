@@ -11,7 +11,9 @@ import 'page/auth/login/login.controller.dart';
 class AppProvider {
   static List<SingleChildWidget> get providers => [
     BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
-    BlocProvider<HomeController>(create: (_) => HomeController()),
+    BlocProvider<HomeController>(
+      create: (_) => HomeController(AuthFirebaseService(SecureStorage())),
+    ),
     BlocProvider<LoginController>(
       create: (_) => LoginController(AuthFirebaseService(SecureStorage())),
     ),

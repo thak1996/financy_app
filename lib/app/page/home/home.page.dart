@@ -1,7 +1,12 @@
+import 'package:financy_app/app/core/services/auth_firebase.service.dart';
+import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/core/widgets/alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/theme/theme_switch.dart';
 import 'home.controller.dart';
+import 'home.state.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,88 +14,50 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeController(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Home"),
-          actions: const [ThemeSwitchIcon(), SizedBox(width: 16)],
-        ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          children: [
-            Text(
-              'Display Large',
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Display Medium',
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Display Small',
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(height: 24),
-            Text(
-              'Headline Medium',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Headline Small',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 24),
-            Text('Title Large', style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 16),
-            Text(
-              'Body Large - This is a sample body text that demonstrates how the body text style looks in our theme. It should be easy to read and have proper spacing.',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Body Medium - This is a smaller body text that can be used for secondary information or less important content.',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 24),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Dark Mode',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const ThemeSwitch(),
-                  ],
+      create: (context) => HomeController(AuthFirebaseService(SecureStorage())),
+      child: BlocBuilder<HomeController, HomeState>(
+        builder: (context, state) {
+          final controller = context.read<HomeController>();
+          return BlocListener<HomeController, HomeState>(
+            listener: (context, state) {
+              if (state is HomeLoggedOut) context.pushNamed('login');
+              if (state is HomeError) {
+                context.pop();
+                AlertDialogWidget.show(
+                  context,
+                  title: 'Erro',
+                  message: state.message,
+                );
+              }
+              if (state is HomeLoading) {
+                showDialog(
+                  context: context,
+                  builder:
+                      (context) => Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      ),
+                );
+              }
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text("Home"),
+                actions: const [ThemeSwitchIcon(), SizedBox(width: 16)],
+              ),
+              body: Center(
+                child: IconButton(
+                  onPressed: () => controller.logout(),
+                  icon: const Icon(Icons.logout_outlined),
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Elevated Button'),
-            ),
-            const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: () {},
-              child: const Text('Outlined Button'),
-            ),
-            const SizedBox(height: 16),
-            TextButton(onPressed: () {}, child: const Text('Text Button')),
-            const SizedBox(height: 24),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Text Field',
-                hintText: 'Enter some text',
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

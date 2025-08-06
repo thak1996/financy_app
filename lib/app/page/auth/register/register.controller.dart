@@ -16,9 +16,10 @@ class RegisterController extends Cubit<RegisterState> {
         email: userCredentials.email!,
         password: userCredentials.password!,
       );
-      response.fold((success) {
-        emit(RegisterSuccess());
-      }, (failure) => emit(RegisterError(failure.toString())));
+      response.fold(
+        (success) => emit(RegisterSuccess()),
+        (failure) => emit(RegisterError(failure.toString())),
+      );
     } catch (e) {
       emit(RegisterError(e.toString()));
     }

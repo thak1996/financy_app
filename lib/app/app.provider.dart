@@ -13,10 +13,10 @@ class AppProvider {
     BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
     BlocProvider<HomeController>(create: (_) => HomeController()),
     BlocProvider<LoginController>(
-      create: (_) => LoginController(SecureStorage(), AuthFirebaseService()),
+      create: (_) => LoginController(AuthFirebaseService(SecureStorage())),
     ),
     BlocProvider<RegisterController>(
-      create: (_) => RegisterController(AuthFirebaseService(), SecureStorage()),
+      create: (_) => RegisterController(AuthFirebaseService(SecureStorage())),
     ),
     Provider<SecureStorage>(create: (_) => SecureStorage()),
   ];

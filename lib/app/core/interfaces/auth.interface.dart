@@ -12,4 +12,6 @@ abstract class IAuthService {
     required String email,
     required String password,
   });
+
+  AsyncResult<Unit> logout();
 }

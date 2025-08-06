@@ -50,7 +50,7 @@ class AlertDialogWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          PrimaryButton(
+          PrimaryButtonWidget(
             text: buttonText,
             maxWidth: 100,
             onPressed: () => Navigator.pop(context),

@@ -137,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        PrimaryButton(
+                        PrimaryButtonWidget(
                           padding: const EdgeInsets.all(0),
                           text: 'Sign Up',
                           onPressed: () async {

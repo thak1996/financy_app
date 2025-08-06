@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../theme/app.colors.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+class PrimaryButtonWidget extends StatelessWidget {
+  const PrimaryButtonWidget({
     super.key,
     required this.text,
     required this.onPressed,

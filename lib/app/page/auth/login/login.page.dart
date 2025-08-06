@@ -1,3 +1,4 @@
+import 'package:financy_app/app/core/widgets/circular_progress_indicator.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -53,15 +54,7 @@ class _LoginPageState extends State<LoginPage> {
               if (state is LoginLoading) {
                 showDialog(
                   context: context,
-                  builder:
-                      (context) => Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.5,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            AppColors.white,
-                          ),
-                        ),
-                      ),
+                  builder: (context) => CircularProgressIndicatorWidget(),
                 );
               }
             },
@@ -121,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                             ),
-                            PrimaryButton(
+                            PrimaryButtonWidget(
                               padding: const EdgeInsets.all(0),
                               text: 'Sign In',
                               onPressed: () {

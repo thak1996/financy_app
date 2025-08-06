@@ -1,6 +1,7 @@
 import 'package:financy_app/app/core/services/auth_firebase.service.dart';
 import 'package:financy_app/app/core/utils/secure_storage.dart';
 import 'package:financy_app/app/core/widgets/alert_dialog.widget.dart';
+import 'package:financy_app/app/core/widgets/circular_progress_indicator.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -32,15 +33,7 @@ class HomePage extends StatelessWidget {
               if (state is HomeLoading) {
                 showDialog(
                   context: context,
-                  builder:
-                      (context) => Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.5,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        ),
-                      ),
+                  builder: (context) => CircularProgressIndicatorWidget(),
                 );
               }
             },

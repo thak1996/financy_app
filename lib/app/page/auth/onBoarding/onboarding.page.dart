@@ -36,7 +36,7 @@ class OnBoarding extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  PrimaryButton(
+                  PrimaryButtonWidget(
                     text: 'Get Started',
                     onPressed: () => context.pushNamed('register'),
                   ),

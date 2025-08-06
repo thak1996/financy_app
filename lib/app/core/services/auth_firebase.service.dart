@@ -3,13 +3,13 @@ import 'package:financy_app/app/core/exception/auth.exception.dart';
 import 'package:financy_app/app/core/interfaces/auth.interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:result_dart/result_dart.dart';
-import '../models/user_credentials.model.dart';
+import '../models/user.model.dart';
 
 class AuthFirebaseService implements IAuthService {
   final _auth = FirebaseAuth.instance;
 
   @override
-  AsyncResult<UserCredentials> login({
+  AsyncResult<UserModel> login({
     required String email,
     required String password,
   }) async {
@@ -19,7 +19,7 @@ class AuthFirebaseService implements IAuthService {
         password: password,
       );
       return Success(
-        UserCredentials(email: response.user?.email, token: response.user?.uid),
+        UserModel(email: response.user?.email, token: response.user?.uid),
       );
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
@@ -29,7 +29,7 @@ class AuthFirebaseService implements IAuthService {
   }
 
   @override
-  AsyncResult<UserCredentials> register(
+  AsyncResult<UserModel> register(
     String? name, {
     required String email,
     required String password,
@@ -43,7 +43,7 @@ class AuthFirebaseService implements IAuthService {
         await response.user?.updateDisplayName(name);
       }
       return Success(
-        UserCredentials(email: response.user?.email, token: response.user?.uid),
+        UserModel(email: response.user?.email, token: response.user?.uid),
       );
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));

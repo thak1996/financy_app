@@ -1,28 +1,22 @@
 import 'dart:convert';
 
-class UserCredentials {
+class UserModel {
   final int? id;
   final String? name;
   final String? password;
   final String? email;
   final String? token;
 
-  UserCredentials({
-    this.id,
-    this.name,
-    this.password,
-    this.email,
-    this.token,
-  });
+  UserModel({this.id, this.name, this.password, this.email, this.token});
 
-  UserCredentials copyWith({
+  UserModel copyWith({
     int? id,
     String? name,
     String? password,
     String? email,
     String? token,
   }) {
-    return UserCredentials(
+    return UserModel(
       id: id ?? this.id,
       name: name ?? this.name,
       password: password ?? this.password,
@@ -41,8 +35,8 @@ class UserCredentials {
     };
   }
 
-  factory UserCredentials.fromMap(Map<String, dynamic> map) {
-    return UserCredentials(
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       id: map['id'] != null ? map['id'] as int : null,
       name: map['name'] != null ? map['name'] as String : null,
       password: map['password'] != null ? map['password'] as String : null,
@@ -53,7 +47,8 @@ class UserCredentials {
 
   String toJson() => json.encode(toMap());
 
-  factory UserCredentials.fromJson(String source) => UserCredentials.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -61,23 +56,22 @@ class UserCredentials {
   }
 
   @override
-  bool operator ==(covariant UserCredentials other) {
+  bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.password == password &&
-      other.email == email &&
-      other.token == token;
+
+    return other.id == id &&
+        other.name == name &&
+        other.password == password &&
+        other.email == email &&
+        other.token == token;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      password.hashCode ^
-      email.hashCode ^
-      token.hashCode;
+        name.hashCode ^
+        password.hashCode ^
+        email.hashCode ^
+        token.hashCode;
   }
 }

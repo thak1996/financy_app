@@ -1,13 +1,13 @@
 import 'package:result_dart/result_dart.dart';
-import '../models/user_credentials.model.dart';
+import '../models/user.model.dart';
 
 abstract class IAuthService {
-  AsyncResult<UserCredentials> login({
+  AsyncResult<UserModel> login({
     required String email,
     required String password,
   });
 
-  AsyncResult<UserCredentials> register(
+  AsyncResult<UserModel> register(
     String? name, {
     required String email,
     required String password,

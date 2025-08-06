@@ -1,9 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'page/auth/onBoarding/onboarding.page.dart';
-import 'page/auth/register/register.page.dart';
-import 'page/home/home.page.dart';
-import 'page/auth/login/login.page.dart';
-import 'page/auth/splash/splash.page.dart';
+import '../../page/auth/onBoarding/onboarding.page.dart';
+import '../../page/auth/register/register.page.dart';
+import '../../page/home/home.page.dart';
+import '../../page/auth/login/login.page.dart';
+import '../../page/auth/splash/splash.page.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',

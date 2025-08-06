@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'app.provider.dart';
-import 'app.route.dart';
+import 'core/routes/app.route.dart';
 import 'core/theme/app.theme.dart';
 import 'core/theme/theme_cubit.dart';
 

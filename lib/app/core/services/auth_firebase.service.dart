@@ -1,8 +1,9 @@
+import 'package:financy_app/app/core/exception/app.exception.dart';
+import 'package:financy_app/app/core/exception/auth.exception.dart';
 import 'package:financy_app/app/core/interfaces/auth.interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:result_dart/result_dart.dart';
 import '../models/user_credentials.model.dart';
-import '../utils/api_exception.dart';
 
 class AuthFirebaseService implements IAuthService {
   final _auth = FirebaseAuth.instance;
@@ -21,7 +22,7 @@ class AuthFirebaseService implements IAuthService {
         UserCredentials(email: response.user?.email, token: response.user?.uid),
       );
     } on FirebaseAuthException catch (e) {
-      return Failure(AppException.fromFirebaseAuthException(e));
+      return Failure(AuthException.fromFirebaseAuth(e));
     } catch (e) {
       return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));
     }
@@ -45,7 +46,7 @@ class AuthFirebaseService implements IAuthService {
         UserCredentials(email: response.user?.email, token: response.user?.uid),
       );
     } on FirebaseAuthException catch (e) {
-      return Failure(AppException.fromFirebaseAuthException(e));
+      return Failure(AuthException.fromFirebaseAuth(e));
     } catch (e) {
       return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));
     }

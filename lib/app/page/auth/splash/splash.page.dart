@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
         builder: (context, state) {
           return BlocListener<SplashController, SplashState>(
             listener: (context, state) {
-              if (state is LoginSuccess) context.goNamed('home');
+              if (state is LoginSuccess) context.goNamed('app-scaffold');
               if (state is LoginFailed) context.goNamed('login');
             },
             child: Scaffold(

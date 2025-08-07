@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                   message: state.message,
                 );
               }
-              if (state is LoginSuccess) context.goNamed('home');
+              if (state is LoginSuccess) context.goNamed('app-scaffold');
               if (state is LoginLoading) {
                 showDialog(
                   context: context,

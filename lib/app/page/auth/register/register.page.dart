@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
             message: state.message,
           );
         }
-        if (state is RegisterSuccess) context.goNamed('home');
+        if (state is RegisterSuccess) context.goNamed('app-scaffold');
         if (state is RegisterLoading) {
           showDialog(
             context: context,

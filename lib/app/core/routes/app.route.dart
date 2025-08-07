@@ -1,9 +1,13 @@
 import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/page/screens/home/home.page.dart';
+import 'package:financy_app/app/page/screens/profile/profile.page.dart';
+import 'package:financy_app/app/page/screens/stats/state.page.dart';
+import 'package:financy_app/app/page/screens/transactions/transactions.page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import '../../page/auth/onBoarding/onboarding.page.dart';
 import '../../page/auth/register/register.page.dart';
-import '../../page/home/home.page.dart';
+import '../../page/screens/app_scaffold/app_scaffold.page.dart';
 import '../../page/auth/login/login.page.dart';
 import '../../page/auth/splash/splash.page.dart';
 
@@ -37,9 +41,29 @@ final GoRouter appRouter = GoRouter(
 
     // Routes private
     GoRoute(
+      path: '/app-scaffold',
+      name: 'app-scaffold',
+      builder: (context, state) => AppScaffoldPage(),
+    ),
+    GoRoute(
       path: '/home',
       name: 'home',
       builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: '/stats',
+      name: 'stats',
+      builder: (context, state) => StatsPage(),
+    ),
+    GoRoute(
+      path: '/transactions',
+      name: 'transactions',
+      builder: (context, state) => TransactionsPage(),
+    ),
+    GoRoute(
+      path: '/profile',
+      name: 'profile',
+      builder: (context, state) => ProfilePage(),
     ),
   ],
 );
@@ -56,7 +80,8 @@ Future<String?> _redirectHandler(
   if (location == '/') return null;
 
   if (!isAuthenticated && !publicRoutes.contains(location)) return '/login';
-  if (isAuthenticated && publicRoutes.contains(location)) return '/home';
-
+  if (isAuthenticated && publicRoutes.contains(location)) {
+    return '/app-scaffold';
+  }
   return null;
 }

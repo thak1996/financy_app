@@ -1,4 +1,4 @@
-import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/core/theme/app.colors.dart';
 import 'package:financy_app/app/core/widgets/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

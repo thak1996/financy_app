@@ -1,8 +1,17 @@
+import 'package:financy_app/app/core/services/auth_firebase.service.dart';
+import 'package:financy_app/app/core/theme/theme_cubit.dart';
+import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/page/auth/login/login.controller.dart';
+import 'package:financy_app/app/page/auth/register/register.controller.dart';
+import 'package:financy_app/app/page/screens/add_transaction/add_transaction.controller.dart';
+import 'package:financy_app/app/page/screens/app_scaffold/app_scaffold.controller.dart';
+import 'package:financy_app/app/page/screens/home/home.controller.dart';
+import 'package:financy_app/app/page/screens/profile/profile.controller.dart';
+import 'package:financy_app/app/page/screens/stats/stats.controller.dart';
+import 'package:financy_app/app/page/screens/transactions/transactions.controller.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'core/exports.dart';
-import 'page/exports.dart';
 
 class AppProvider {
   static List<SingleChildWidget> get providers => [

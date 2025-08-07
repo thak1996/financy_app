@@ -1,5 +1,7 @@
-import 'package:financy_app/app/core/exports.dart';
-import 'package:financy_app/app/page/exports.dart';
+import 'package:financy_app/app/core/theme/app.colors.dart';
+import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/page/auth/splash/splash.controller.dart';
+import 'package:financy_app/app/page/auth/splash/splash.state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
         builder: (context, state) {
           return BlocListener<SplashController, SplashState>(
             listener: (context, state) {
-              if (state is LoginSuccess) context.goNamed('app-scaffold');
+              if (state is SplashSuccess) context.goNamed('app-scaffold');
               if (state is SplashFailed) context.goNamed('login');
             },
             child: Scaffold(

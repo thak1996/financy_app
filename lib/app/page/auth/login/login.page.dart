@@ -1,17 +1,9 @@
-import 'package:financy_app/app/core/widgets/circular_progress_indicator.widget.dart';
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/core/widgets/exports.dart';
+import 'package:financy_app/app/page/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/services/auth_firebase.service.dart';
-import '../../../core/theme/app.colors.dart';
-import '../../../core/utils/secure_storage.dart';
-import '../../../core/utils/validators.dart';
-import '../../../core/widgets/text_field.widget.dart';
-import '../../../core/widgets/text_rich_widget.dart';
-import 'login.controller.dart';
-import 'login.state.dart';
-import '../../../core/widgets/alert_dialog.widget.dart';
-import '../../../core/widgets/primary_button.widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

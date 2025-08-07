@@ -4,6 +4,6 @@ class SplashInitial extends SplashState {}
 
 class SplashLoading extends SplashState {}
 
-class LoginSuccess extends SplashState {}
+class SplashSuccess extends SplashState {}
 
-class LoginFailed extends SplashState {}
+class SplashFailed extends SplashState {}

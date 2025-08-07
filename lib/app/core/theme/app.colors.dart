@@ -21,6 +21,7 @@ abstract class AppColors {
   // Surface Colors
   static Color get background => const Color(0xFFFFFFFF);
   static Color get surface => const Color(0xFFFFFFFF);
+  static Color get surfaceDark => const Color(0xFF1E1E1E);
 
   // Text Colors
   static Color get textPrimary => const Color(0xFF438883);

@@ -8,7 +8,7 @@ class AppScaffoldController extends Cubit<AppScaffoldState> {
   late PageController _pageController;
   PageController get pageController => _pageController;
 
-  set setPageController(PageController newPageController) {
+  set setPage(PageController newPageController) {
     _pageController = newPageController;
   }
 

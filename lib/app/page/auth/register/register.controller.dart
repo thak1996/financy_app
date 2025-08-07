@@ -1,7 +1,6 @@
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/page/exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/models/user.model.dart';
-import '../../../core/services/auth_firebase.service.dart';
-import 'register.state.dart';
 
 class RegisterController extends Cubit<RegisterState> {
   RegisterController(this._authService) : super(RegisterInitial());

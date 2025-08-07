@@ -1,8 +1,7 @@
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/core/widgets/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app.colors.dart';
-import '../../../core/widgets/primary_button.widget.dart';
-import '../../../core/widgets/text_rich_widget.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});

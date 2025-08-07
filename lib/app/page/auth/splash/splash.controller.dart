@@ -1,8 +1,7 @@
-import 'package:financy_app/app/core/utils/secure_storage.dart';
-import 'package:financy_app/app/core/utils/log_printer.dart';
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/page/exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import 'splash.state.dart';
 
 class SplashController extends Cubit<SplashState> {
   SplashController(this._secureStorageService) : super(SplashInitial());
@@ -18,14 +17,14 @@ class SplashController extends Cubit<SplashState> {
       final token = await _secureStorageService.read('user');
       if (token != null && token.isNotEmpty) {
         _logger.i('Usuário está logado');
-        emit(LoginSuccess());
+        emit(SplashSuccess());
       } else {
         _logger.w('Usuário não está logado');
-        emit(LoginFailed());
+        emit(SplashFailed());
       }
     } catch (e) {
       _logger.e('Erro ao verificar autenticação: $e');
-      emit(LoginFailed());
+      emit(SplashFailed());
     }
   }
 }

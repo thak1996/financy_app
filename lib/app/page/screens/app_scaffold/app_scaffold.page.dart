@@ -1,20 +1,10 @@
-import 'package:financy_app/app/core/services/auth_firebase.service.dart';
-import 'package:financy_app/app/core/utils/secure_storage.dart';
-import 'package:financy_app/app/page/screens/home/home.controller.dart';
-import 'package:financy_app/app/page/screens/home/home.page.dart';
-import 'package:financy_app/app/page/screens/profile/profile.controller.dart';
-import 'package:financy_app/app/page/screens/profile/profile.page.dart';
-import 'package:financy_app/app/page/screens/stats/state.page.dart';
-import 'package:financy_app/app/page/screens/stats/stats.controller.dart';
-import 'package:financy_app/app/page/screens/transactions/transactions.controller.dart';
-import 'package:financy_app/app/page/screens/transactions/transactions.page.dart';
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/core/widgets/exports.dart';
+import 'package:financy_app/app/page/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'app_scaffold.controller.dart';
-import 'app_scaffold.state.dart';
-import 'package:financy_app/app/core/widgets/bottom_app_bar.widget.dart';
-import 'package:financy_app/app/core/extensions/page_controller.ext.dart';
+import 'package:provider/single_child_widget.dart';
 
 class AppScaffoldPage extends StatelessWidget {
   const AppScaffoldPage({super.key});
@@ -22,24 +12,7 @@ class AppScaffoldPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create:
-              (context) =>
-                  AppScaffoldController()..setPageController = PageController(),
-        ),
-        BlocProvider(create: (context) => HomeController()..loadHomeData()),
-        BlocProvider(create: (context) => StatsController()..loadStatsData()),
-        BlocProvider(
-          create: (context) => TransactionsController()..loadTransactionsData(),
-        ),
-        BlocProvider(
-          create:
-              (context) =>
-                  ProfileController(AuthFirebaseService(SecureStorage()))
-                    ..loadProfileData(),
-        ),
-      ],
+      providers: _createProviders(),
       child: BlocBuilder<AppScaffoldController, AppScaffoldState>(
         builder: (context, state) {
           final controller = context.read<AppScaffoldController>();
@@ -83,6 +56,7 @@ class AppScaffoldPage extends StatelessWidget {
                 selectedItemColor: Theme.of(context).colorScheme.primary,
                 children: [
                   CustomBottomAppBarItem(
+                    key: Keys.homePageBottomAppBarItem,
                     label: BottomAppBarItem.home.name,
                     primaryIcon: Icons.home,
                     secondaryIcon: Icons.home_outlined,
@@ -92,6 +66,7 @@ class AppScaffoldPage extends StatelessWidget {
                         ),
                   ),
                   CustomBottomAppBarItem(
+                    key: Keys.statsPageBottomAppBarItem,
                     label: BottomAppBarItem.stats.name,
                     primaryIcon: Icons.analytics,
                     secondaryIcon: Icons.analytics_outlined,
@@ -102,6 +77,7 @@ class AppScaffoldPage extends StatelessWidget {
                   ),
                   CustomBottomAppBarItem.empty(),
                   CustomBottomAppBarItem(
+                    key: Keys.walletPageBottomAppBarItem,
                     label: BottomAppBarItem.wallet.name,
                     primaryIcon: Icons.account_balance_wallet,
                     secondaryIcon: Icons.account_balance_wallet_outlined,
@@ -111,6 +87,7 @@ class AppScaffoldPage extends StatelessWidget {
                         ),
                   ),
                   CustomBottomAppBarItem(
+                    key: Keys.profilePageBottomAppBarItem,
                     label: BottomAppBarItem.profile.name,
                     primaryIcon: Icons.person,
                     secondaryIcon: Icons.person_outline,
@@ -126,6 +103,26 @@ class AppScaffoldPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  List<SingleChildWidget> _createProviders() {
+    return [
+      BlocProvider(
+        create:
+            (context) => AppScaffoldController()..setPage = PageController(),
+      ),
+      BlocProvider(create: (context) => HomeController()..loadHomeData()),
+      BlocProvider(create: (context) => StatsController()..loadStatsData()),
+      BlocProvider(
+        create: (context) => TransactionsController()..loadTransactionsData(),
+      ),
+      BlocProvider(
+        create:
+            (context) =>
+                ProfileController(AuthFirebaseService(SecureStorage()))
+                  ..loadProfileData(),
+      ),
+    ];
   }
 
   Future<void> _refreshPage(

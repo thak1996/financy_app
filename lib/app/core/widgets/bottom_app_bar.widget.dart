@@ -1,5 +1,4 @@
 import 'package:financy_app/app/core/extensions/page_controller.ext.dart';
-import 'package:financy_app/app/core/theme/app.colors.dart';
 import 'package:flutter/material.dart';
 
 class BottomAppBarWidget extends StatefulWidget {
@@ -26,7 +25,7 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
 
   @override
   void dispose() {
-    widget.controller.dispose();
+    widget.controller.removeListener(_handlePageChange);
     super.dispose();
   }
 
@@ -34,7 +33,10 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BottomAppBar(
+      color: theme.bottomAppBarTheme.color,
+      elevation: 4,
       shape: const CircularNotchedRectangle(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -49,24 +51,28 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
                 builder: (context) {
                   return Expanded(
                     key: item.key,
-                    child: InkWell(
-                      onTap: item.onPressed,
-                      onTapUp: (_) {
-                        widget.controller.setBottomAppBarItemIndex = widget
-                            .children
-                            .indexOf(item);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        child: Icon(
-                          currentItem ? item.primaryIcon : item.secondaryIcon,
-                          color:
-                              currentItem
-                                  ? widget.selectedItemColor
-                                  : AppColors.grey300,
-                        ),
-                      ),
-                    ),
+                    child:
+                        item.isEmpty
+                            ? SizedBox.shrink()
+                            : IconButton(
+                              onPressed: () {
+                                item.onPressed?.call();
+                                widget.controller.setBottomAppBarItemIndex =
+                                    widget.children.indexOf(item);
+                              },
+                              icon: Icon(
+                                currentItem
+                                    ? item.primaryIcon
+                                    : item.secondaryIcon,
+                                color:
+                                    currentItem
+                                        ? (widget.selectedItemColor ??
+                                            theme.colorScheme.primary)
+                                        : theme.colorScheme.onSurfaceVariant,
+                              ),
+                              splashRadius: 24,
+                              iconSize: 24,
+                            ),
                   );
                 },
               );
@@ -82,6 +88,7 @@ class CustomBottomAppBarItem {
   final IconData? primaryIcon;
   final IconData? secondaryIcon;
   final VoidCallback? onPressed;
+  final bool isEmpty;
 
   CustomBottomAppBarItem({
     this.key,
@@ -89,7 +96,7 @@ class CustomBottomAppBarItem {
     this.primaryIcon,
     this.secondaryIcon,
     this.onPressed,
-  });
+  }) : isEmpty = false;
 
   CustomBottomAppBarItem.empty({
     this.key,
@@ -97,5 +104,5 @@ class CustomBottomAppBarItem {
     this.primaryIcon,
     this.secondaryIcon,
     this.onPressed,
-  });
+  }) : isEmpty = true;
 }

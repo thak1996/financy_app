@@ -1,6 +1,6 @@
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/page/exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/services/auth_firebase.service.dart';
-import 'login.state.dart';
 
 class LoginController extends Cubit<LoginState> {
   LoginController(this._authService) : super(const LoginInitial());

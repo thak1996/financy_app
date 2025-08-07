@@ -1,15 +1,9 @@
-import '../../../core/models/user.model.dart';
-import '../../../core/widgets/alert_dialog.widget.dart';
-import '../../../core/widgets/primary_button.widget.dart';
-import '../../../core/widgets/text_field.widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/theme/app.colors.dart';
-import '../../../core/utils/validators.dart';
-import 'package:go_router/go_router.dart';
+import 'package:financy_app/app/core/exports.dart';
+import 'package:financy_app/app/core/widgets/exports.dart';
+import 'package:financy_app/app/page/exports.dart';
 import 'package:flutter/material.dart';
-import '../../../core/widgets/text_rich_widget.dart';
-import 'register.controller.dart';
-import 'register.state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

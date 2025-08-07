@@ -104,6 +104,14 @@ class AppTheme {
           surfaceTintColor: Colors.transparent,
         ),
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        shape: CircleBorder(),
+        foregroundColor: Colors.white,
+        backgroundColor: AppColors.primary,
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        shape: const CircularNotchedRectangle(),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -195,7 +203,7 @@ class AppTheme {
       colorScheme: ColorScheme.dark(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
-        surface: AppColors.surface,
+        surface: AppColors.surfaceDark,
         error: AppColors.error,
       ),
       textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme)
@@ -292,6 +300,13 @@ class AppTheme {
           elevation: 4,
           surfaceTintColor: Colors.transparent,
         ),
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        foregroundColor: Colors.white,
+        shape: CircleBorder(),
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        shape: const CircularNotchedRectangle(),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(

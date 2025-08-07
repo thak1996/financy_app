@@ -1,4 +1,5 @@
 import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/page/screens/add_transaction/add_transaction.page.dart';
 import 'package:financy_app/app/page/screens/home/home.page.dart';
 import 'package:financy_app/app/page/screens/profile/profile.page.dart';
 import 'package:financy_app/app/page/screens/stats/state.page.dart';
@@ -64,6 +65,11 @@ final GoRouter appRouter = GoRouter(
       path: '/profile',
       name: 'profile',
       builder: (context, state) => ProfilePage(),
+    ),
+    GoRoute(
+      name: 'addTransaction',
+      path: '/add-transaction',
+      builder: (context, state) => AddTransactionPage(),
     ),
   ],
 );

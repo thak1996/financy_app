@@ -1,4 +1,4 @@
-import 'package:financy_app/app/data/models/user.model.dart';
+import 'package:financy_app/app/data/exports.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/validators.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';

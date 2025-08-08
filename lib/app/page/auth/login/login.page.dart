@@ -1,4 +1,4 @@
-import 'package:financy_app/app/data/services/auth_firebase.service.dart';
+import 'package:financy_app/app/data/exports.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/shared/utils/validators.dart';

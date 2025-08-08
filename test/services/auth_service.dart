@@ -1,5 +1,5 @@
-import 'package:financy_app/app/core/exception/auth.exception.dart';
-import 'package:financy_app/app/core/models/user.model.dart';
+import 'package:financy_app/app/data/exception/auth.exception.dart';
+import 'package:financy_app/app/data/models/user.model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:result_dart/result_dart.dart';

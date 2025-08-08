@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-
 import 'package:financy_app/app/app.provider.dart';
-import 'package:financy_app/app/core/routes/app.route.dart';
-import 'package:financy_app/app/core/theme/app.theme.dart';
-import 'package:financy_app/app/core/theme/theme_cubit.dart';
-
+import 'package:financy_app/app/app.route.dart';
+import 'package:financy_app/app/shared/theme/app.theme.dart';
+import 'package:financy_app/app/shared/theme/theme_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,7 +1,7 @@
-import 'package:financy_app/app/core/models/user.model.dart';
-import 'package:financy_app/app/core/theme/app.colors.dart';
-import 'package:financy_app/app/core/utils/validators.dart';
-import 'package:financy_app/app/core/widgets/exports.dart';
+import 'package:financy_app/app/data/models/user.model.dart';
+import 'package:financy_app/app/shared/theme/app.colors.dart';
+import 'package:financy_app/app/shared/utils/validators.dart';
+import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:financy_app/app/page/auth/register/register.controller.dart';
 import 'package:financy_app/app/page/auth/register/register.state.dart';
 import 'package:flutter/material.dart';

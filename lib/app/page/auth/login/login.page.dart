@@ -1,8 +1,8 @@
-import 'package:financy_app/app/core/services/auth_firebase.service.dart';
-import 'package:financy_app/app/core/theme/app.colors.dart';
-import 'package:financy_app/app/core/utils/secure_storage.dart';
-import 'package:financy_app/app/core/utils/validators.dart';
-import 'package:financy_app/app/core/widgets/exports.dart';
+import 'package:financy_app/app/data/services/auth_firebase.service.dart';
+import 'package:financy_app/app/shared/theme/app.colors.dart';
+import 'package:financy_app/app/shared/utils/secure_storage.dart';
+import 'package:financy_app/app/shared/utils/validators.dart';
+import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:financy_app/app/page/auth/login/login.controller.dart';
 import 'package:financy_app/app/page/auth/login/login.state.dart';
 import 'package:flutter/material.dart';

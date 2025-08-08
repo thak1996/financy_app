@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:financy_app/app/core/services/auth_firebase.service.dart';
+import 'package:financy_app/app/data/services/auth_firebase.service.dart';
 import 'profile.state.dart';
 
 class ProfileController extends Cubit<ProfileState> {

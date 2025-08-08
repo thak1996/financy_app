@@ -1,4 +1,4 @@
-import 'package:financy_app/app/core/theme/theme_switch.dart';
+import 'package:financy_app/app/shared/theme/theme_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

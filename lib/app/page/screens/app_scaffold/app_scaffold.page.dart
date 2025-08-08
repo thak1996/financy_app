@@ -1,8 +1,8 @@
-import 'package:financy_app/app/core/consts/keys.dart';
-import 'package:financy_app/app/core/extensions/page_controller.ext.dart';
-import 'package:financy_app/app/core/services/auth_firebase.service.dart';
-import 'package:financy_app/app/core/utils/secure_storage.dart';
-import 'package:financy_app/app/core/widgets/exports.dart';
+import 'package:financy_app/app/shared/consts/keys.dart';
+import 'package:financy_app/app/shared/extensions/page_controller.ext.dart';
+import 'package:financy_app/app/data/services/auth_firebase.service.dart';
+import 'package:financy_app/app/shared/utils/secure_storage.dart';
+import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:financy_app/app/page/screens/app_scaffold/app_scaffold.controller.dart';
 import 'package:financy_app/app/page/screens/app_scaffold/app_scaffold.state.dart';
 import 'package:financy_app/app/page/screens/home/home.controller.dart';

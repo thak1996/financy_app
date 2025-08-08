@@ -1,4 +1,4 @@
-import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/screens/add_transaction/add_transaction.page.dart';
 import 'package:financy_app/app/page/screens/home/home.page.dart';
 import 'package:financy_app/app/page/screens/profile/profile.page.dart';
@@ -6,11 +6,11 @@ import 'package:financy_app/app/page/screens/stats/state.page.dart';
 import 'package:financy_app/app/page/screens/transactions/transactions.page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import '../../page/auth/onBoarding/onboarding.page.dart';
-import '../../page/auth/register/register.page.dart';
-import '../../page/screens/app_scaffold/app_scaffold.page.dart';
-import '../../page/auth/login/login.page.dart';
-import '../../page/auth/splash/splash.page.dart';
+import 'page/auth/onBoarding/onboarding.page.dart';
+import 'page/auth/register/register.page.dart';
+import 'page/screens/app_scaffold/app_scaffold.page.dart';
+import 'page/auth/login/login.page.dart';
+import 'page/auth/splash/splash.page.dart';
 
 final SecureStorage secureStorage = SecureStorage();
 

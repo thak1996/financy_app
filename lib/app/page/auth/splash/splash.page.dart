@@ -1,5 +1,5 @@
-import 'package:financy_app/app/core/theme/app.colors.dart';
-import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/shared/theme/app.colors.dart';
+import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/auth/splash/splash.controller.dart';
 import 'package:financy_app/app/page/auth/splash/splash.state.dart';
 import 'package:flutter/material.dart';

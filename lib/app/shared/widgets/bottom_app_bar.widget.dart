@@ -1,4 +1,4 @@
-import 'package:financy_app/app/core/extensions/page_controller.ext.dart';
+import 'package:financy_app/app/shared/extensions/page_controller.ext.dart';
 import 'package:flutter/material.dart';
 
 class BottomAppBarWidget extends StatefulWidget {

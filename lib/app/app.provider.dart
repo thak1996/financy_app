@@ -1,6 +1,6 @@
-import 'package:financy_app/app/core/services/auth_firebase.service.dart';
-import 'package:financy_app/app/core/theme/theme_cubit.dart';
-import 'package:financy_app/app/core/utils/secure_storage.dart';
+import 'package:financy_app/app/data/services/auth_firebase.service.dart';
+import 'package:financy_app/app/shared/theme/theme_cubit.dart';
+import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/auth/login/login.controller.dart';
 import 'package:financy_app/app/page/auth/register/register.controller.dart';
 import 'package:financy_app/app/page/screens/add_transaction/add_transaction.controller.dart';

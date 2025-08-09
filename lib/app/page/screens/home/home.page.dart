@@ -1,4 +1,4 @@
-import 'package:financy_app/app/shared/theme/theme_switch.dart';
+
 import 'package:financy_app/app/shared/widgets/alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,30 +22,30 @@ class HomePage extends StatelessWidget {
               );
             }
           },
-          child: Scaffold(
-            appBar: AppBar(
-              title: const Text("Dashboard"),
-              actions: const [ThemeSwitchIcon(), SizedBox(width: 16)],
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<HomeController>().setEmit(
-                        HomeError(message: "Erro ao carregar dados"),
-                      );
-                    },
-                    child: const Text("State Error"),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          child: _buildBody(state, context),
         );
       },
+    );
+  }
+
+  Widget _buildBody(HomeState state, BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                context.read<HomeController>().setEmit(
+                  HomeError(message: "Erro ao carregar dados"),
+                );
+              },
+              child: const Text("State Error"),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

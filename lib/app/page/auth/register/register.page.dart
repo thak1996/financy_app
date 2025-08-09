@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
       listener: (context, state) {
         if (state is RegisterError) {
           context.pop();
-          AlertDialogWidget.show(
+          AlertDialogWidget.showInfo(
             context,
             title: 'Erro',
             message: state.message,

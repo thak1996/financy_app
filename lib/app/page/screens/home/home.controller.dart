@@ -6,13 +6,16 @@ class HomeController extends Cubit<HomeState> {
 
   Future<void> loadHomeData() async {
     emit(HomeLoading());
-
     try {
       await Future.delayed(const Duration(seconds: 1));
       emit(HomeSuccess());
     } catch (e) {
       emit(HomeError(message: e.toString()));
     }
+  }
+
+  Future<void> setEmit(HomeState state) async {
+    emit(state);
   }
 
   Future<void> refreshData() async {

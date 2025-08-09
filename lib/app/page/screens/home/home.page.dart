@@ -1,4 +1,5 @@
 import 'package:financy_app/app/shared/theme/theme_switch.dart';
+import 'package:financy_app/app/shared/widgets/alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home.controller.dart';
@@ -11,45 +12,40 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeController, HomeState>(
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text("Dashboard"),
-            actions: const [ThemeSwitchIcon(), SizedBox(width: 16)],
+        return BlocListener<HomeController, HomeState>(
+          listener: (context, state) {
+            if (state is HomeError) {
+              AlertDialogWidget.show(
+                context,
+                title: 'Erro',
+                message: state.message,
+              );
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Dashboard"),
+              actions: const [ThemeSwitchIcon(), SizedBox(width: 16)],
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<HomeController>().setEmit(
+                        HomeError(message: "Erro ao carregar dados"),
+                      );
+                    },
+                    child: const Text("State Error"),
+                  ),
+                ],
+              ),
+            ),
           ),
-          body: _buildBody(state),
         );
       },
     );
-  }
-
-  Widget _buildBody(HomeState state) {
-    return switch (state) {
-      HomeLoading() => const Center(child: CircularProgressIndicator()),
-      HomeError() => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
-            Text('Erro: ${state.message}'),
-          ],
-        ),
-      ),
-      _ => const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.dashboard, size: 100, color: Colors.blue),
-            SizedBox(height: 16),
-            Text(
-              'Dashboard Principal',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text('Aqui ficará o resumo financeiro'),
-          ],
-        ),
-      ),
-    };
   }
 }

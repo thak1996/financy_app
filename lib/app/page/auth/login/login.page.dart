@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             listener: (context, state) {
               if (state is LoginError) {
                 context.pop();
-                AlertDialogWidget.showInfo(
+                AlertDialogWidget.show(
                   context,
                   title: 'Erro',
                   message: state.message,

@@ -1,6 +1,7 @@
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class OnBoarding extends StatelessWidget {
@@ -17,12 +18,12 @@ class OnBoarding extends StatelessWidget {
               flex: 2,
               child: Image.asset(
                 'assets/images/onboarding.png',
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.3,
+                width: 0.8.sw,
+                height: 0.3.sh,
                 fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Expanded(
               child: Column(
                 children: [
@@ -30,16 +31,17 @@ class OnBoarding extends StatelessWidget {
                     'Spend Smarter \nSave More',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontSize: 36.sp,
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   PrimaryButtonWidget(
                     text: 'Get Started',
                     onPressed: () => context.pushNamed('register'),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   TextRichWidget(
                     textOne: 'Already have an account? ',
                     textTwo: 'Sign in',

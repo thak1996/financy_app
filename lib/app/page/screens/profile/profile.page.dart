@@ -1,6 +1,7 @@
 import 'package:financy_app/app/shared/theme/theme_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'profile.controller.dart';
 import 'profile.state.dart';
@@ -35,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                   icon: const Icon(Icons.logout_outlined),
                   tooltip: 'Sair',
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16.w),
               ],
             ),
             body: _buildBody(state),
@@ -52,23 +53,23 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
+            Icon(Icons.error, size: 64, color: Colors.red),
+            SizedBox(height: 16.h),
             Text('Erro: ${state.message}'),
           ],
         ),
       ),
-      _ => const Center(
+      _ => Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.person, size: 100, color: Colors.purple),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Text(
               'Perfil do Usuário',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text('Configurações e dados pessoais'),
           ],
         ),

@@ -6,6 +6,7 @@ import 'package:financy_app/app/page/auth/register/register.controller.dart';
 import 'package:financy_app/app/page/auth/register/register.state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -63,11 +64,11 @@ class _RegisterPageState extends State<RegisterPage> {
           return Scaffold(
             backgroundColor: AppColors.iceWhite,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 22.sp, vertical: 16.sp),
               child: Center(
                 child: SingleChildScrollView(
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 400),
+                    constraints: BoxConstraints(maxWidth: 400.w),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,17 +80,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: Theme.of(
                               context,
                             ).textTheme.displayMedium?.copyWith(
+                              fontSize: 32.sp,
                               fontWeight: FontWeight.w700,
                               color: AppColors.textPrimary,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         Image.asset(
                           'assets/images/register.png',
                           fit: BoxFit.contain,
                         ),
-                        const SizedBox(height: 32),
+                        SizedBox(height: 32.h),
                         Form(
                           key: _formKey,
                           child: Column(
@@ -101,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 textInputAction: TextInputAction.next,
                                 validator: Validators.validateName,
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: 24.h),
                               TextFieldWidget(
                                 controller: _emailController,
                                 label: 'YOUR EMAIL',
@@ -109,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 textInputAction: TextInputAction.next,
                                 validator: Validators.validateEmail,
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: 24.h),
                               TextFieldWidget(
                                 controller: _passwordController,
                                 label: 'CHOOSE YOUR PASSWORD',
@@ -119,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 helperText:
                                     'Must have at least 8 characters, 1 capital letter and 1 number.',
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: 24.h),
                               TextFieldWidget(
                                 controller: _confirmPasswordController,
                                 label: 'CONFIRM YOUR PASSWORD',
@@ -133,9 +135,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         PrimaryButtonWidget(
-                          padding: const EdgeInsets.all(0),
+                          padding: EdgeInsets.all(0),
                           text: 'Sign Up',
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -149,13 +151,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             }
                           },
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         TextRichWidget(
                           textOne: 'Already have account?',
                           textTwo: 'Sign in',
                           onTap: () => context.pushNamed('login'),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                       ],
                     ),
                   ),

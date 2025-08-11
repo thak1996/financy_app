@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app.colors.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -71,6 +72,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             helperText: _helperText,
             helperMaxLines: 3,
             helperStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: 12.sp,
               color: AppColors.textPrimary,
               fontWeight: FontWeight.w500,
             ),

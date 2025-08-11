@@ -4,6 +4,7 @@ import 'package:financy_app/app/page/auth/splash/splash.controller.dart';
 import 'package:financy_app/app/page/auth/splash/splash.state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
@@ -43,13 +44,13 @@ class _SplashPageState extends State<SplashPage> {
                         style: Theme.of(
                           context,
                         ).textTheme.headlineLarge?.copyWith(
-                          fontSize: 50,
+                          fontSize: 50.sp,
                           fontWeight: FontWeight.w700,
                           color: AppColors.white,
                         ),
                       ),
-                      const SizedBox(height: 32),
-                      const CircularProgressIndicator(color: Colors.white),
+                      SizedBox(height: 32.h),
+                      CircularProgressIndicator(color: Colors.white),
                     ],
                   ),
                 ),

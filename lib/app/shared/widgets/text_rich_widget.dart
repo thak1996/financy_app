@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app.colors.dart';
 
 class TextRichWidget extends StatelessWidget {
@@ -27,6 +28,7 @@ class TextRichWidget extends StatelessWidget {
         child: RichText(
           text: TextSpan(
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: 14.sp,
               color: AppColors.textSecondary,
               fontWeight: FontWeight.w400,
             ),

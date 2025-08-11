@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'add_transaction.controller.dart';
 import 'add_transaction.state.dart';
 
@@ -22,8 +23,8 @@ class AddTransactionPage extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(title: const Text('Adicionar Transação')),
-          body: const Padding(
-            padding: EdgeInsets.all(16),
+          body: Padding(
+            padding: EdgeInsets.all(16.r),
             child: _AddTransactionForm(),
           ),
         ),
@@ -68,10 +69,10 @@ class _AddTransactionFormState extends State<_AddTransactionForm> {
               return null;
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           TextFormField(
             controller: _amountController,
-            decoration: const InputDecoration(labelText: 'Valor'),
+            decoration: InputDecoration(labelText: 'Valor'),
             keyboardType: TextInputType.number,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -83,7 +84,7 @@ class _AddTransactionFormState extends State<_AddTransactionForm> {
               return null;
             },
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           BlocBuilder<AddTransactionController, AddTransactionState>(
             builder: (context, state) {
               if (state is AddTransactionLoading) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app.colors.dart';
 
 class PrimaryButtonWidget extends StatelessWidget {
@@ -26,19 +27,19 @@ class PrimaryButtonWidget extends StatelessWidget {
       child: Center(
         child: Container(
           constraints: BoxConstraints(maxWidth: maxWidth),
-          height: height ?? 50,
+          height: height ?? 50.h,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: AppColors.gradientButton,
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
             ),
-            borderRadius: BorderRadius.circular(40),
+            borderRadius: BorderRadius.circular(40.r),
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(40.r),
               onTap: isLoading ? null : onPressed,
               child: Center(
                 child:
@@ -58,6 +59,7 @@ class PrimaryButtonWidget extends StatelessWidget {
                           style: Theme.of(
                             context,
                           ).textTheme.bodyLarge?.copyWith(
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.white,
                           ),

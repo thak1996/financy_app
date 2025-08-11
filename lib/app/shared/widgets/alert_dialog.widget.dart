@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'primary_button.widget.dart';
 
 class AlertDialogWidget extends StatelessWidget {
@@ -35,10 +36,10 @@ class AlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.w)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,12 +50,12 @@ class AlertDialogWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           PrimaryButtonWidget(
             text: buttonText,
             maxWidth: 100,
             onPressed: () => Navigator.pop(context),
-            height: 40,
+            height: 40.h,
           ),
         ],
       ),

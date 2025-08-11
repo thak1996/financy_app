@@ -6,6 +6,7 @@ import 'package:financy_app/app/app.provider.dart';
 import 'package:financy_app/app/app.route.dart';
 import 'package:financy_app/app/shared/theme/app.theme.dart';
 import 'package:financy_app/app/shared/theme/theme_cubit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,14 +19,23 @@ class MyApp extends StatelessWidget {
         create: (_) => ThemeCubit(storage: FlutterSecureStorage()),
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) {
-            return MaterialApp.router(
-              title: 'financy_app',
-              darkTheme: AppTheme.darkTheme,
-              theme: AppTheme.lightTheme,
-              themeMode:
-                  state == ThemeState.light ? ThemeMode.light : ThemeMode.dark,
-              debugShowCheckedModeBanner: false,
-              routerConfig: appRouter,
+            return ScreenUtilInit(
+              designSize: const Size(375, 812),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) {
+                return MaterialApp.router(
+                  title: 'financy_app',
+                  darkTheme: AppTheme.darkTheme,
+                  theme: AppTheme.lightTheme,
+                  themeMode:
+                      state == ThemeState.light
+                          ? ThemeMode.light
+                          : ThemeMode.dark,
+                  debugShowCheckedModeBanner: false,
+                  routerConfig: appRouter,
+                );
+              },
             );
           },
         ),

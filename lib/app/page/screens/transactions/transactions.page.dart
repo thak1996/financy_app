@@ -1,6 +1,7 @@
 import 'package:financy_app/app/shared/theme/theme_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'transactions.controller.dart';
 import 'transactions.state.dart';
 
@@ -30,22 +31,22 @@ class TransactionsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.error, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Text('Erro: ${state.message}'),
           ],
         ),
       ),
-      _ => const Center(
+      _ => Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.receipt_long, size: 100, color: Colors.green),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Text(
               'Transações',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text('Lista de todas as suas transações'),
           ],
         ),

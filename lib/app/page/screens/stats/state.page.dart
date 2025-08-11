@@ -1,6 +1,7 @@
 import 'package:financy_app/app/shared/theme/theme_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'stats.controller.dart';
 import 'stats.state.dart';
 
@@ -29,23 +30,23 @@ class StatsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
+            Icon(Icons.error, size: 64, color: Colors.red),
+            SizedBox(height: 16.h),
             Text('Erro: ${state.message}'),
           ],
         ),
       ),
-      _ => const Center(
+      _ => Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.analytics, size: 100, color: Colors.orange),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Text(
               'Estatísticas Financeiras',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text('Gráficos e relatórios detalhados'),
           ],
         ),

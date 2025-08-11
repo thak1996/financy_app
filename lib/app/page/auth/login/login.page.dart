@@ -7,6 +7,7 @@ import 'package:financy_app/app/page/auth/login/login.controller.dart';
 import 'package:financy_app/app/page/auth/login/login.state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
@@ -62,10 +63,10 @@ class _LoginPageState extends State<LoginPage> {
                     SliverFillRemaining(
                       hasScrollBody: false,
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                          right: 24,
-                          left: 24,
-                          bottom: 24,
+                        padding: EdgeInsets.only(
+                          right: 24.w,
+                          left: 24.w,
+                          bottom: 24.h,
                         ),
                         child: Column(
                           children: [
@@ -75,13 +76,14 @@ class _LoginPageState extends State<LoginPage> {
                               style: Theme.of(
                                 context,
                               ).textTheme.displayLarge?.copyWith(
+                                fontSize: 36.sp,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.primary,
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            SizedBox(height: 12.h),
                             Image.asset('assets/images/login.png'),
-                            const SizedBox(height: 32),
+                            SizedBox(height: 32.h),
                             Form(
                               key: _formKey,
                               child: Column(
@@ -93,20 +95,20 @@ class _LoginPageState extends State<LoginPage> {
                                     validator: Validators.validateEmail,
                                     textInputAction: TextInputAction.next,
                                   ),
-                                  const SizedBox(height: 37),
+                                  SizedBox(height: 37.h),
                                   TextFieldWidget(
                                     controller: _passwordController,
                                     label: 'YOUR PASSWORD',
                                     validator: Validators.validatePassword,
                                     isPassword: true,
                                   ),
-                                  const SizedBox(height: 8),
+                                  SizedBox(height: 8.h),
                                   TextRichWidget(
                                     textOne: 'Forgot Password?',
                                     alignment: Alignment.topRight,
                                     onTap: () {},
                                   ),
-                                  const SizedBox(height: 24),
+                                  SizedBox(height: 24.h),
                                 ],
                               ),
                             ),
@@ -122,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               },
                             ),
-                            const SizedBox(height: 24),
+                            SizedBox(height: 24.h),
                             TextRichWidget(
                               textOne: 'Don\'t Have Account?',
                               textTwo: 'Sign up',

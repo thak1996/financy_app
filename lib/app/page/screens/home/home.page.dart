@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.zero,
-                      itemCount: 4,
+                      itemCount: 10,
                       itemBuilder: (context, index) {
                         final color =
                             index % 2 == 0

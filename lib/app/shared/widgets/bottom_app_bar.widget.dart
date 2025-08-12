@@ -43,7 +43,6 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
         children:
             widget.children.map((item) {
               bool currentItem;
-
               currentItem =
                   widget.children.indexOf(item) ==
                   widget.controller.selectedBottomAppBarItemIndex;

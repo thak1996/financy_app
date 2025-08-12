@@ -1,5 +1,5 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app.colors.dart';
 
 class TextRichWidget extends StatelessWidget {
@@ -27,16 +27,17 @@ class TextRichWidget extends StatelessWidget {
         onTap: onTap,
         child: RichText(
           text: TextSpan(
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: 14.sp,
-              color: AppColors.textSecondary,
+            style: AppTextStyles.text14(
+              context,
               fontWeight: FontWeight.w400,
+              color: AppColors.textSecondary,
             ),
             children: [
               TextSpan(text: "$textOne "),
               TextSpan(
                 text: textTwo ?? ' ',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                style: AppTextStyles.text14(
+                  context,
                   color: AppColors.primary,
                   fontWeight: FontWeight.w500,
                 ),

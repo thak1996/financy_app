@@ -1,3 +1,4 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app.colors.dart';
@@ -56,10 +57,8 @@ class PrimaryButtonWidget extends StatelessWidget {
                         )
                         : Text(
                           text,
-                          style: Theme.of(
+                          style: AppTextStyles.text16(
                             context,
-                          ).textTheme.bodyLarge?.copyWith(
-                            fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.white,
                           ),

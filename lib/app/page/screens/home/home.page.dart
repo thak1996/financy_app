@@ -1,3 +1,4 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/widgets/alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
@@ -33,16 +34,19 @@ class HomePage extends StatelessWidget {
 
   Widget _buildBody(HomeController controller, BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          backgroundTophome(),
-          headerHome(context),
-          cardHeader(context),
-          Positioned(
-            top: 380.h,
-            left: 0,
-            right: 0,
-            bottom: 0,
+          SizedBox(
+            height: 380.h,
+            child: Stack(
+              children: [
+                backgroundTophome(),
+                headerHome(context),
+                cardHeader(context),
+              ],
+            ),
+          ),
+          Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 28.r, vertical: 4.r),
               child: Column(
@@ -52,22 +56,23 @@ class HomePage extends StatelessWidget {
                     children: [
                       Text(
                         'Transactions History',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: AppTextStyles.text18(
+                          context,
                           color: AppColors.textTertiary,
-                          fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         'See all',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: AppTextStyles.text14(
+                          context,
                           color: AppColors.textGrey,
-                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 8.h),
                   Expanded(
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
@@ -94,30 +99,24 @@ class HomePage extends StatelessWidget {
                           ),
                           title: Text(
                             'UpWork',
-                            style: Theme.of(
+                            style: AppTextStyles.text16(
                               context,
-                            ).textTheme.bodyLarge?.copyWith(
-                              fontSize: 16.sp,
                               color: AppColors.black,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           subtitle: Text(
                             'Today',
-                            style: Theme.of(
+                            style: AppTextStyles.text14(
                               context,
-                            ).textTheme.bodyMedium?.copyWith(
-                              fontSize: 14.sp,
                               color: AppColors.textGrey,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           trailing: Text(
                             value,
-                            style: Theme.of(
+                            style: AppTextStyles.text16(
                               context,
-                            ).textTheme.bodyLarge?.copyWith(
-                              fontSize: 16.sp,
                               color: color,
                               fontWeight: FontWeight.w500,
                             ),
@@ -165,18 +164,18 @@ class HomePage extends StatelessWidget {
                   children: [
                     Text(
                       'Total Balance',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: 16.sp,
+                      style: AppTextStyles.text16(
+                        context,
                         fontWeight: FontWeight.w600,
                         color: AppColors.white,
                       ),
                     ),
                     Text(
                       'R\$ 1,556.00',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
+                      style: AppTextStyles.text24(
+                        context,
                         color: AppColors.white,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -220,20 +219,16 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text(
                           'Income',
-                          style: Theme.of(
+                          style: AppTextStyles.text16(
                             context,
-                          ).textTheme.bodyLarge?.copyWith(
-                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
                             color: AppColors.white,
                           ),
                         ),
                         Text(
                           '\$ 1,840.00',
-                          style: Theme.of(
+                          style: AppTextStyles.text20(
                             context,
-                          ).textTheme.titleLarge?.copyWith(
-                            fontSize: 20.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.white,
                           ),
@@ -263,20 +258,16 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text(
                           'Expenses',
-                          style: Theme.of(
+                          style: AppTextStyles.text16(
                             context,
-                          ).textTheme.bodyLarge?.copyWith(
-                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
                             color: AppColors.white,
                           ),
                         ),
                         Text(
                           '\$ 284.00',
-                          style: Theme.of(
+                          style: AppTextStyles.text20(
                             context,
-                          ).textTheme.titleLarge?.copyWith(
-                            fontSize: 20.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.white,
                           ),
@@ -306,16 +297,16 @@ class HomePage extends StatelessWidget {
             children: [
               Text(
                 'Good afternoon,',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 14.sp,
+                style: AppTextStyles.text14(
+                  context,
                   fontWeight: FontWeight.w500,
                   color: AppColors.white,
                 ),
               ),
               Text(
                 'Enjelin Morgeana',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 20.sp,
+                style: AppTextStyles.text20(
+                  context,
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),

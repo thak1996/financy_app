@@ -1,6 +1,6 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app.colors.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -52,7 +52,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           textInputAction: widget.textInputAction,
           inputFormatters:
               widget.inputFormatter != null ? [widget.inputFormatter!] : null,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          style: AppTextStyles.text14(
+            context,
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w500,
           ),
@@ -65,14 +66,15 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           },
           decoration: InputDecoration(
             labelText: widget.label.toUpperCase(),
-            labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            labelStyle: AppTextStyles.text14(
+              context,
               color: AppColors.textPrimary,
               fontWeight: FontWeight.w500,
             ),
             helperText: _helperText,
             helperMaxLines: 3,
-            helperStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontSize: 12.sp,
+            helperStyle: AppTextStyles.text12(
+              context,
               color: AppColors.textPrimary,
               fontWeight: FontWeight.w500,
             ),

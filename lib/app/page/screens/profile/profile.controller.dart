@@ -28,14 +28,14 @@ class ProfileController extends Cubit<ProfileState> {
     try {
       final result = await _authService.logout();
       result.fold(
-        (error) => emit(ProfileError(message: error.toString())),
         (_) => emit(ProfileLoggedOut()),
+        (error) => emit(ProfileError(message: error.toString())),
       );
     } catch (e) {
       emit(ProfileError(message: e.toString()));
     }
   }
-  
+
   Future<void> refreshProfile() async {
     await loadProfileData();
   }

@@ -1,4 +1,5 @@
 import 'package:financy_app/app/data/exports.dart';
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/validators.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
@@ -77,10 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text(
                             'Start Saving\nYour Money!',
                             textAlign: TextAlign.center,
-                            style: Theme.of(
+                            style: AppTextStyles.text32(
                               context,
-                            ).textTheme.displayMedium?.copyWith(
-                              fontSize: 32.sp,
                               fontWeight: FontWeight.w700,
                               color: AppColors.textPrimary,
                             ),

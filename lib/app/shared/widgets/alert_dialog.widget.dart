@@ -1,3 +1,4 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'primary_button.widget.dart';
@@ -47,7 +48,7 @@ class AlertDialogWidget extends StatelessWidget {
         children: [
           Text(
             message,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: AppTextStyles.text14(context),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 24.h),

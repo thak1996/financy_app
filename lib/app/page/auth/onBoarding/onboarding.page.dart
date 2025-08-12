@@ -1,3 +1,4 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,8 @@ class OnBoarding extends StatelessWidget {
                   Text(
                     'Spend Smarter \nSave More',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontSize: 36.sp,
+                    style: AppTextStyles.text36(
+                      context,
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
                     ),

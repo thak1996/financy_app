@@ -1,3 +1,4 @@
+import 'package:financy_app/app/shared/consts/app_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/auth/splash/splash.controller.dart';
@@ -41,12 +42,10 @@ class _SplashPageState extends State<SplashPage> {
                     children: [
                       Text(
                         "Financy",
-                        style: Theme.of(
+                        style: AppTextStyles.text50(
                           context,
-                        ).textTheme.headlineLarge?.copyWith(
-                          fontSize: 50.sp,
-                          fontWeight: FontWeight.w700,
                           color: AppColors.white,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       SizedBox(height: 32.h),

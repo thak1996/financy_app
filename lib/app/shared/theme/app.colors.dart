@@ -29,7 +29,12 @@ abstract class AppColors {
   // Text Colors
   static Color get textPrimary => const Color(0xFF438883);
   static Color get textSecondary => const Color(0xFF444444);
+  static Color get textTertiary => const Color(0xFF222222);
+  static Color get textGrey => const Color(0xFF666666);
   static Color get textDisabled => const Color(0xFFBDBDBD);
+  static Color get income => const Color(0xFF25A969);
+  static Color get outcome => const Color(0xFFF95B51);
+  static Color get antiFlashWhite => const Color(0xFFF0F6F5);
 
   // Link Colors
   static Color get link => const Color(0xFF2196F3);

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/widgets/alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'home.controller.dart';
 import 'home.state.dart';
+import 'dart:developer';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,23 +25,111 @@ class HomePage extends StatelessWidget {
               );
             }
           },
-          child: _buildBody(state, controller, context),
+          child: _buildBody(controller, context),
         );
       },
     );
   }
 
-  Widget _buildBody(
-    HomeState state,
-    HomeController controller,
-    BuildContext context,
-  ) {
+  Widget _buildBody(HomeController controller, BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           backgroundTophome(),
           headerHome(context),
           cardHeader(context),
+          Positioned(
+            top: 380.h,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 28.r, vertical: 4.r),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Transactions History',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: AppColors.textTertiary,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        'See all',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textGrey,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      itemCount: 4,
+                      itemBuilder: (context, index) {
+                        final color =
+                            index % 2 == 0
+                                ? AppColors.income
+                                : AppColors.outcome;
+                        final value =
+                            index % 2 == 0 ? "+ \$ 100.00" : "- \$ 100.00";
+                        return ListTile(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 8.r),
+                          leading: Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.antiFlashWhite,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8.r),
+                              ),
+                            ),
+                            padding: EdgeInsets.all(8.r),
+                            child: Icon(Icons.monetization_on_outlined),
+                          ),
+                          title: Text(
+                            'UpWork',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge?.copyWith(
+                              fontSize: 16.sp,
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          subtitle: Text(
+                            'Today',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontSize: 14.sp,
+                              color: AppColors.textGrey,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          trailing: Text(
+                            value,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge?.copyWith(
+                              fontSize: 16.sp,
+                              color: color,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -127,7 +214,7 @@ class HomePage extends StatelessWidget {
                         size: 18.h,
                       ),
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: 8.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -170,7 +257,7 @@ class HomePage extends StatelessWidget {
                         size: 18.h,
                       ),
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: 8.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

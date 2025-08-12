@@ -9,6 +9,8 @@ abstract class AppColors {
 
   static Color get warning => const Color(0xFFFFC107);
   static Color get error => const Color(0xFFF44336);
+  static Color get notification => const Color(0xFFFFAB7B);
+  static Color get darkGreen => const Color(0xFF2F7E79);
 
   // Neutral Colors
   static Color get grey100 => const Color(0xFFF5F5F5);
@@ -16,6 +18,7 @@ abstract class AppColors {
   static Color get grey300 => const Color(0xFFE0E0E0);
 
   static Color get white => const Color(0xFFFFFFFF);
+  static Color get black => const Color(0xFF000000);
   static Color get iceWhite => const Color(0xFFEEF8F7);
 
   // Surface Colors
@@ -38,5 +41,9 @@ abstract class AppColors {
   static List<Color> get gradientButton => [
     Color(0xFF69AEA9),
     Color(0xFF3F8782),
+  ];
+  static List<Color> get greenGradient => [
+    Color(0xFF429690),
+    Color(0xFF2A7C76),
   ];
 }

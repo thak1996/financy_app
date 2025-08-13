@@ -1,4 +1,4 @@
-import 'package:financy_app/app/shared/consts/app_styles.dart';
+import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';

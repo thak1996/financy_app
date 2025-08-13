@@ -1,157 +1,187 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// ----------------------------------------------------------
+/// AppTextStyles - Centralized Responsive Text Styles
+///
+/// USAGE:
+/// Import this file and use the static methods, passing the context.
+/// You can customize color and fontWeight via optional parameters.
+///
+/// Example:
+///   Text(
+///     'Title',
+///     style: AppTextStyles.text18(context, color: AppColors.primary, fontWeight: FontWeight.bold),
+///   ),
+///
+/// All methods use Theme.of(context).textTheme as a base and apply responsiveness with flutter_screenutil.
+///
+/// -----------------------------------------------------------
 class AppTextStyles {
+  /// Responsive text style, size 12sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text12(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.labelLarge!.copyWith(
-    fontSize: fontSize ?? 12.sp,
+    fontSize: 12.sp,
     color: color ?? Theme.of(context).textTheme.labelLarge?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 14sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text14(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.bodyMedium!.copyWith(
-    fontSize: fontSize ?? 14.sp,
+    fontSize: 14.sp,
     color: color ?? Theme.of(context).textTheme.bodyMedium?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 16sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text16(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.bodyLarge!.copyWith(
-    fontSize: fontSize ?? 16.sp,
+    fontSize: 16.sp,
     color: color ?? Theme.of(context).textTheme.bodyLarge?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 18sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text18(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.titleMedium!.copyWith(
-    fontSize: fontSize ?? 18.sp,
+    fontSize: 18.sp,
     color: color ?? Theme.of(context).textTheme.titleMedium?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 20sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text20(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.titleLarge!.copyWith(
-    fontSize: fontSize ?? 20.sp,
+    fontSize: 20.sp,
     color: color ?? Theme.of(context).textTheme.titleLarge?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 22sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text22(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.headlineSmall!.copyWith(
-    fontSize: fontSize ?? 22.sp,
+    fontSize: 22.sp,
     color: color ?? Theme.of(context).textTheme.headlineSmall?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 24sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text24(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.headlineMedium!.copyWith(
-    fontSize: fontSize ?? 24.sp,
+    fontSize: 24.sp,
     color: color ?? Theme.of(context).textTheme.headlineMedium?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 26sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text26(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displaySmall!.copyWith(
-    fontSize: fontSize ?? 26.sp,
+    fontSize: 26.sp,
     color: color ?? Theme.of(context).textTheme.displaySmall?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 28sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text28(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displaySmall!.copyWith(
-    fontSize: fontSize ?? 28.sp,
+    fontSize: 28.sp,
     color: color ?? Theme.of(context).textTheme.displaySmall?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 30sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text30(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displayMedium!.copyWith(
-    fontSize: fontSize ?? 30.sp,
+    fontSize: 30.sp,
     color: color ?? Theme.of(context).textTheme.displayMedium?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 32sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text32(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displayMedium!.copyWith(
-    fontSize: fontSize ?? 32.sp,
+    fontSize: 32.sp,
     color: color ?? Theme.of(context).textTheme.displayMedium?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 34sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text34(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displayLarge!.copyWith(
-    fontSize: fontSize ?? 34.sp,
+    fontSize: 34.sp,
     color: color ?? Theme.of(context).textTheme.displayLarge?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 36sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text36(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displayLarge!.copyWith(
-    fontSize: fontSize ?? 36.sp,
+    fontSize: 36.sp,
     color: color ?? Theme.of(context).textTheme.displayLarge?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );
 
+  /// Responsive text style, size 50sp.
+  /// [color] and [fontWeight] are optional.
   static TextStyle text50(
     BuildContext context, {
     Color? color,
     FontWeight? fontWeight,
-    double? fontSize,
   }) => Theme.of(context).textTheme.displayLarge!.copyWith(
-    fontSize: fontSize ?? 50.sp,
+    fontSize: 50.sp,
     color: color ?? Theme.of(context).textTheme.displayLarge?.color,
     fontWeight: fontWeight ?? FontWeight.normal,
   );

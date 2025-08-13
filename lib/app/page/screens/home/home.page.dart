@@ -1,5 +1,6 @@
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
+import 'package:financy_app/app/shared/utils/date_formatter_util.dart';
 import 'package:financy_app/app/shared/widgets/alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
             if (state is HomeError) {
               AlertDialogWidget.show(
                 context,
-                title: 'Erro',
+                title: 'Error',
                 message: state.message,
               );
             }
@@ -38,93 +39,117 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                bodyHome(context),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 28.r,
+                      vertical: 4.r,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Transactions History',
+                              style: AppTextStyles.text18(
+                                context,
+                                color: AppColors.textTertiary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'See all',
+                              style: AppTextStyles.text14(
+                                context,
+                                color: AppColors.textGrey,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8.h),
+                        Expanded(
+                          child:
+                              state is HomeSuccess
+                                  ? state.transactions.isNotEmpty
+                                      ? ListView.builder(
+                                        physics: BouncingScrollPhysics(),
+                                        padding: EdgeInsets.zero,
+                                        itemCount: state.transactions.length,
+                                        itemBuilder: (context, index) {
+                                          final transaction =
+                                              state.transactions[index];
+                                          return ListTile(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                  horizontal: 8.r,
+                                                ),
+                                            leading: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.antiFlashWhite,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(8.r),
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.all(8.r),
+                                              child: transaction.icon,
+                                            ),
+                                            title: Text(
+                                              transaction.title,
+                                              style: AppTextStyles.text16(
+                                                context,
+                                                color: AppColors.black,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            subtitle: Text(
+                                              DateFormatter.formatDate(
+                                                transaction.date,
+                                              ),
+                                              style: AppTextStyles.text14(
+                                                context,
+                                                color: AppColors.textGrey,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                            trailing: Text(
+                                              transaction.value < 0
+                                                  ? '- \$ ${transaction.value.abs().toStringAsFixed(2)}'
+                                                  : '+ \$ ${transaction.value.toStringAsFixed(2)}',
+                                              style: AppTextStyles.text16(
+                                                context,
+                                                color:
+                                                    transaction.value < 0
+                                                        ? AppColors.outcome
+                                                        : AppColors.income,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                      : Center(
+                                        child: Text(
+                                          'No transactions available',
+                                          style: AppTextStyles.text16(
+                                            context,
+                                            color: AppColors.textGrey,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      )
+                                  : Center(child: CircularProgressIndicator()),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         );
       },
-    );
-  }
-
-  Expanded bodyHome(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 28.r, vertical: 4.r),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Transactions History',
-                  style: AppTextStyles.text18(
-                    context,
-                    color: AppColors.textTertiary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
-                  'See all',
-                  style: AppTextStyles.text14(
-                    context,
-                    color: AppColors.textGrey,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8.h),
-            Expanded(
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  final color =
-                      index % 2 == 0 ? AppColors.income : AppColors.outcome;
-                  final value = index % 2 == 0 ? "+ \$ 100.00" : "- \$ 100.00";
-                  return ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8.r),
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.antiFlashWhite,
-                        borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                      ),
-                      padding: EdgeInsets.all(8.r),
-                      child: Icon(Icons.monetization_on_outlined),
-                    ),
-                    title: Text(
-                      'UpWork',
-                      style: AppTextStyles.text16(
-                        context,
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'Today',
-                      style: AppTextStyles.text14(
-                        context,
-                        color: AppColors.textGrey,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    trailing: Text(
-                      value,
-                      style: AppTextStyles.text16(
-                        context,
-                        color: color,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

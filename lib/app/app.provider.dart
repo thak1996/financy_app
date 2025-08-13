@@ -1,3 +1,4 @@
+import 'package:financy_app/app/data/repositories/transaction.repository.dart';
 import 'package:financy_app/app/data/services/auth_firebase.service.dart';
 import 'package:financy_app/app/shared/theme/theme_cubit.dart';
 import 'package:financy_app/app/shared/utils/secure_storage.dart';
@@ -24,7 +25,9 @@ class AppProvider {
       create: (_) => RegisterController(AuthFirebaseService(SecureStorage())),
     ),
     BlocProvider<StatsController>(create: (_) => StatsController()),
-    BlocProvider<HomeController>(create: (_) => HomeController()),
+    BlocProvider<HomeController>(
+      create: (_) => HomeController(TransactionRepositoryImpl()),
+    ),
     BlocProvider<AddTransactionController>(
       create: (_) => AddTransactionController(),
     ),
@@ -34,6 +37,7 @@ class AppProvider {
     BlocProvider<ProfileController>(
       create: (_) => ProfileController(AuthFirebaseService(SecureStorage())),
     ),
+    Provider<TransactionRepository>(create: (_) => TransactionRepositoryImpl()),
     Provider<SecureStorage>(create: (_) => SecureStorage()),
   ];
 }

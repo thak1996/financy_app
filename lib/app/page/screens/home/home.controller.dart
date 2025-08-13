@@ -1,24 +1,28 @@
+import 'package:financy_app/app/data/models/repository.model.dart';
+import 'package:financy_app/app/data/repositories/transaction.repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home.state.dart';
 
 class HomeController extends Cubit<HomeState> {
-  HomeController() : super(HomeInitial());
+  HomeController(this._transactionRepository) : super(HomeInitial());
+
+  final TransactionRepository _transactionRepository;
+
+  List<TransactionModel> _transactions = [];
+  List<TransactionModel> get transactions => _transactions;
 
   Future<void> loadHomeData() async {
     emit(HomeLoading());
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      emit(HomeSuccess());
+      final result = await _transactionRepository.getAllTransactions();
+      result.fold((success) {
+        _transactions = success;
+        emit(HomeSuccess(transactions: _transactions));
+      }, (failure) => emit(HomeError(message: failure.toString())));
     } catch (e) {
       emit(HomeError(message: e.toString()));
     }
   }
 
-  Future<void> setEmit(HomeState state) async {
-    emit(state);
-  }
-
-  Future<void> refreshData() async {
-    await loadHomeData();
-  }
+  Future<void> refreshData() async => await loadHomeData();
 }

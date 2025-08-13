@@ -15,7 +15,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeController, HomeState>(
       builder: (context, state) {
-        final controller = context.read<HomeController>();
         return BlocListener<HomeController, HomeState>(
           listener: (context, state) {
             if (state is HomeError) {
@@ -26,110 +25,105 @@ class HomePage extends StatelessWidget {
               );
             }
           },
-          child: _buildBody(controller, context),
+          child: Scaffold(
+            body: Column(
+              children: [
+                SizedBox(
+                  height: 380.h,
+                  child: Stack(
+                    children: [
+                      backgroundHeader(),
+                      headerHome(context),
+                      cardHeader(context),
+                    ],
+                  ),
+                ),
+                bodyHome(context),
+              ],
+            ),
+          ),
         );
       },
     );
   }
 
-  Widget _buildBody(HomeController controller, BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: 380.h,
-            child: Stack(
+  Expanded bodyHome(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 28.r, vertical: 4.r),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                backgroundTophome(),
-                headerHome(context),
-                cardHeader(context),
+                Text(
+                  'Transactions History',
+                  style: AppTextStyles.text18(
+                    context,
+                    color: AppColors.textTertiary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  'See all',
+                  style: AppTextStyles.text14(
+                    context,
+                    color: AppColors.textGrey,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ],
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28.r, vertical: 4.r),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Transactions History',
-                        style: AppTextStyles.text18(
-                          context,
-                          color: AppColors.textTertiary,
-                          fontWeight: FontWeight.w600,
-                        ),
+            SizedBox(height: 8.h),
+            Expanded(
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  final color =
+                      index % 2 == 0 ? AppColors.income : AppColors.outcome;
+                  final value = index % 2 == 0 ? "+ \$ 100.00" : "- \$ 100.00";
+                  return ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 8.r),
+                    leading: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.antiFlashWhite,
+                        borderRadius: BorderRadius.all(Radius.circular(8.r)),
                       ),
-                      Text(
-                        'See all',
-                        style: AppTextStyles.text14(
-                          context,
-                          color: AppColors.textGrey,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.h),
-                  Expanded(
-                    child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        final color =
-                            index % 2 == 0
-                                ? AppColors.income
-                                : AppColors.outcome;
-                        final value =
-                            index % 2 == 0 ? "+ \$ 100.00" : "- \$ 100.00";
-                        return ListTile(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 8.r),
-                          leading: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.antiFlashWhite,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8.r),
-                              ),
-                            ),
-                            padding: EdgeInsets.all(8.r),
-                            child: Icon(Icons.monetization_on_outlined),
-                          ),
-                          title: Text(
-                            'UpWork',
-                            style: AppTextStyles.text16(
-                              context,
-                              color: AppColors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          subtitle: Text(
-                            'Today',
-                            style: AppTextStyles.text14(
-                              context,
-                              color: AppColors.textGrey,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          trailing: Text(
-                            value,
-                            style: AppTextStyles.text16(
-                              context,
-                              color: color,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        );
-                      },
+                      padding: EdgeInsets.all(8.r),
+                      child: Icon(Icons.monetization_on_outlined),
                     ),
-                  ),
-                ],
+                    title: Text(
+                      'UpWork',
+                      style: AppTextStyles.text16(
+                        context,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    subtitle: Text(
+                      'Today',
+                      style: AppTextStyles.text14(
+                        context,
+                        color: AppColors.textGrey,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    trailing: Text(
+                      value,
+                      style: AppTextStyles.text16(
+                        context,
+                        color: color,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -346,7 +340,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Positioned backgroundTophome() {
+  Positioned backgroundHeader() {
     return Positioned(
       left: 0,
       right: 0,

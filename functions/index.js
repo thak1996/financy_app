@@ -1,7 +1,16 @@
 require("dotenv").config();
 
-const functions = require("firebase-functions/v1");
+const {onRequest} = require("firebase-functions/v2/https");
+const {onUserCreated} = require("firebase-functions/v2/identity");
+const {onUserDeleted} = require("firebase-functions/v2/identity");
+const {setGlobalOptions} = require("firebase-functions/v2");
+const functions = require("firebase-functions/v2");
 const admin = require("firebase-admin");
+
+setGlobalOptions({
+  region: "us-central1",
+  maxInstances: 10,
+});
 
 admin.initializeApp();
 
@@ -36,11 +45,12 @@ const makeGraphQLRequest = async (query, variables = {}) => {
   }
 };
 
-exports.registerUser = functions.https.onCall(async (request) => {
-  const {email, password, displayName} = request.data;
+exports.registerUser = onRequest(async (request) => {
+  const {email, password, displayName} = request.body;
 
   if (!email || !password || !displayName) {
-    throw new Error("Missing required information");
+    throw new functions.https.HttpsError(
+      "invalid-argument", "Missing required information");
   }
 
   try {
@@ -67,16 +77,19 @@ exports.registerUser = functions.https.onCall(async (request) => {
       success: true,
     };
   } catch (error) {
-    throw new Error("Error processing register: " + error.message);
+    throw new functions.https.HttpsError(
+      "internal", "Error processing register: " + error.message);
   }
 });
 
-exports.processSignUp = functions.auth.user().onCreate(async (user) => {
+exports.processSignUp = onUserCreated(async (event) => {
+  const user = event.data;
   const id = user.uid;
   const email = user.email;
   const name = user.displayName || "No Name";
 
   if (!id || !email) {
+    console.error("Missing required user information");
     return null;
   }
 
@@ -99,14 +112,17 @@ exports.processSignUp = functions.auth.user().onCreate(async (user) => {
 
     return data;
   } catch (error) {
+    console.error("Error processing sign up:", error);
     return null;
   }
 });
 
-exports.processDelete = functions.auth.user().onDelete(async (user) => {
+exports.processDelete = onUserDeleted(async (event) => {
+  const user = event.data;
   const id = user.uid;
 
   if (!id) {
+    console.error("Missing user ID");
     return null;
   }
 
@@ -123,23 +139,17 @@ exports.processDelete = functions.auth.user().onDelete(async (user) => {
 
     return data;
   } catch (error) {
+    console.error("Error processing delete:", error);
     return null;
   }
 });
 
-exports.updateUserName = functions.https.onCall(async (request) => {
-  const {id, name} = request.data;
-
-  if (!request.auth) {
-    throw new Error("User must be authenticated to update name");
-  }
+exports.updateUserName = onRequest(async (request) => {
+  const {id, name} = request.body;
 
   if (!id || !name) {
-    throw new Error("Missing required information: id or name");
-  }
-
-  if (request.auth.uid !== id) {
-    throw new Error("User can only update their own name");
+    throw new functions.https.HttpsError(
+      "invalid-argument", "Missing required information: id or name");
   }
 
   const mutation = `mutation($id: String!, $name: String!) {
@@ -163,6 +173,7 @@ exports.updateUserName = functions.https.onCall(async (request) => {
       affected_rows: result.update_user.affected_rows,
     };
   } catch (error) {
-    throw new Error("Error processing user name update: " + error.message);
+    throw new functions.https.HttpsError(
+      "internal", "Error processing user name update: " + error.message);
   }
 });

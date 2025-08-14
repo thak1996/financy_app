@@ -1,1 +1,41 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"app-financy-34576","appId":"1:1040725228402:android:7ad0d953b37ac0d3707beb","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"app-financy-34576","configurations":{"android":"1:1040725228402:android:7ad0d953b37ac0d3707beb","ios":"1:1040725228402:ios:6273285e5ffbc64c707beb","windows":"1:1040725228402:web:fb6c2925993ce110707beb"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "app-financy-34576",
+          "appId": "1:1040725228402:android:7ad0d953b37ac0d3707beb",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "app-financy-34576",
+          "configurations": {
+            "android": "1:1040725228402:android:7ad0d953b37ac0d3707beb",
+            "ios": "1:1040725228402:ios:6273285e5ffbc64c707beb",
+            "windows": "1:1040725228402:web:fb6c2925993ce110707beb"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs18",
+      "platforms": "gcfv1",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
+}

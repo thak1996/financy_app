@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const functions = require("firebase-functions/v1");
 const admin = require("firebase-admin");
+const fetch = require("node-fetch");
 
 admin.initializeApp();
 
@@ -13,14 +14,11 @@ const makeGraphQLRequest = async (query, variables = {}) => {
         "Content-Type": "application/json",
         "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET,
       },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
+      body: JSON.stringify({query, variables}),
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP status ${response.status}`);
     }
 
     const result = await response.json();
@@ -36,21 +34,29 @@ const makeGraphQLRequest = async (query, variables = {}) => {
   }
 };
 
-exports.registerUser = functions.https.onCall(async (request) => {
-  const {email, password, displayName} = request.data;
+exports.registerUser = functions.https.onCall(async (data, context) => {
+  const {email, password, displayName} = data || {};
 
   if (!email || !password || !displayName) {
-    throw new Error("Missing required information");
+    console.error("registerUser: missing fields", {
+      email,
+      password,
+      displayName,
+    });
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "Missing required information",
+    );
   }
 
   try {
     const userRecord = await admin.auth().createUser({
-      email: email,
-      password: password,
-      displayName: displayName,
+      email,
+      password,
+      displayName,
     });
 
-    const customClaims = {
+    const claims = {
       "https://hasura.io/jwt/claims": {
         "x-hasura-default-role": "user",
         "x-hasura-allowed-roles": ["user"],
@@ -58,7 +64,7 @@ exports.registerUser = functions.https.onCall(async (request) => {
       },
     };
 
-    await admin.auth().setCustomUserClaims(userRecord.uid, customClaims);
+    await admin.auth().setCustomUserClaims(userRecord.uid, claims);
 
     return {
       uid: userRecord.uid,
@@ -67,7 +73,11 @@ exports.registerUser = functions.https.onCall(async (request) => {
       success: true,
     };
   } catch (error) {
-    throw new Error("Error processing register: " + error.message);
+    console.error("registerUser error:", error);
+    throw new functions.https.HttpsError(
+      "internal",
+      "Error processing register: " + (error.message || String(error)),
+    );
   }
 });
 
@@ -76,29 +86,19 @@ exports.processSignUp = functions.auth.user().onCreate(async (user) => {
   const email = user.email;
   const name = user.displayName || "No Name";
 
-  if (!id || !email) {
-    return null;
-  }
+  if (!id || !email) return null;
 
-  const mutation = `mutation($id: String!, $email: String!, $name: String!) {
-    insert_user(objects: [{
-      id: $id,
-      email: $email,
-      name: $name,
-    }]) {
-      affected_rows
-    }
-  }`;
+  const mutation = `
+    mutation($id: String!, $email: String!, $name: String!) {
+      insert_user(objects: [{ id: $id, email: $email, name: $name }]) {
+        affected_rows
+      }
+    }`;
 
   try {
-    const data = await makeGraphQLRequest(mutation, {
-      id: id,
-      email: email,
-      name: name,
-    });
-
-    return data;
+    return await makeGraphQLRequest(mutation, {id, email, name});
   } catch (error) {
+    console.error("processSignUp error:", error);
     return null;
   }
 });
@@ -106,63 +106,67 @@ exports.processSignUp = functions.auth.user().onCreate(async (user) => {
 exports.processDelete = functions.auth.user().onDelete(async (user) => {
   const id = user.uid;
 
-  if (!id) {
-    return null;
-  }
+  if (!id) return null;
 
-  const mutation = `mutation($id: String!) {
-    delete_user(where: {id: {_eq: $id}}) {
-      affected_rows
-    }
-  }`;
+  const mutation = `
+    mutation($id: String!) {
+      delete_user(where: {id: {_eq: $id}}) {
+        affected_rows
+      }
+    }`;
 
   try {
-    const data = await makeGraphQLRequest(mutation, {
-      id: id,
-    });
-
-    return data;
+    return await makeGraphQLRequest(mutation, {id});
   } catch (error) {
+    console.error("processDelete error:", error);
     return null;
   }
 });
 
-exports.updateUserName = functions.https.onCall(async (request) => {
-  const {id, name} = request.data;
+exports.updateUserName = functions.https.onCall(async (data, context) => {
+  const {id, name} = data || {};
 
-  if (!request.auth) {
-    throw new Error("User must be authenticated to update name");
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+      "unauthenticated",
+      "User must be authenticated",
+    );
   }
 
   if (!id || !name) {
-    throw new Error("Missing required information: id or name");
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "Missing id or name",
+    );
   }
 
-  if (request.auth.uid !== id) {
-    throw new Error("User can only update their own name");
+  if (context.auth.uid !== id) {
+    throw new functions.https.HttpsError(
+      "permission-denied",
+      "Can only update own name",
+    );
   }
 
-  const mutation = `mutation($id: String!, $name: String!) {
-    update_user(where: {id: {_eq: $id}}, _set: {name: $name}) {
-      affected_rows
-    }
-  }`;
+  const mutation = `
+    mutation($id: String!, $name: String!) {
+      update_user(where: {id: {_eq: $id}}, _set: {name: $name}) {
+        affected_rows
+      }
+    }`;
 
   try {
-    const result = await makeGraphQLRequest(mutation, {
-      id: id,
-      name: name,
-    });
-
-    await admin.auth().updateUser(id, {
-      displayName: name,
-    });
+    const result = await makeGraphQLRequest(mutation, {id, name});
+    await admin.auth().updateUser(id, {displayName: name});
 
     return {
       success: true,
       affected_rows: result.update_user.affected_rows,
     };
   } catch (error) {
-    throw new Error("Error processing user name update: " + error.message);
+    console.error("updateUserName error:", error);
+    throw new functions.https.HttpsError(
+      "internal",
+      "Error processing user name update: " + (error.message || String(error)),
+    );
   }
 });

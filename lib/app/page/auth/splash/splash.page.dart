@@ -8,14 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
-  @override
-  State<SplashPage> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -23,11 +18,8 @@ class _SplashPageState extends State<SplashPage> {
       child: BlocListener<SplashController, SplashState>(
         listener: (context, state) {
           if (!context.mounted) return;
-          if (state is SplashSuccess) {
-            context.goNamed('app-scaffold');
-          } else if (state is SplashFailed) {
-            context.goNamed('login');
-          }
+          if (state is SplashSuccess) context.goNamed('app-scaffold');
+          if (state is SplashFailed) context.goNamed('login');
         },
         child: Scaffold(
           body: Container(

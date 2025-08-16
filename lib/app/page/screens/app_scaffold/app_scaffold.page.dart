@@ -1,4 +1,5 @@
 import 'package:financy_app/app/data/repositories/transaction.repository.dart';
+import 'package:financy_app/app/data/services/graohql.service.dart';
 import 'package:financy_app/app/shared/consts/keys.dart';
 import 'package:financy_app/app/shared/extensions/page_controller.ext.dart';
 import 'package:financy_app/app/data/services/auth_firebase.service.dart';
@@ -126,8 +127,11 @@ class AppScaffoldPage extends StatelessWidget {
       ),
       BlocProvider(
         create:
-            (context) =>
-                HomeController(TransactionRepositoryImpl())..loadHomeData(),
+            (context) => HomeController(
+              TransactionRepositoryImpl(
+                graphQlService: context.read<GraphQlService>(),
+              ),
+            )..loadHomeData(),
       ),
       BlocProvider(create: (context) => StatsController()..loadStatsData()),
       BlocProvider(

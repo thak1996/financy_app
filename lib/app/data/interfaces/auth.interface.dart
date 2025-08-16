@@ -15,5 +15,5 @@ abstract class IAuthService {
 
   AsyncResult<Unit> logout();
 
-  AsyncResult<String> get userToken;
+  Future<String?> getIdToken({bool forceRefresh = false});
 }

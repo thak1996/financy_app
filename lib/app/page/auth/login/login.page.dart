@@ -1,4 +1,5 @@
 import 'package:financy_app/app/data/exports.dart';
+import 'package:financy_app/app/data/services/graohql.service.dart';
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/secure_storage.dart';
@@ -6,10 +7,10 @@ import 'package:financy_app/app/shared/utils/validators.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:financy_app/app/page/auth/login/login.controller.dart';
 import 'package:financy_app/app/page/auth/login/login.state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,6 +38,11 @@ class _LoginPageState extends State<LoginPage> {
           (context) => LoginController(
             authService: AuthFirebaseService(
               secureStorageService: SecureStorage(),
+            ),
+            graphQlService: GraphQlService(
+              authService: AuthFirebaseService(
+                secureStorageService: SecureStorage(),
+              ),
             ),
           ),
       child: BlocBuilder<LoginController, LoginState>(

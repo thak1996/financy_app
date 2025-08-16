@@ -18,11 +18,10 @@ class RegisterController extends Cubit<RegisterState> {
         email: userCredentials.email!,
         password: userCredentials.password!,
       );
-      await graphQlService.init();
-      response.fold(
-        (success) => emit(RegisterSuccess()),
-        (failure) => emit(RegisterError(failure.toString())),
-      );
+      response.fold((success) async {
+        await graphQlService.refreshClient();
+        emit(RegisterSuccess());
+      }, (failure) => emit(RegisterError(failure.toString())));
     } catch (e) {
       emit(RegisterError(e.toString()));
     }

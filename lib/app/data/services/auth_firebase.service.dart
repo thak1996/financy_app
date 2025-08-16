@@ -96,16 +96,13 @@ class AuthFirebaseService implements IAuthService {
   }
 
   @override
-  AsyncResult<String> get userToken async {
+  Future<String?> getIdToken({bool forceRefresh = false}) async {
     try {
-      final token = await _auth.currentUser?.getIdToken();
-      if (token != null && token.isNotEmpty) {
-        return Success(token);
-      } else {
-        return Failure(AuthException('User is not logged in'));
-      }
+      final token = await _auth.currentUser?.getIdToken(forceRefresh);
+      return token;
     } catch (e) {
-      return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));
+      _logger.w('getIdToken error: $e');
+      return null;
     }
   }
 }

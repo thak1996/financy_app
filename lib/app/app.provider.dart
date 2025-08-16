@@ -40,7 +40,12 @@ class AppProvider {
     ),
 
     // -------------------- Repositories --------------------
-    Provider<TransactionRepository>(create: (_) => TransactionRepositoryImpl()),
+    Provider<TransactionRepository>(
+      create:
+          (context) => TransactionRepositoryImpl(
+            graphQlService: context.read<GraphQlService>(),
+          ),
+    ),
 
     // -------------------- Blocs / Cubits --------------------
     // ThemeCubit uses the same SecureStorage instance
@@ -57,6 +62,7 @@ class AppProvider {
     BlocProvider<LoginController>(
       create: (context) {
         return LoginController(
+          graphQlService: context.read<GraphQlService>(),
           authService: context.read<AuthFirebaseService>(),
         );
       },

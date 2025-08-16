@@ -3,14 +3,14 @@ import 'package:financy_app/app/page/auth/register/register.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterController extends Cubit<RegisterState> {
-  RegisterController(this._authService) : super(RegisterInitial());
+  RegisterController({required this.authService}) : super(RegisterInitial());
 
-  final AuthFirebaseService _authService;
+  final AuthFirebaseService authService;
 
   Future<void> register(UserModel userCredentials) async {
     try {
       emit(RegisterLoading());
-      final response = await _authService.register(
+      final response = await authService.register(
         userCredentials.name,
         email: userCredentials.email!,
         password: userCredentials.password!,

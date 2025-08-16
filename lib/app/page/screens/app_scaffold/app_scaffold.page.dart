@@ -135,9 +135,9 @@ class AppScaffoldPage extends StatelessWidget {
       ),
       BlocProvider(
         create:
-            (context) =>
-                ProfileController(AuthFirebaseService(SecureStorage()))
-                  ..loadProfileData(),
+            (context) => ProfileController(
+              AuthFirebaseService(secureStorageService: SecureStorage()),
+            )..loadProfileData(),
       ),
     ];
   }

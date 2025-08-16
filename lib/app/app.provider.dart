@@ -11,18 +11,31 @@ import 'package:financy_app/app/page/screens/profile/profile.controller.dart';
 import 'package:financy_app/app/page/screens/stats/stats.controller.dart';
 import 'package:financy_app/app/page/screens/transactions/transactions.controller.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class AppProvider {
   static List<SingleChildWidget> get providers => [
-    BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
+    BlocProvider<ThemeCubit>(
+      create: (_) => ThemeCubit(storage: FlutterSecureStorage()),
+    ),
     BlocProvider<AppScaffoldController>(create: (_) => AppScaffoldController()),
     BlocProvider<LoginController>(
-      create: (_) => LoginController(AuthFirebaseService(SecureStorage())),
+      create:
+          (_) => LoginController(
+            authService: AuthFirebaseService(
+              secureStorageService: SecureStorage(),
+            ),
+          ),
     ),
     BlocProvider<RegisterController>(
-      create: (_) => RegisterController(AuthFirebaseService(SecureStorage())),
+      create:
+          (_) => RegisterController(
+            authService: AuthFirebaseService(
+              secureStorageService: SecureStorage(),
+            ),
+          ),
     ),
     BlocProvider<StatsController>(create: (_) => StatsController()),
     BlocProvider<HomeController>(
@@ -35,7 +48,10 @@ class AppProvider {
       create: (_) => TransactionsController(),
     ),
     BlocProvider<ProfileController>(
-      create: (_) => ProfileController(AuthFirebaseService(SecureStorage())),
+      create:
+          (_) => ProfileController(
+            AuthFirebaseService(secureStorageService: SecureStorage()),
+          ),
     ),
     Provider<TransactionRepository>(create: (_) => TransactionRepositoryImpl()),
     Provider<SecureStorage>(create: (_) => SecureStorage()),

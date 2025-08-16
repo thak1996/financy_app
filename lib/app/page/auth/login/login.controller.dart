@@ -3,14 +3,14 @@ import 'package:financy_app/app/page/auth/login/login.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginController extends Cubit<LoginState> {
-  LoginController(this._authService) : super(const LoginInitial());
+  LoginController({required this.authService}) : super(const LoginInitial());
 
-  final AuthFirebaseService _authService;
+  final AuthFirebaseService authService;
 
   Future<void> login(String email, String password) async {
     emit(const LoginLoading());
     try {
-      final result = await _authService.login(email: email, password: password);
+      final result = await authService.login(email: email, password: password);
       result.fold(
         (success) => emit(const LoginSuccess()),
         (failure) => emit(LoginError(failure.toString())),

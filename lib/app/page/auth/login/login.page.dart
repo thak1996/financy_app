@@ -34,7 +34,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create:
-          (context) => LoginController(AuthFirebaseService(SecureStorage())),
+          (context) => LoginController(
+            authService: AuthFirebaseService(
+              secureStorageService: SecureStorage(),
+            ),
+          ),
       child: BlocBuilder<LoginController, LoginState>(
         builder: (context, state) {
           final controller = context.read<LoginController>();

@@ -14,4 +14,6 @@ abstract class IAuthService {
   });
 
   AsyncResult<Unit> logout();
+
+  AsyncResult<String> get userToken;
 }

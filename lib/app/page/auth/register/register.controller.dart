@@ -1,11 +1,14 @@
 import 'package:financy_app/app/data/exports.dart';
+import 'package:financy_app/app/data/services/graohql.service.dart';
 import 'package:financy_app/app/page/auth/register/register.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterController extends Cubit<RegisterState> {
-  RegisterController({required this.authService}) : super(RegisterInitial());
+  RegisterController({required this.authService, required this.graphQlService})
+    : super(RegisterInitial());
 
   final AuthFirebaseService authService;
+  final GraphQlService graphQlService;
 
   Future<void> register(UserModel userCredentials) async {
     try {
@@ -15,6 +18,7 @@ class RegisterController extends Cubit<RegisterState> {
         email: userCredentials.email!,
         password: userCredentials.password!,
       );
+      await graphQlService.init();
       response.fold(
         (success) => emit(RegisterSuccess()),
         (failure) => emit(RegisterError(failure.toString())),

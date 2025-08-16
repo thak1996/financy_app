@@ -13,7 +13,7 @@ class GraphQlService {
   Future<void> init() async {
     final token = authService.userToken;
     final HttpLink httpLink = HttpLink(
-      'https://your-graphql-endpoint.com/graphql',
+      'https://fancy-lemming-59.hasura.app/v1/graphql',
     );
 
     final AuthLink authLink = AuthLink(getToken: () async => 'Bearer $token');

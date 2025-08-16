@@ -7,8 +7,8 @@ class ThemeCubit extends Cubit<ThemeState> {
   static const _storageKey = 'theme_mode';
   final FlutterSecureStorage _storage;
 
-  ThemeCubit({required FlutterSecureStorage? storage})
-    : _storage = storage ?? const FlutterSecureStorage(),
+  ThemeCubit({required FlutterSecureStorage storage})
+    : _storage = storage,
       super(ThemeState.light) {
     _loadTheme();
   }

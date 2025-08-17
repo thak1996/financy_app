@@ -1,5 +1,5 @@
 import 'package:financy_app/app/data/exports.dart';
-import 'package:financy_app/app/data/services/graohql.service.dart';
+import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/page/auth/login/login.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,10 +14,10 @@ class LoginController extends Cubit<LoginState> {
     emit(const LoginLoading());
     try {
       final result = await authService.login(email: email, password: password);
-      result.fold((success) async {
-        await graphQlService.refreshClient();
-        emit(const LoginSuccess());
-      }, (failure) => emit(LoginError(failure.toString())));
+      result.fold(
+        (success) => emit(const LoginSuccess()),
+        (failure) => emit(LoginError(failure.toString())),
+      );
     } catch (e) {
       emit(LoginError(e.toString()));
     }

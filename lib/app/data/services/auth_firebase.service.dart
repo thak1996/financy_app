@@ -28,16 +28,15 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
+      final token = await _auth.currentUser?.getIdToken();
+      _logger.i('Token User: $token');
       if (response.user != null) {
-        _logger.i('Token User: ${await _auth.currentUser?.getIdToken()}');
         await secureStorageService.write(
           key: 'user',
           value: response.user?.uid ?? '',
         );
       }
-      return Success(
-        UserModel(email: response.user?.email, token: response.user?.uid),
-      );
+      return Success(UserModel(email: response.user?.email, token: token));
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
     } catch (e) {
@@ -62,7 +61,7 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
-      _logger.i('Token User: ${await _auth.currentUser?.getIdToken()}');
+      final token = await _auth.currentUser?.getIdToken();
       if (response.user != null) {
         await response.user?.updateDisplayName(name);
         await secureStorageService.write(
@@ -70,9 +69,7 @@ class AuthFirebaseService implements IAuthService {
           value: response.user?.uid ?? '',
         );
       }
-      return Success(
-        UserModel(email: response.user?.email, token: response.user?.uid),
-      );
+      return Success(UserModel(email: response.user?.email, token: token));
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
     } on FirebaseFunctionsException catch (e) {
@@ -99,9 +96,22 @@ class AuthFirebaseService implements IAuthService {
   Future<String?> getIdToken({bool forceRefresh = false}) async {
     try {
       final token = await _auth.currentUser?.getIdToken(forceRefresh);
+      _logger.i('Token User: $token');
       return token;
     } catch (e) {
       _logger.w('getIdToken error: $e');
+      return null;
+    }
+  }
+
+  Future<UserModel?> getCurrentUser() async {
+    try {
+      final firebaseUser = _auth.currentUser;
+      if (firebaseUser == null) return null;
+      final token = await firebaseUser.getIdToken();
+      return UserModel(email: firebaseUser.email, token: token);
+    } catch (e) {
+      _logger.w('getCurrentUser error: $e');
       return null;
     }
   }

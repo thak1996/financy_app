@@ -1,5 +1,5 @@
 import 'package:financy_app/app/data/exports.dart';
-import 'package:financy_app/app/data/services/graohql.service.dart';
+import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/secure_storage.dart';

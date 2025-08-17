@@ -1,6 +1,7 @@
+import 'package:financy_app/app/data/services/auth_firebase.service.dart';
+import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/auth/splash/splash.controller.dart';
 import 'package:financy_app/app/page/auth/splash/splash.state.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,11 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SplashController(SecureStorage())..checkAuth(),
+      create:
+          (context) => SplashController(
+            authService: RepositoryProvider.of<AuthFirebaseService>(context),
+            graphQlService: RepositoryProvider.of<GraphQlService>(context),
+          )..checkAuthState(),
       child: BlocListener<SplashController, SplashState>(
         listener: (context, state) {
           if (!context.mounted) return;

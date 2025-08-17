@@ -27,7 +27,6 @@ class GraphQlService {
       getToken: () async {
         try {
           final String? token = await authService.getIdToken();
-          _logger.i("$token'");
           if (token == null || token.isEmpty) return null;
           return 'Bearer $token';
         } catch (e, st) {
@@ -41,6 +40,7 @@ class GraphQlService {
 
     _client = GraphQLClient(
       cache: GraphQLCache(store: InMemoryStore()),
+      queryRequestTimeout: Duration(seconds: 10),
       link: link,
     );
   }

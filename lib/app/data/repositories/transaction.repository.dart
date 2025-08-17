@@ -1,6 +1,6 @@
 import 'package:financy_app/app/data/exception/app.exception.dart';
 import 'package:financy_app/app/data/models/repository.model.dart';
-import 'package:financy_app/app/data/services/graohql.service.dart';
+import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/queries/get_all_transactions.dart';
 import 'package:financy_app/app/shared/utils/log_printer.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

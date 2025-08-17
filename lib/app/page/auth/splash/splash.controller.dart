@@ -1,17 +1,23 @@
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
+import 'package:financy_app/app/data/services/auth_firebase.service.dart';
+import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/page/auth/splash/splash.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashController extends Cubit<SplashState> {
-  SplashController(this._secureStorageService) : super(SplashInitial());
+  SplashController({required this.authService, required this.graphQlService})
+    : super(SplashInitial());
 
-  final SecureStorage _secureStorageService;
+  final AuthFirebaseService authService;
+  final GraphQlService graphQlService;
 
-  Future<void> checkAuth() async {
+  Future<void> checkAuthState() async {
     emit(SplashLoading());
     try {
-      final token = await _secureStorageService.read('user');
-      if (token != null && token.isNotEmpty) {
+      final user = await authService.getCurrentUser();
+      if (user != null) {
+        final token = await authService.getIdToken();
+        if (token == null) emit(SplashFailed());
+        await graphQlService.refreshClient();
         emit(SplashSuccess());
       } else {
         emit(SplashFailed());

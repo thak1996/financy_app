@@ -1,6 +1,6 @@
 import 'package:financy_app/app/data/repositories/transaction.repository.dart';
 import 'package:financy_app/app/data/services/auth_firebase.service.dart';
-import 'package:financy_app/app/data/services/graohql.service.dart';
+import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/theme/theme_cubit.dart';
 import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/auth/login/login.controller.dart';

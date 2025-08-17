@@ -3,7 +3,6 @@ import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/keys.dart';
 import 'package:financy_app/app/shared/extensions/page_controller.ext.dart';
 import 'package:financy_app/app/data/services/auth_firebase.service.dart';
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:financy_app/app/page/screens/app_scaffold/app_scaffold.controller.dart';
 import 'package:financy_app/app/page/screens/app_scaffold/app_scaffold.state.dart';
@@ -140,7 +139,7 @@ class AppScaffoldPage extends StatelessWidget {
       BlocProvider(
         create:
             (context) => ProfileController(
-              AuthFirebaseService(secureStorageService: SecureStorage()),
+              AuthFirebaseService(),
             )..loadProfileData(),
       ),
     ];

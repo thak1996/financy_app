@@ -4,19 +4,16 @@ import 'package:financy_app/app/data/exception/auth.exception.dart';
 import 'package:financy_app/app/data/exception/functions.exception.dart';
 import 'package:financy_app/app/data/interfaces/auth.interface.dart';
 import 'package:financy_app/app/shared/utils/log_printer.dart';
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
 import '../models/user.model.dart';
 
 class AuthFirebaseService implements IAuthService {
-  AuthFirebaseService({required this.secureStorageService});
 
   final _auth = FirebaseAuth.instance;
   final _functions = FirebaseFunctions.instance;
   final Logger _logger = Logger(printer: LoggerPrinter('AuthFirebaseService'));
-  final SecureStorage secureStorageService;
 
   @override
   AsyncResult<UserModel> login({
@@ -28,15 +25,7 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
-      final token = await _auth.currentUser?.getIdToken();
-      _logger.i('Token User: $token');
-      if (response.user != null) {
-        await secureStorageService.write(
-          key: 'user',
-          value: response.user?.uid ?? '',
-        );
-      }
-      return Success(UserModel(email: response.user?.email, token: token));
+      return Success(UserModel(email: response.user?.email));
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
     } catch (e) {
@@ -61,15 +50,10 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
-      final token = await _auth.currentUser?.getIdToken();
       if (response.user != null) {
         await response.user?.updateDisplayName(name);
-        await secureStorageService.write(
-          key: 'user',
-          value: response.user?.uid ?? '',
-        );
       }
-      return Success(UserModel(email: response.user?.email, token: token));
+      return Success(UserModel(email: response.user?.email));
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
     } on FirebaseFunctionsException catch (e) {
@@ -83,7 +67,6 @@ class AuthFirebaseService implements IAuthService {
   AsyncResult<Unit> logout() async {
     try {
       await _auth.signOut();
-      await secureStorageService.delete('user');
       return Success(unit);
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
@@ -96,7 +79,7 @@ class AuthFirebaseService implements IAuthService {
   Future<String?> getIdToken({bool forceRefresh = false}) async {
     try {
       final token = await _auth.currentUser?.getIdToken(forceRefresh);
-      _logger.i('Token User: $token');
+      _logger.i('$token');
       return token;
     } catch (e) {
       _logger.w('getIdToken error: $e');

@@ -2,7 +2,6 @@ import 'package:financy_app/app/data/exports.dart';
 import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/shared/utils/validators.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:financy_app/app/page/auth/login/login.controller.dart';
@@ -36,14 +35,8 @@ class _LoginPageState extends State<LoginPage> {
     return BlocProvider(
       create:
           (context) => LoginController(
-            authService: AuthFirebaseService(
-              secureStorageService: SecureStorage(),
-            ),
-            graphQlService: GraphQlService(
-              authService: AuthFirebaseService(
-                secureStorageService: SecureStorage(),
-              ),
-            ),
+            authService: AuthFirebaseService(),
+            graphQlService: GraphQlService(authService: AuthFirebaseService()),
           ),
       child: BlocBuilder<LoginController, LoginState>(
         builder: (context, state) {

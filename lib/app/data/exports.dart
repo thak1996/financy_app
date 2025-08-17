@@ -5,7 +5,6 @@ export 'exception/base.exception.dart';
 
 // Interfaces
 export 'interfaces/auth.interface.dart';
-export 'interfaces/secure_storage.interface.dart';
 
 // Models
 export 'models/user.model.dart';

@@ -1,9 +1,9 @@
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/screens/add_transaction/add_transaction.page.dart';
 import 'package:financy_app/app/page/screens/home/home.page.dart';
 import 'package:financy_app/app/page/screens/profile/profile.page.dart';
 import 'package:financy_app/app/page/screens/stats/state.page.dart';
 import 'package:financy_app/app/page/screens/transactions/transactions.page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'page/auth/onBoarding/onboarding.page.dart';
@@ -11,8 +11,6 @@ import 'page/auth/register/register.page.dart';
 import 'page/screens/app_scaffold/app_scaffold.page.dart';
 import 'page/auth/login/login.page.dart';
 import 'page/auth/splash/splash.page.dart';
-
-final SecureStorage secureStorage = SecureStorage();
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -78,8 +76,7 @@ Future<String?> _redirectHandler(
   BuildContext context,
   GoRouterState state,
 ) async {
-  final token = await secureStorage.read('user');
-  final isAuthenticated = token != null && token.isNotEmpty;
+  final isAuthenticated = FirebaseAuth.instance.currentUser != null;
   final location = state.uri.path;
 
   final publicRoutes = ['/login', '/register', '/onboarding'];

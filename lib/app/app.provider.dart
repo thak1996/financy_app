@@ -2,7 +2,6 @@ import 'package:financy_app/app/data/repositories/transaction.repository.dart';
 import 'package:financy_app/app/data/services/auth_firebase.service.dart';
 import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/theme/theme_cubit.dart';
-import 'package:financy_app/app/shared/utils/secure_storage.dart';
 import 'package:financy_app/app/page/auth/login/login.controller.dart';
 import 'package:financy_app/app/page/auth/register/register.controller.dart';
 import 'package:financy_app/app/page/screens/add_transaction/add_transaction.controller.dart';
@@ -18,19 +17,9 @@ import 'package:provider/single_child_widget.dart';
 
 class AppProvider {
   static List<SingleChildWidget> get providers => [
-    // -------------------- Core utilities --------------------
-    // Secure storage singleton used across the app
-    Provider<SecureStorage>(create: (_) => SecureStorage()),
-
     // -------------------- Services --------------------
     // Auth service depends on SecureStorage
-    Provider<AuthFirebaseService>(
-      create: (context) {
-        return AuthFirebaseService(
-          secureStorageService: context.read<SecureStorage>(),
-        );
-      },
-    ),
+    Provider<AuthFirebaseService>(create: (context) => AuthFirebaseService()),
 
     // GraphQL service depends on Auth service
     Provider<GraphQlService>(

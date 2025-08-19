@@ -109,7 +109,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         backgroundColor: AppColors.primary,
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
+      bottomAppBarTheme: BottomAppBarThemeData(
         shape: const CircularNotchedRectangle(),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -305,7 +305,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         shape: CircleBorder(),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
+      bottomAppBarTheme: BottomAppBarThemeData(
         shape: const CircularNotchedRectangle(),
       ),
       inputDecorationTheme: InputDecorationTheme(

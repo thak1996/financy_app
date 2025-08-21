@@ -1,18 +1,3 @@
-buildscript {
-    extra.apply {
-        set("kotlinVersion", "2.0.0")
-    }
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.3.0")
-        classpath("com.google.gms:google-services:4.4.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
-    }
-}
-
 allprojects {
     repositories {
         google()
@@ -20,7 +5,10 @@ allprojects {
     }
 }
 
-val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
+val newBuildDir: Directory =
+    rootProject.layout.buildDirectory
+        .dir("../../build")
+        .get()
 rootProject.layout.buildDirectory.value(newBuildDir)
 
 subprojects {

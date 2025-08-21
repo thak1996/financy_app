@@ -85,14 +85,25 @@ class HomePage extends StatelessWidget {
                                                 EdgeInsets.symmetric(
                                                   horizontal: 8.r,
                                                 ),
-                                            leading: Container(
-                                              decoration: BoxDecoration(
-                                                color: AppColors.antiFlashWhite,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8.r),
+                                            leading: SizedBox(
+                                              width: 48.w,
+                                              height: 48.h,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      AppColors.antiFlashWhite,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                        Radius.circular(8.r),
+                                                      ),
+                                                ),
+                                                padding: EdgeInsets.all(8.r),
+                                                child: Icon(
+                                                  Icons.monetization_on,
+                                                  size: 20.h,
+                                                  color: AppColors.darkGreen,
                                                 ),
                                               ),
-                                              padding: EdgeInsets.all(8.r),
                                             ),
                                             title: Text(
                                               transaction.description,
@@ -114,8 +125,8 @@ class HomePage extends StatelessWidget {
                                             ),
                                             trailing: Text(
                                               transaction.value < 0
-                                                  ? '- \$ ${transaction.value.abs().toStringAsFixed(2)}'
-                                                  : '+ \$ ${transaction.value.toStringAsFixed(2)}',
+                                                  ? '- \$${transaction.value.abs().toStringAsFixed(2).replaceAll('.', ',')}'
+                                                  : '+ \$${transaction.value.toStringAsFixed(2).replaceAll('.', ',')}',
                                               style: AppTextStyles.text16(
                                                 context,
                                                 color:

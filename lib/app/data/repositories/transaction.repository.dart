@@ -2,9 +2,7 @@ import 'package:financy_app/app/data/exception/app.exception.dart';
 import 'package:financy_app/app/data/models/transaction.model.dart';
 import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/queries/get_all_transactions.dart';
-import 'package:financy_app/app/shared/utils/log_printer.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
 
 abstract class TransactionRepository {
@@ -16,10 +14,6 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   final GraphQlService graphQlService;
 
-  final Logger _logger = Logger(
-    printer: LoggerPrinter('TransactionRepository'),
-  );
-
   @override
   AsyncResult<List<TransactionModel>> getAllTransactions() async {
     try {
@@ -29,9 +23,8 @@ class TransactionRepositoryImpl implements TransactionRepository {
         fetchPolicy: FetchPolicy.networkOnly,
       );
       final result = await client.query(options);
-      final parsedData = List.from(result.data?['transactions'] ?? []);
+      final parsedData = List.from(result.data?['transaction'] ?? []);
       final transactions = parsedData.map((e) => TransactionModel.fromMap(e)).toList();
-      _logger.i('QueryResult: ${result.data.toString()}');
       return Success(transactions);
     } catch (e) {
       return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));

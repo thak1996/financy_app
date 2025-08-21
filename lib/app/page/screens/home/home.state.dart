@@ -1,4 +1,4 @@
-import 'package:financy_app/app/data/models/repository.model.dart';
+import 'package:financy_app/app/data/models/transaction.model.dart';
 
 sealed class HomeState {}
 

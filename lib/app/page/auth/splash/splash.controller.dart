@@ -13,6 +13,7 @@ class SplashController extends Cubit<SplashState> {
   Future<void> checkAuthState() async {
     emit(SplashLoading());
     try {
+      await Future.delayed(const Duration(seconds: 2));
       final user = await authService.getCurrentUser();
       if (user != null) {
         final token = await authService.getIdToken();

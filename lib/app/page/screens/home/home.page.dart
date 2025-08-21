@@ -93,10 +93,9 @@ class HomePage extends StatelessWidget {
                                                 ),
                                               ),
                                               padding: EdgeInsets.all(8.r),
-                                              child: transaction.icon,
                                             ),
                                             title: Text(
-                                              transaction.title,
+                                              transaction.description,
                                               style: AppTextStyles.text16(
                                                 context,
                                                 color: AppColors.black,

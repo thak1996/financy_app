@@ -1,4 +1,4 @@
-import 'package:financy_app/app/data/models/repository.model.dart';
+import 'package:financy_app/app/data/models/transaction.model.dart';
 import 'package:financy_app/app/data/repositories/transaction.repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home.state.dart';

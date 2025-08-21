@@ -1,5 +1,6 @@
 import 'package:financy_app/app/data/services/auth_firebase.service.dart';
 import 'package:financy_app/app/shared/utils/log_printer.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:logger/logger.dart';
@@ -28,6 +29,8 @@ class GraphQlService {
         try {
           final String? token = await authService.getIdToken();
           if (token == null || token.isEmpty) return null;
+          Clipboard.setData(ClipboardData(text: token));
+          _logger.i('✅ Token copiado para a área de transferência!');
           return 'Bearer $token';
         } catch (e, st) {
           _logger.e('Error getting token for GraphQL: $e', stackTrace: st);

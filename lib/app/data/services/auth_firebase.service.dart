@@ -79,7 +79,6 @@ class AuthFirebaseService implements IAuthService {
   Future<String?> getIdToken({bool forceRefresh = false}) async {
     try {
       final token = await _auth.currentUser?.getIdToken(forceRefresh);
-      _logger.i('$token');
       return token;
     } catch (e) {
       _logger.w('getIdToken error: $e');

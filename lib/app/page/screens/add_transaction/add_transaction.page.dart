@@ -1,3 +1,6 @@
+import 'package:financy_app/app/shared/consts/app_text_styles.dart';
+import 'package:financy_app/app/shared/theme/app.colors.dart';
+import 'package:financy_app/app/shared/widgets/app_header.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,10 +25,11 @@ class AddTransactionPage extends StatelessWidget {
           }
         },
         child: Scaffold(
-          appBar: AppBar(title: const Text('Adicionar Transação')),
-          body: Padding(
-            padding: EdgeInsets.all(16.r),
-            child: _AddTransactionForm(),
+          body: Stack(
+            children: [
+              AppHeader(title: 'Adicionar Transação'),
+              _TransactionForm(),
+            ],
           ),
         ),
       ),
@@ -33,76 +37,245 @@ class AddTransactionPage extends StatelessWidget {
   }
 }
 
-class _AddTransactionForm extends StatefulWidget {
-  const _AddTransactionForm();
+class _TransactionForm extends StatefulWidget {
+  const _TransactionForm();
 
   @override
-  State<_AddTransactionForm> createState() => _AddTransactionFormState();
+  State<_TransactionForm> createState() => _TransactionFormState();
 }
 
-class _AddTransactionFormState extends State<_AddTransactionForm> {
+class _TransactionFormState extends State<_TransactionForm> {
+  // Chave para validar o formulário
   final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
+
+  // Controladores para os campos de texto
   final _amountController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
+  // Variáveis para guardar o estado dos campos
+  // 0 para Income, 1 para Expense
+  final List<bool> _selectedTransactionType = <bool>[true, false];
+  String? _selectedCategory;
+  DateTime _selectedDate = DateTime.now();
+
+  // Lista de exemplo para as categorias
+  final List<String> _categories = ['Salário', 'Comida', 'Transporte', 'Lazer'];
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
 
   @override
   void dispose() {
-    _titleController.dispose();
     _amountController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          TextFormField(
-            controller: _titleController,
-            decoration: const InputDecoration(labelText: 'Título'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Informe o título';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: 16.h),
-          TextFormField(
-            controller: _amountController,
-            decoration: InputDecoration(labelText: 'Valor'),
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Informe o valor';
-              }
-              if (double.tryParse(value) == null) {
-                return 'Valor inválido';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: 24.h),
-          BlocBuilder<AddTransactionController, AddTransactionState>(
-            builder: (context, state) {
-              if (state is AddTransactionLoading) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return ElevatedButton(
+    return Positioned(
+      top: 165.h,
+      left: 24.w,
+      right: 24.w,
+      child: Container(
+        padding: EdgeInsets.all(24.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: ToggleButtons(
+                  onPressed: (int index) {
+                    setState(() {
+                      for (
+                        int i = 0;
+                        i < _selectedTransactionType.length;
+                        i++
+                      ) {
+                        _selectedTransactionType[i] = i == index;
+                      }
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(12.r),
+                  selectedColor: Colors.white,
+                  fillColor: Colors.teal[100],
+                  color: Colors.teal[100],
+                  constraints: BoxConstraints(minHeight: 40.h, minWidth: 120.w),
+                  isSelected: _selectedTransactionType,
+                  children: [
+                    Text(
+                      'Income',
+                      style: AppTextStyles.text14(
+                        context,
+                      ).apply(color: AppColors.textGrey),
+                    ),
+                    Text(
+                      'Expense',
+                      style: AppTextStyles.text14(
+                        context,
+                      ).apply(color: AppColors.textGrey),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              // Campo de Valor (Amount)
+              TextFormField(
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'AMOUNT',
+                  prefixText: '\$ ',
+                  suffixIcon: Icon(
+                    Icons.thumb_up_alt,
+                    color: AppColors.textGreyDark,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty.';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.h),
+
+              // Campo de Descrição
+              TextFormField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  labelText: 'DESCRIPTION',
+                  hintText: 'Add description',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty.';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.h),
+
+              // Campo de Categoria
+              DropdownButtonFormField<String>(
+                initialValue: _selectedCategory,
+                decoration: InputDecoration(
+                  labelText: 'CATEGORY',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                ),
+                hint: const Text('Select a category'),
+                items:
+                    _categories.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedCategory = newValue;
+                  });
+                },
+                validator:
+                    (value) =>
+                        value == null ? 'Please select a category' : null,
+              ),
+              SizedBox(height: 16.h),
+
+              // Campo de Data
+              InkWell(
+                onTap: () => _selectDate(context),
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    labelText: 'DATE',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(''),
+                      const Icon(Icons.calendar_today_outlined),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 32.h),
+
+              // Botão de Adicionar
+              ElevatedButton(
                 onPressed: () {
+                  // Primeiro, valida o formulário
                   if (_formKey.currentState!.validate()) {
-                    context
-                        .read<AddTransactionController>()
-                        .submitTransaction();
+                    // Se for válido, envia o evento para o BLoC
+                    // Você precisará criar um evento no seu controller para receber estes dados
+                    /*
+                    context.read<AddTransactionController>().add(
+                      SubmitTransaction(
+                        type: _selectedTransactionType[0] ? 'income' : 'expense',
+                        amount: double.parse(_amountController.text),
+                        description: _descriptionController.text,
+                        category: _selectedCategory!,
+                        date: _selectedDate,
+                      ),
+                    );
+                    */
+                    // A linha abaixo é apenas para teste, substitua pela de cima
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data...')),
+                    );
                   }
                 },
-                child: const Text('Salvar'),
-              );
-            },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 16.h),
+                  backgroundColor: Colors.teal[400],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                ),
+                child: Text(
+                  'Add',
+                  style: TextStyle(fontSize: 18.sp, color: Colors.white),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

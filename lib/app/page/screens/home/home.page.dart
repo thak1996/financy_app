@@ -2,6 +2,7 @@ import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/date_formatter_util.dart';
 import 'package:financy_app/app/shared/widgets/alert_dialog.widget.dart';
+import 'package:financy_app/app/shared/widgets/app_header.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,13 +32,7 @@ class HomePage extends StatelessWidget {
               children: [
                 SizedBox(
                   height: 380.h,
-                  child: Stack(
-                    children: [
-                      backgroundHeader(),
-                      headerHome(context),
-                      cardHeader(context),
-                    ],
-                  ),
+                  child: Stack(children: [AppHeader(), cardHeader(context)]),
                 ),
                 Expanded(
                   child: Padding(
@@ -308,89 +303,6 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Positioned headerHome(BuildContext context) {
-    return Positioned(
-      left: 24.w,
-      right: 24.w,
-      top: 74.h,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Good afternoon,',
-                style: AppTextStyles.text14(
-                  context,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.white,
-                ),
-              ),
-              Text(
-                'Enjelin Morgeana',
-                style: AppTextStyles.text20(
-                  context,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.white,
-                ),
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: () => log('Notification tapped'),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                color: AppColors.white.withValues(alpha: 0.06),
-              ),
-              child: Stack(
-                alignment: AlignmentDirectional(0.5, -0.5),
-                children: [
-                  Icon(
-                    Icons.notifications_none_outlined,
-                    size: 32.h,
-                    color: AppColors.white,
-                  ),
-                  Container(
-                    width: 8.w,
-                    height: 8.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.notification,
-                      borderRadius: BorderRadius.circular(4.r),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Positioned backgroundHeader() {
-    return Positioned(
-      left: 0,
-      right: 0,
-      child: Container(
-        height: 287.h,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: AppColors.greenGradient,
-          ),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(500, 30),
-            bottomRight: Radius.elliptical(500, 30),
-          ),
         ),
       ),
     );

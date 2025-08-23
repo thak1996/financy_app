@@ -45,20 +45,12 @@ class _TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<_TransactionForm> {
-  // Chave para validar o formulário
   final _formKey = GlobalKey<FormState>();
-
-  // Controladores para os campos de texto
   final _amountController = TextEditingController();
   final _descriptionController = TextEditingController();
-
-  // Variáveis para guardar o estado dos campos
-  // 0 para Income, 1 para Expense
   final List<bool> _selectedTransactionType = <bool>[true, false];
   String? _selectedCategory;
   DateTime _selectedDate = DateTime.now();
-
-  // Lista de exemplo para as categorias
   final List<String> _categories = ['Salário', 'Comida', 'Transporte', 'Lazer'];
 
   Future<void> _selectDate(BuildContext context) async {
@@ -95,7 +87,7 @@ class _TransactionFormState extends State<_TransactionForm> {
           borderRadius: BorderRadius.circular(24.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey.withValues(alpha: 0.1),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(0, 3),

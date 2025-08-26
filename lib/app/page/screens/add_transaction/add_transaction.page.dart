@@ -29,7 +29,6 @@ class AddTransactionPage extends StatelessWidget {
             children: [
               AppHeader(title: 'Adicionar Transação'),
               _TransactionForm(),
-              
             ],
           ),
         ),

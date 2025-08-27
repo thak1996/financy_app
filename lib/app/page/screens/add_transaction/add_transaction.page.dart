@@ -102,17 +102,16 @@ class _TransactionFormState extends State<_TransactionForm> {
               Align(
                 alignment: Alignment.center,
                 child: ToggleButtons(
-                  onPressed: (int index) {
-                    setState(() {
-                      for (
-                        int i = 0;
-                        i < _selectedTransactionType.length;
-                        i++
-                      ) {
-                        _selectedTransactionType[i] = i == index;
-                      }
-                    });
-                  },
+                  onPressed:
+                      (int index) => setState(() {
+                        for (
+                          int i = 0;
+                          i < _selectedTransactionType.length;
+                          i++
+                        ) {
+                          _selectedTransactionType[i] = i == index;
+                        }
+                      }),
                   borderRadius: BorderRadius.circular(12.r),
                   selectedColor: Colors.white,
                   fillColor: Colors.teal[100],

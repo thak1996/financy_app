@@ -136,7 +136,6 @@ class _TransactionFormState extends State<_TransactionForm> {
                 ),
               ),
               SizedBox(height: 24.h),
-
               // Campo de Valor (Amount)
               TextFormField(
                 controller: _amountController,

@@ -158,7 +158,6 @@ class _TransactionFormState extends State<_TransactionForm> {
                 },
               ),
               SizedBox(height: 16.h),
-
               // Campo de Descrição
               TextFormField(
                 controller: _descriptionController,

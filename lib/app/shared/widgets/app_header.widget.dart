@@ -11,7 +11,6 @@ class AppHeader extends StatefulWidget {
     this.title,
     this.background = true,
     this.iconsButtons = false,
-    
   });
 
   final String? title;

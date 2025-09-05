@@ -24,7 +24,7 @@ class AddTransactionController extends Cubit<AddTransactionState> {
     for (int i = 0; i < selectedTransactionType.length; i++) {
       selectedTransactionType[i] = i == index;
     }
-    emit(AddTransactionInitial()); // Trigger rebuild
+    emit(AddTransactionInitial());
   }
 
   Future<void> selectDate(BuildContext context) async {
@@ -36,7 +36,7 @@ class AddTransactionController extends Cubit<AddTransactionState> {
     );
     if (picked != null && picked != selectedDate) {
       selectedDate = picked;
-      emit(AddTransactionInitial()); // Trigger rebuild
+      emit(AddTransactionInitial());
     }
   }
 
@@ -45,9 +45,6 @@ class AddTransactionController extends Cubit<AddTransactionState> {
 
     emit(AddTransactionLoading());
     try {
-      // Chame o service aqui (ex.: await transactionService.addTransaction(...))
-      // Use result_dart: AsyncResult<Unit> result = await service.add(...);
-      // if (result.isError) throw result.exception;
       emit(AddTransactionSuccess());
     } catch (e) {
       emit(AddTransactionError(message: e.toString()));

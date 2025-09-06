@@ -1,8 +1,7 @@
 class Validators {
   static String? validateName(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Name is required';
-    }
+    if (value == null || value.isEmpty) return 'Name is required';
+
     if (value.length > 255) {
       return 'Name must be at most 255 characters';
     }

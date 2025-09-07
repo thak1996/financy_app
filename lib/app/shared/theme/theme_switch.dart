@@ -13,9 +13,7 @@ class ThemeSwitch extends StatelessWidget {
           value: state == ThemeState.dark,
           onChanged: (_) => context.read<ThemeCubit>().toggleTheme(),
           thumbIcon: WidgetStateProperty.resolveWith<Icon?>((states) {
-            if (state == ThemeState.dark) {
-              return const Icon(Icons.dark_mode);
-            }
+            if (state == ThemeState.dark) return const Icon(Icons.dark_mode);
             return const Icon(Icons.light_mode);
           }),
         );

@@ -92,7 +92,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
           validator:
               widget.validator ??
-              (value) => value?.isEmpty ?? true ? 'Campo obrigatório' : null,
+              (value) {
+                return value?.isEmpty ?? true ? 'Campo obrigatório' : null;
+              },
         ),
       ],
     );

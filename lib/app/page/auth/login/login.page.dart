@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:financy_app/app/data/exports.dart';
 import 'package:financy_app/app/data/services/graphql.service.dart';
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
@@ -107,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                   TextRichWidget(
                                     textOne: 'Forgot Password?',
                                     alignment: Alignment.topRight,
-                                    onTap: () {},
+                                    onTap: () => log('Forgot Password tapped'),
                                   ),
                                   SizedBox(height: 24.h),
                                 ],

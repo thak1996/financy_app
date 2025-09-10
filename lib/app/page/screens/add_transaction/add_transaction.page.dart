@@ -1,6 +1,7 @@
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/widgets/app_header.widget.dart';
+import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,10 +19,17 @@ class AddTransactionPage extends StatelessWidget {
         listener: (context, state) {
           if (state is AddTransactionSuccess) {
             Navigator.of(context).pop(true);
-          } else if (state is AddTransactionError) {
+          }
+          if (state is AddTransactionError) {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+          if (state is AddTransactionLoading) {
+            showDialog(
+              context: context,
+              builder: (context) => CircularProgressIndicatorWidget(),
+            );
           }
         },
         child: Scaffold(

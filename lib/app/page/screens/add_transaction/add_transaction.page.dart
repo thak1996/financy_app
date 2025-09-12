@@ -17,9 +17,7 @@ class AddTransactionPage extends StatelessWidget {
       create: (_) => AddTransactionController(),
       child: BlocListener<AddTransactionController, AddTransactionState>(
         listener: (context, state) {
-          if (state is AddTransactionSuccess) {
-            Navigator.of(context).pop(true);
-          }
+          if (state is AddTransactionSuccess) Navigator.of(context).pop(true);
           if (state is AddTransactionError) {
             ScaffoldMessenger.of(
               context,

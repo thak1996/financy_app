@@ -6,6 +6,7 @@ import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'add_transaction.controller.dart';
 import 'add_transaction.state.dart';
 
@@ -18,7 +19,7 @@ class AddTransactionPage extends StatelessWidget {
       create: (_) => AddTransactionController(),
       child: BlocListener<AddTransactionController, AddTransactionState>(
         listener: (context, state) {
-          if (state is AddTransactionSuccess) Navigator.of(context).pop(true);
+          if (state is AddTransactionSuccess) context.pop(true);
           if (state is AddTransactionError) {
             ScaffoldMessenger.of(
               context,

@@ -1,15 +1,12 @@
 class Validators {
   static String? validateName(String? value) {
     if (value == null || value.isEmpty) return 'Name is required';
-
     if (value.length > 255) return 'Name must be at most 255 characters';
-
     return null;
   }
 
   static String? validatePhone(String? value) {
     if (value == null || value.isEmpty) return 'Phone number is required';
-
     final phoneRegex = RegExp(
       r'^\([1-9]{2}\) [9]{0,1}[6-9]{1}[0-9]{3}\-[0-9]{4}$',
     );
@@ -21,7 +18,6 @@ class Validators {
 
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) return 'Password is required';
-
     if (value.length < 8) return 'Password must be at least 8 characters';
     return null;
   }

@@ -41,4 +41,9 @@ class Validators {
     if (value != password) return 'Passwords do not match. Please retype.';
     return null;
   }
+
+  static String? validateNonEmpty(String? value) {
+    if (value == null || value.isEmpty) return 'This field cannot be empty';
+    return null;
+  }
 }

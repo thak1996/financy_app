@@ -1,5 +1,6 @@
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
+import 'package:financy_app/app/shared/utils/validators.dart';
 import 'package:financy_app/app/shared/widgets/app_header.widget.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';
@@ -69,12 +70,7 @@ class AddTransactionPage extends StatelessWidget {
                                   color: AppColors.textGrey,
                                 ),
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Este campo não pode estar vazio.';
-                                }
-                                return null;
-                              },
+                              validator: Validators.validateNonEmpty,
                             ),
                             SizedBox(height: 16.h),
                             TextFormField(
@@ -87,12 +83,7 @@ class AddTransactionPage extends StatelessWidget {
                                 ),
                               ),
                               keyboardType: TextInputType.number,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Este campo não pode estar vazio.';
-                                }
-                                return null;
-                              },
+                              validator: Validators.validateNonEmpty,
                             ),
                             SizedBox(height: 16.h),
                             ElevatedButton(

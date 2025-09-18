@@ -7,21 +7,31 @@ const fetch = require("node-fetch");
 admin.initializeApp();
 
 const makeGraphQLRequest = async (query, variables = {}) => {
+  const endpoint = process.env.GRAPHQL_ENDPOINT;
+  const secret = process.env.HASURA_ADMIN_SECRET;
+
   try {
-    const response = await fetch(process.env.GRAPHQL_ENDPOINT, {
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET,
+        "x-hasura-admin-secret": secret,
       },
       body: JSON.stringify({query, variables}),
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP status ${response.status}`);
+    const text = await response.text();
+
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch (e) {
+      throw new Error(`Failed to parse JSON: ${text}`);
     }
 
-    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(`GraphQL request failed with status ${response.status}`);
+    }
 
     if (result.errors) {
       throw new Error(result.errors[0].message);

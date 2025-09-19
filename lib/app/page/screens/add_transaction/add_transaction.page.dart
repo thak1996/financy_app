@@ -35,7 +35,7 @@ class AddTransactionPage extends StatelessWidget {
         child: Scaffold(
           body: Stack(
             children: [
-              AppHeader(title: 'Adicionar Transação'),
+              AppHeader(title: 'Adicionar Transação', arrowButton: true),
               BlocBuilder<AddTransactionController, AddTransactionState>(
                 builder: (context, state) {
                   final controller = context.read<AddTransactionController>();

@@ -10,12 +10,14 @@ class AppHeader extends StatefulWidget {
     super.key,
     this.title,
     this.background = true,
-    this.iconsButtons = false,
+    this.arrowButton = false,
+    this.moreHoriz = false,
   });
 
   final String? title;
   final bool background;
-  final bool iconsButtons;
+  final bool arrowButton;
+  final bool moreHoriz;
 
   @override
   State<AppHeader> createState() => _AppHeaderState();
@@ -58,11 +60,11 @@ class _AppHeaderState extends State<AppHeader> {
   Row headerSec() {
     return Row(
       mainAxisAlignment:
-          widget.iconsButtons
+          widget.arrowButton || widget.moreHoriz
               ? MainAxisAlignment.spaceBetween
               : MainAxisAlignment.center,
       children: [
-        if (widget.iconsButtons)
+        if (widget.arrowButton)
           GestureDetector(
             onTap: () => context.pop(),
             child: Icon(
@@ -79,7 +81,8 @@ class _AppHeaderState extends State<AppHeader> {
             color: AppColors.white,
           ),
         ),
-        if (widget.iconsButtons)
+        if (widget.arrowButton) SizedBox(),
+        if (widget.moreHoriz)
           Icon(Icons.more_horiz, size: 24.h, color: AppColors.white),
       ],
     );

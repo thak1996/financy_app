@@ -1,7 +1,6 @@
 import 'package:financy_app/app/shared/consts/app_text_styles.dart';
 import 'package:financy_app/app/shared/theme/app.colors.dart';
 import 'package:financy_app/app/shared/utils/validators.dart';
-import 'package:financy_app/app/shared/widgets/app_header.widget.dart';
 import 'package:financy_app/app/shared/widgets/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

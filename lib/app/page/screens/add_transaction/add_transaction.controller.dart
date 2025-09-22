@@ -16,9 +16,7 @@ class AddTransactionController extends Cubit<AddTransactionState> {
   DateTime selectedDate = DateTime.now();
   final List<String> categories = ['Salário', 'Comida', 'Transporte', 'Lazer'];
 
-  void _initControllers() {
-    // Inicializações se necessárias
-  }
+  void _initControllers() {}
 
   void toggleTransactionType(int index) {
     for (int i = 0; i < selectedTransactionType.length; i++) {

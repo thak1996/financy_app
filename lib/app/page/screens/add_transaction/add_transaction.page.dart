@@ -10,8 +10,18 @@ import 'package:go_router/go_router.dart';
 import 'add_transaction.controller.dart';
 import 'add_transaction.state.dart';
 
-class AddTransactionPage extends StatelessWidget {
+class AddTransactionPage extends StatefulWidget {
   const AddTransactionPage({super.key});
+
+  @override
+  State<AddTransactionPage> createState() => _AddTransactionPageState();
+}
+
+class _AddTransactionPageState extends State<AddTransactionPage> {
+  final formKey = GlobalKey<FormState>();
+  final amountController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final valueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +68,12 @@ class AddTransactionPage extends StatelessWidget {
                         ],
                       ),
                       child: Form(
-                        key: controller.formKey,
+                        key: formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             TextFormField(
-                              controller: controller.descriptionController,
+                              controller: descriptionController,
                               decoration: InputDecoration(
                                 labelText: 'Descrição',
                                 labelStyle: AppTextStyles.text16(
@@ -75,7 +85,7 @@ class AddTransactionPage extends StatelessWidget {
                             ),
                             SizedBox(height: 16.h),
                             TextFormField(
-                              controller: controller.valueController,
+                              controller: valueController,
                               decoration: InputDecoration(
                                 labelText: 'Valor',
                                 labelStyle: AppTextStyles.text16(
@@ -91,7 +101,11 @@ class AddTransactionPage extends StatelessWidget {
                               onPressed:
                                   state is AddTransactionLoading
                                       ? null
-                                      : controller.submitTransaction,
+                                      : () {
+                                        if (formKey.currentState!.validate()) {
+                                          controller.submitTransaction();
+                                        }
+                                      },
                               child:
                                   state is AddTransactionLoading
                                       ? CircularProgressIndicator()

@@ -7,10 +7,7 @@ class AddTransactionController extends Cubit<AddTransactionState> {
     _initControllers();
   }
 
-  final formKey = GlobalKey<FormState>();
-  final amountController = TextEditingController();
-  final descriptionController = TextEditingController();
-  final valueController = TextEditingController();
+
   final List<bool> selectedTransactionType = <bool>[true, false];
   String? selectedCategory;
   DateTime selectedDate = DateTime.now();
@@ -39,20 +36,11 @@ class AddTransactionController extends Cubit<AddTransactionState> {
   }
 
   Future<void> submitTransaction() async {
-    if (!formKey.currentState!.validate()) return;
-
     emit(AddTransactionLoading());
     try {
       emit(AddTransactionSuccess());
     } catch (e) {
       emit(AddTransactionError(message: e.toString()));
     }
-  }
-
-  @override
-  Future<void> close() {
-    amountController.dispose();
-    descriptionController.dispose();
-    return super.close();
   }
 }

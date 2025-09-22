@@ -4,4 +4,7 @@ export 'bottom_app_bar.widget.dart';
 export 'circular_progress_indicator.widget.dart';
 export 'primary_button.widget.dart';
 export 'text_field.widget.dart';
-export 'text_rich_widget.dart';
+export 'text_rich.widget.dart';
+export 'transaction_list_view.widget.dart';
+export 'balance_card.widget.dart';
+export 'app_header.widget.dart';

@@ -81,7 +81,7 @@ class _AppHeaderState extends State<AppHeader> {
             color: AppColors.white,
           ),
         ),
-        if (widget.arrowButton) SizedBox(),
+        if (widget.arrowButton) SizedBox.shrink(),
         if (widget.moreHoriz)
           Icon(Icons.more_horiz, size: 24.h, color: AppColors.white),
       ],

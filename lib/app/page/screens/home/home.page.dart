@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                       BalanceCard(
                         totalAmount: 1556.00,
                         incomeAmount: 1840.00,
-                        outcomeAmount: -544.00,
+                        outcomeAmount: 544.00,
                       ),
                     ],
                   ),

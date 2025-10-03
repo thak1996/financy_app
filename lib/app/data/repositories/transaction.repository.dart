@@ -23,11 +23,29 @@ class TransactionRepositoryImpl implements TransactionRepository {
         fetchPolicy: FetchPolicy.networkOnly,
       );
       final result = await client.query(options);
+      if (result.hasException) throw result.exception!;
       final parsedData = List.from(result.data?['transaction'] ?? []);
       final transactions = parsedData.map((e) => TransactionModel.fromMap(e)).toList();
       return Success(transactions);
-    } catch (e) {
-      return Failure(AppException.fromStatusCode(e.hashCode, e.toString()));
+    } on OperationException catch (e, s) {
+      return Failure(
+        AppException(
+          message:
+              e.graphqlErrors.isNotEmpty
+                  ? e.graphqlErrors.first.message
+                  : 'Erro na comunicação com o servidor.',
+          originalException: e,
+          stackTrace: s,
+        ),
+      );
+    } catch (e, s) {
+      return Failure(
+        AppException(
+          message: 'Ocorreu um erro inesperado. Verifique sua conexão.',
+          originalException: e is Exception ? e : Exception(e.toString()),
+          stackTrace: s,
+        ),
+      );
     }
   }
 }

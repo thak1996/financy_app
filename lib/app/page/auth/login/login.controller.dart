@@ -12,14 +12,10 @@ class LoginController extends Cubit<LoginState> {
 
   Future<void> login(String email, String password) async {
     emit(const LoginLoading());
-    try {
-      final result = await authService.login(email: email, password: password);
-      result.fold(
-        (success) => emit(const LoginSuccess()),
-        (failure) => emit(LoginError(failure.toString())),
-      );
-    } catch (e) {
-      emit(LoginError(e.toString()));
-    }
+    final result = await authService.login(email: email, password: password);
+    result.fold(
+      (success) => emit(const LoginSuccess()),
+      (failure) => emit(LoginError(failure.toString())),
+    );
   }
 }

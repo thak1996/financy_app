@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:financy_app/app/data/exception/app.exception.dart';
 import 'package:financy_app/app/data/exception/auth.exception.dart';
@@ -10,7 +11,6 @@ import 'package:result_dart/result_dart.dart';
 import '../models/user.model.dart';
 
 class AuthFirebaseService implements IAuthService {
-
   final _auth = FirebaseAuth.instance;
   final _functions = FirebaseFunctions.instance;
   final Logger _logger = Logger(printer: LoggerPrinter('AuthFirebaseService'));
@@ -25,7 +25,9 @@ class AuthFirebaseService implements IAuthService {
         email: email,
         password: password,
       );
-      return Success(UserModel(email: response.user?.email));
+      final token = await response.user?.getIdToken();
+      log('Bearer $token');
+      return Success(UserModel(email: response.user?.email, token: token));
     } on FirebaseAuthException catch (e) {
       return Failure(AuthException.fromFirebaseAuth(e));
     } catch (e) {

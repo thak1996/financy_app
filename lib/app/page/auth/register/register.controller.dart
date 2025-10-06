@@ -11,19 +11,15 @@ class RegisterController extends Cubit<RegisterState> {
   final GraphQlService graphQlService;
 
   Future<void> register(UserModel userCredentials) async {
-    try {
-      emit(RegisterLoading());
-      final response = await authService.register(
-        userCredentials.name,
-        email: userCredentials.email!,
-        password: userCredentials.password!,
-      );
-      response.fold(
-        (success) => emit(RegisterSuccess()),
-        (failure) => emit(RegisterError(failure.toString())),
-      );
-    } catch (e) {
-      emit(RegisterError(e.toString()));
-    }
+    emit(RegisterLoading());
+    final response = await authService.register(
+      userCredentials.name,
+      email: userCredentials.email!,
+      password: userCredentials.password!,
+    );
+    response.fold(
+      (success) => emit(RegisterSuccess()),
+      (failure) => emit(RegisterError(failure.toString())),
+    );
   }
 }

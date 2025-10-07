@@ -16,5 +16,14 @@ class HomeController extends Cubit<HomeState> {
     );
   }
 
+  Future<void> loadBalances() async {
+    emit(HomeLoading());
+    final result = await _transactionRepository.getBalances();
+    result.fold(
+      (success) => emit(HomeBalancesSuccess(balances: success)),
+      (failure) => emit(HomeError(message: failure.toString())),
+    );
+  }
+  
   Future<void> refreshData() async => await loadHomeData();
 }

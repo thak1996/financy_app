@@ -12,92 +12,108 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeController, HomeState>(
-      builder: (context, state) {
-        return BlocListener<HomeController, HomeState>(
-          listener: (context, state) {
-            if (state is HomeError) {
-              AlertDialogWidget.show(
-                context,
-                title: 'Error',
-                message: state.message,
-              );
-            }
-          },
-          child: Scaffold(
-            body: Column(
-              children: [
-                SizedBox(
-                  height: 380.h,
-                  child: Stack(
-                    children: [
-                      AppHeader(),
-                      BalanceCard(
-                        totalAmount: 1556.00,
-                        incomeAmount: 1840.00,
-                        outcomeAmount: 544.00,
-                      ),
-                    ],
+    return BlocListener<HomeController, HomeState>(
+      listener: (context, state) {
+        if (state is HomeError) {
+          AlertDialogWidget.show(
+            context,
+            title: 'Error',
+            message: state.message,
+          );
+        }
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            SizedBox(
+              height: 380.h,
+              child: Stack(
+                children: [
+                  AppHeader(),
+                  BlocBuilder<HomeController, HomeState>(
+                    buildWhen: (previous, current) {
+                      return current is HomeSuccess ||
+                          current is HomeLoading ||
+                          current is HomeInitial;
+                    },
+                    builder: (context, state) {
+                      final balances =
+                          state is HomeBalancesSuccess ? state.balances : null;
+                      return BalanceCard(
+                        totalAmount: balances?.totalBalance ?? 0.0,
+                        incomeAmount: balances?.totalIncome ?? 0.0,
+                        outcomeAmount: balances?.totalOutcome ?? 0.0,
+                      );
+                    },
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 28.r,
-                      vertical: 4.r,
-                    ),
-                    child: Column(
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 28.r, vertical: 4.r),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Transactions History',
-                              style: AppTextStyles.text18(
-                                context,
-                                color: AppColors.textTertiary,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              'See all',
-                              style: AppTextStyles.text14(
-                                context,
-                                color: AppColors.textGrey,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
+                        Text(
+                          'Transactions History',
+                          style: AppTextStyles.text18(
+                            context,
+                            color: AppColors.textTertiary,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        SizedBox(height: 8.h),
-                        Expanded(
-                          child:
-                              state is HomeSuccess
-                                  ? state.transactions.isNotEmpty
-                                      ? TransactionListView(
-                                        transactions: state.transactions,
-                                      )
-                                      : Center(
-                                        child: Text(
-                                          'No transactions available',
-                                          style: AppTextStyles.text16(
-                                            context,
-                                            color: AppColors.textGrey,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      )
-                                  : Center(child: CircularProgressIndicator()),
+                        Text(
+                          'See all',
+                          style: AppTextStyles.text14(
+                            context,
+                            color: AppColors.textGrey,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    SizedBox(height: 8.h),
+                    Expanded(
+                      child: BlocBuilder<HomeController, HomeState>(
+                        buildWhen: (previous, current) {
+                          return current is HomeSuccess ||
+                              current is HomeLoading ||
+                              current is HomeInitial;
+                        },
+                        builder: (context, state) {
+                          if (state is HomeSuccess) {
+                            if (state.transactions.isNotEmpty) {
+                              return TransactionListView(
+                                transactions: state.transactions,
+                              );
+                            } else {
+                              return Center(
+                                child: Text(
+                                  'No transactions available',
+                                  style: AppTextStyles.text16(
+                                    context,
+                                    color: AppColors.textGrey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              );
+                            }
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }
